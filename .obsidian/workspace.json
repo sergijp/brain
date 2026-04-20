@@ -1,0 +1,233 @@
+{
+  "main": {
+    "id": "2948a7e4eb990f3f",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0491f8e7c6a5a29",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0fe61c432e4611e7",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Граф"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e997a19d39d06a07",
+    "type": "split",
+    "children": [
+      {
+        "id": "da152dddbc9bd267",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "694f2d4bc62a5108",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловий менеджер"
+            }
+          },
+          {
+            "id": "5e810d9a2ec8e4f1",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Пошук"
+            }
+          },
+          {
+            "id": "8a9e9eb4f3006fa8",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Закладки"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "cfe148c822d0d3b3",
+    "type": "split",
+    "children": [
+      {
+        "id": "07cd8a2ba652b509",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fb9245a6314f5c39",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "50-Resources/Templates/tpl-bug.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Зворотні посилання для tpl-bug"
+            }
+          },
+          {
+            "id": "cef13a01e02d7e79",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "50-Resources/Templates/tpl-bug.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Вихідні посилання з tpl-bug"
+            }
+          },
+          {
+            "id": "b55aef0892cd6b1e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Мітки"
+            }
+          },
+          {
+            "id": "485af750481063ae",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Всі властивості"
+            }
+          },
+          {
+            "id": "ab3ce566c1096d9e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "50-Resources/Templates/tpl-bug.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Вміст tpl-bug"
+            }
+          },
+          {
+            "id": "c372437a39f1749d",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Відкрити провідник файлів": false,
+      "graph:Граф": false,
+      "canvas:Створити нове полотно": false,
+      "daily-notes:Сьогоднішня нотатка": false,
+      "templates:Вставити шаблон": false,
+      "command-palette:Відкрити меню команд": false,
+      "bases:Створити нову базу": false,
+      "templater-obsidian:Templater": false
+    }
+  },
+  "active": "0fe61c432e4611e7",
+  "lastOpenFiles": [
+    "vault_writer.py",
+    "INDEX.md",
+    "CLAUDE-SETUP.md",
+    "CLAUDE-RULES.md",
+    "AGENT-PROMPT.md",
+    "WORKFLOW/GEMINI",
+    "WORKFLOW/ANTIGRAVITY",
+    "WORKFLOW/CLOUDE",
+    "WORKFLOW",
+    "99-Archive",
+    "60-Agents/shared/common-mcp",
+    "60-Agents/shared/templates",
+    "60-Agents/shared/base-skills",
+    "60-Agents/shared/README.md",
+    "60-Agents/Agent-Claude-Code/skills",
+    "60-Agents/Agent-Claude-Code/mcp",
+    "60-Agents/Agent-Claude-Code/README.md",
+    "60-Agents/Agent-Claude-Main/README.md",
+    "60-Agents/README.md",
+    "50-Resources/Templates/tpl-project.md",
+    "50-Resources/Templates/tpl-inbox.md",
+    "50-Resources/Templates/tpl-trading-journal.md",
+    "50-Resources/Templates/tpl-trading-analysis.md",
+    "50-Resources/Templates/tpl-meeting.md",
+    "50-Resources/Templates/tpl-learning.md",
+    "50-Resources/Templates/tpl-bug.md",
+    "40-Personal/README.md",
+    "30-Learning/README.md",
+    "20-Trading/README.md",
+    "10-Work/Projects/visson-ecosystem/sessions/2026-04-19-visson-audit.md",
+    "10-Work/Projects/skills/sessions/2026-04-19-memory-setup.md",
+    "10-Work/Projects/api-setup/sessions/2026-04-19-configure-database.md",
+    "10-Work/Projects/vts/project-overview.md",
+    "10-Work/Projects/visson-ecosystem/refactoring-checklist.md",
+    "10-Work/Projects/visson-ecosystem/project-overview.md",
+    "10-Work/Projects/v-admin-vue2/project-overview.md",
+    "Без назви.canvas"
+  ]
+}
