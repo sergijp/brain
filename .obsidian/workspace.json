@@ -196,6 +196,7 @@
   },
   "active": "0fe61c432e4611e7",
   "lastOpenFiles": [
+    "10-Work/Projects/air-trans/sessions/2026-04-20-planning-soft-deletes.md",
     "10-Work/Projects/bustrek/sessions/2026-04-20-db-index-audit.md",
     "10-Work/Projects/bustrek/sessions",
     "10-Work/Projects/air-trans/sessions/2026-04-20-soft-deletes-bugfixes.md",
@@ -231,7 +232,6 @@
     "50-Resources/Templates/tpl-inbox.md",
     "50-Resources/Templates/tpl-trading-journal.md",
     "50-Resources/Templates/tpl-trading-analysis.md",
-    "50-Resources/Templates/tpl-meeting.md",
-    "50-Resources/Templates/tpl-learning.md"
+    "50-Resources/Templates/tpl-meeting.md"
   ]
 }
