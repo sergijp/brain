@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "e0491f8e7c6a5a29",
+        "id": "dfa5adc13b6cd46b",
         "type": "tabs",
         "children": [
           {
-            "id": "0fe61c432e4611e7",
+            "id": "30c4751606e91168",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AGENT-PROMPT.md",
+                "file": "10-Work/Projects/3g/sessions/2026-04-21-echeck-fiscal-receipts-review.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AGENT-PROMPT"
+              "title": "2026-04-21-echeck-fiscal-receipts-review"
             }
           }
         ]
@@ -41,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Файловий менеджер"
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "50-Resources/Templates/tpl-bug.md",
+                "file": "10-Work/Projects/3g/sessions/2026-04-21-echeck-fiscal-receipts-review.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Зворотні посилання для tpl-bug"
+              "title": "Зворотні посилання для 2026-04-21-echeck-fiscal-receipts-review"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "50-Resources/Templates/tpl-bug.md",
+                "file": "10-Work/Projects/3g/sessions/2026-04-21-echeck-fiscal-receipts-review.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Вихідні посилання з tpl-bug"
+              "title": "Вихідні посилання з 2026-04-21-echeck-fiscal-receipts-review"
             }
           },
           {
@@ -128,7 +128,7 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true,
+                "useHierarchy": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "50-Resources/Templates/tpl-bug.md",
+                "file": "10-Work/Projects/3g/sessions/2026-04-21-echeck-fiscal-receipts-review.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Вміст tpl-bug"
+              "title": "Вміст 2026-04-21-echeck-fiscal-receipts-review"
             }
           },
           {
@@ -175,12 +175,12 @@
               "title": "calendar"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -194,8 +194,28 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0fe61c432e4611e7",
+  "active": "30c4751606e91168",
   "lastOpenFiles": [
+    "10-Work/Projects/3g/sessions/2026-04-21-echeck-planning-refinement.md",
+    "10-Work/Projects/3g/sessions/2026-04-21-echeck-fiscal-receipts-review.md",
+    "INDEX.md",
+    "10-Work/Projects/3g/sessions",
+    "Без назви.canvas",
+    "2026-04-21.md",
+    "10-Work/Projects/air-trans/project-overview.md",
+    "10-Work/Projects/bustrek/sessions/2026-04-21-file-upload-prefix-car-date.md",
+    "10-Work/Projects/bustrek/sessions/2026-04-21-application-steps-module-planning.md",
+    "10-Work/Projects/bustrek/sessions/2026-04-21-file-upload-custom-names.md",
+    "AGENT-PROMPT.md",
+    "10-Work/Projects/air-trans/docs/trips-dispatcher-controller.md",
+    "10-Work/Projects/air-trans/sessions/2026-04-21-trips-dispatcher-refactor.md",
+    "10-Work/Projects/air-trans/docs/driver-trip-date-system.md",
+    "10-Work/Projects/air-trans/docs",
+    "10-Work/Projects/air-trans/sessions/2026-04-21-driver-trip-date-refactor.md",
+    "10-Work/Projects/tradingview-mcp/sessions/2026-04-21-tradingview-mcp-tools-reference.md",
+    "10-Work/Projects/tradingview-mcp/sessions/2026-04-21-eurusd-short-setup.md",
+    "10-Work/Projects/tradingview-mcp/sessions",
+    "10-Work/Projects/tradingview-mcp",
     "10-Work/Projects/air-trans/sessions/2026-04-20-ticket-checked-nullable.md",
     "10-Work/Projects/air-trans/sessions/2026-04-20-planning-soft-deletes.md",
     "10-Work/Projects/bustrek/sessions/2026-04-20-db-index-audit.md",
@@ -212,26 +232,6 @@
     "20-Trading/Journal/2026-04-20-trading-session.md",
     "10-Work/Projects/test-project/sessions",
     "10-Work/Projects/test-project",
-    "10-Work/Projects/air-trans/sessions",
-    "20-Trading/Analysis",
-    "20-Trading/Journal",
-    "00-Inbox/2026-04-19-obsidian-ai-system.md",
-    "10-Work/Projects/3g/project-overview.md",
-    "10-Work/Projects/project-name/sessions/2026-04-19-....md",
-    "10-Work/Projects/project-name/sessions",
-    "10-Work/Projects/project-name",
-    "Без назви.canvas",
-    "INDEX.md",
-    "CLAUDE-SETUP.md",
-    "CLAUDE-RULES.md",
-    "AGENT-PROMPT.md",
-    "60-Agents/shared/README.md",
-    "60-Agents/Agent-Claude-Code/README.md",
-    "60-Agents/Agent-Claude-Main/README.md",
-    "60-Agents/README.md",
-    "50-Resources/Templates/tpl-project.md",
-    "50-Resources/Templates/tpl-inbox.md",
-    "50-Resources/Templates/tpl-trading-journal.md",
-    "50-Resources/Templates/tpl-trading-analysis.md"
+    "10-Work/Projects/air-trans/sessions"
   ]
 }
