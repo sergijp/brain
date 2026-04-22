@@ -1,28 +1,39 @@
 ---
-title: "Трейдинг: 2026-04-22 — Підготовка до NY Open (14:45 Kyiv)"
+title: "Трейдинг: 2026-04-22 — Підсумки дня (Full Integration)"
 date: 2026-04-22
-tags: [trading, journal, session, setup, smc, ny-open]
+tags: [trading, journal, session, setup, smc, results]
 category: trading
-status: in-progress
+project: tradingview-mcp
+status: completed
 pinecone_indexed: false
 ---
 
-## 🗽 Перегляд перед Нью-Йорком (NY Open Setup)
-Система переналаштована на очікувану волатильність під час відкриття американської сесії.
+## 🎯 Мета сесії
+Повна інтеграція TradingView MCP, налаштування пам'яті Obsidian та активна торгівля за стратегією SMC v2.
 
-## 📊 Актуальні сетапи (14:45)
+## 📊 Результати торгівлі (Станом на 17:15 Kyiv)
 
-| Пара | Тип | Entry | SL | TP | Коментар |
-|------|-----|-------|----|----|----------|
-| US100 | Long | 26620.0 | 26575.0 | 26850.0 | Пріоритет: Asian Low sweep |
-| EURUSD | Long | 1.17540 | 1.17430 | 1.17950 | Bullish continuation |
-| XAUUSD | Long | 4756.5 | 4748.0 | 4795.0 | Liquidity sweep hunt |
-| USDJPY | Short | 159.360 | 159.550 | 158.800 | Supply zone retest |
+| Пара | Тип | Entry | SL | Поточна | Статус | P&L |
+|------|-----|-------|----|---------|--------|-----|
+| **US100** | Long | 26620.0 | 26575 | 26683.4 | Active | **+63 pts** |
+| **USDJPY** | Short | 159.345 | 159.52 | 159.303 | Active | **+4.2 pips**|
+| **EURUSD** | Long | 1.17540 | 1.1743 | 1.17538 | Active | -0.2 pips |
+| **XAUUSD** | Long | 4756.5 | 4748 | 4755.7 | Invalid | SL/Sweep |
 
-## 💡 Стратегічні нотатки
-- Очікується "Judas Sweep" по DXY під час відкриття сесії.
-- Всі рівні позначені коричневими лініями ENTRY.
-- Моніторинг Sosumi активовано на період відсутності трейдера.
+## 🔑 Ключові досягнення (ADR)
+- **MCP Setup**: Репозиторій `tradingview-mcp-jackson` активовано. Створено глобальну команду `tv`.
+- **Audio Alerts**: Налаштовано систему Sosumi + Voice для сповіщень про входи (100% гучність).
+- **Scale Calibration**: Підібрано коефіцієнт для Gold (1000 units/$), що дозволяє використовувати нативний Risk/Reward tool через CLI.
+
+## ⚠️ Висновки та навчання
+1. **Золото**: Зробило набагато глибший sweep ліквідності, ніж очікувалося на М5. Потрібно закладати більший буфер для SL на металах під час NY Open.
+2. **Nasdaq**: Модель AMD (Asian Low Sweep) спрацювала ідеально.
+
+## 📎 Артефакти
+- Нові правила: `~/AI/tradingview-mcp-jackson/rules.json`
+- Скріншоти сесії в папці `/screenshots/`
 
 ## 🔗 Пов'язані нотатки
+- [[20-Trading/Strategies/smc-playbook-v2]]
 - [[20-Trading/Analysis/Full-Watchlist-Analysis-2026-04-22]]
+- [[10-Work/Projects/tradingview-mcp/sessions/2026-04-22-setup-and-brief]]
