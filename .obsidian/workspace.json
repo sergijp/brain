@@ -196,6 +196,7 @@
   },
   "active": "0fe61c432e4611e7",
   "lastOpenFiles": [
+    "20-Trading/Journal/2026-04-21-morning-brief.md",
     "20-Trading/Backtest/pine-v4-plan-2026-04-21.md",
     "20-Trading/Backtest/pine-mvp-2026-04-21.md",
     "20-Trading/Backtest",
@@ -227,7 +228,6 @@
     "INDEX.md",
     "CLAUDE-SETUP.md",
     "CLAUDE-RULES.md",
-    "AGENT-PROMPT.md",
     "WORKFLOW/GEMINI",
     "WORKFLOW/ANTIGRAVITY",
     "WORKFLOW/CLOUDE",
