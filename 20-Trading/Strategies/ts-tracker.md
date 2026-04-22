@@ -23,6 +23,7 @@ Live-статус торгових систем. ТС-1/2/3 походять з 
 | **ТС-1** | [[ts-1-reversal-at-poi\|Reversal at POI]] | ⏸ Pine FAIL (PF 0.79 post-cost) | EURUSD 15m Pine, 5.5m period | 24/30 | Потребує rework — див. гіпотези |
 | **ТС-2** | [[ts-2-session-manipulation\|Session Manipulation]] | ⏸ Pine FAIL (0% WR, gross=$0) | EURUSD 15m Pine, 5.5m period | 11/30 | Потребує manual Bar Replay — не подаєтся Pine-proxy |
 | **ТС-3** | [[ts-3-inner-fvg-sniper\|Inner FVG Sniper]] | ⏸ Pine FAIL cross-pair (EURUSD PF 1.43, GBPUSD PF 0.39) | EURUSD+GBPUSD 15m Pine, 5.5m | 10/40 | v5 edge був cherry-pick — manual Bar Replay required |
+| **NS** | [[ns-strategy\|NS — Top-Down SMC]] | 🟢 Pine Validation (стартувало 2026-04-22) | EURUSD 15m Pine, 2024-05 → 2026-04 | 0/50 | Pine v1 код готовий — запуск ітерацій v1-v10 див. [[pine-ns-2026-04-22]] |
 
 ### Легенда статусів
 - ⚪ **Draft** — створена, структура зафіксована, ще не запланована до тестування
@@ -104,6 +105,7 @@ Live-статус торгових систем. ТС-1/2/3 походять з 
 | 2026-04-22 | ТС-3 Pine bench (6 iter + cross-pair): EURUSD v5 PF 1.43 виявився cherry-pick (GBPUSD PF 0.39, WR 19%). Shorts-only FVG = прихований trend-follower, fails на bullish pair. Pine НЕ годиться для TS-3 |
 | 2026-04-22 | Retrospective analysis: [[retrospective-analysis-2026-04-22]] — 6-gate filter прогноз дає ~+25-50% WR improvement, але не вистачає cost hurdle. Next: manual Bar Replay 30 trades у TV app |
 | 2026-04-22 | **NS** створена як незалежна стратегія (Forex + Indices/Commodities, intraday, self-contained rules) — ⚪ Draft |
+| 2026-04-22 | NS → 🟢 Pine Validation. Створено [[pine-ns-2026-04-22]]: повний Pine v6 з 5-крок воронкою + 6-point scoring + AMD Kyiv TZ + opens + SMT (GBPUSD proxy). Запуск v1 (comm=0) → v10 (cross-pair) попереду |
 
 ---
 
