@@ -199,7 +199,24 @@ pinecone_indexed: false
 
 ## ⏭️ Status
 
-🟡 **План зафіксовано + strategy playbook записано.** Чекає команди "виконуй" для Фази A.
+🟢 **Фаза B (скорочена) виконана 2026-04-22** — MVP-комплект для старту Manual Bar Replay готовий.
+
+### Що зроблено (2026-04-22)
+- ✅ `Backtest/README.md` — 4-етапний процес + go-live критерії
+- ✅ `Backtest/template-backtest-trade.md` — YAML schema для журналу
+- ✅ `Checklists/pre-trade-checklist.md` — 6-point gate + AM I CALM
+- ✅ `Strategies/correlation-table.md` — таблиця корів + алгоритм ризику
+
+### Що залишилось (опційно перед Etapom 1, точно перед Paper)
+- ⏳ `Checklists/weekly-review-template.md` — п'ятничний ритуал (потрібен коли є ≥1 тиждень трейдів)
+- ⏳ `Dashboards/live-stats.md` — Dataview queries (потрібен коли є ≥10 трейдів у journal)
+- ⏳ `Journal/` templates — daily bias + morning brief (опційно)
+
+### Фаза A — статус
+⚠️ **Неактуальна в поточній конфігурації** — project Trading repo (`/Users/serhiinadolskyi/AI/...`) не існує на цій машині. Уся робота через vault + TradingView MCP. Auto-memory workflow — перероблено ad-hoc при наступному MCP draw-сеансі.
+
+### Наступний крок
+→ **Стартуємо Етап 1 — Manual Bar Replay.** 50+ трейдів за новим template'ом через TV Ctrl+Alt+R / MCP.
 
 ## 🔗 Пов'язані нотатки
 
