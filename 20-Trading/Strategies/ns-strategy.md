@@ -295,7 +295,11 @@ confluence_score: 0-6
 
 ## 📌 Status
 
-🟡 **Draft** — створено 2026-04-22, очікує запуску бектесту після ТС-1.
+🟢 **Pine Validation (Етап 2)** — стартовано 2026-04-22.
+- Pine v6 `strategy()` код готовий: [[20-Trading/Backtest/pine-ns-2026-04-22]]
+- Параметри v1: EURUSD 15m, 2024-05 → 2026-04, commission 0.03%, 5-step funnel + 6-point scoring → size multiplier (1.0/0.5/0.0)
+- Sample target: ≥ 50 трейдів; PF > 1.3; cross-pair GBPUSD + XAUUSD для robustness (урок ТС-3)
+- Gate для переходу на Етап 1 Manual Bar Replay: всі success criteria з pine-ns файлу
 
 ---
 
