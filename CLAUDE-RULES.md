@@ -305,3 +305,17 @@ tags: [work, bug, solution, backend]
 **Версія**: 2026-04-19  
 **Статус**: Активна  
 **Остання оновлення**: 2026-04-19
+
+## GOLDEN STANDARD: Top-Down Analysis Workflow
+1. **Timeframe Sequence:** Weekly (W), Daily (D), 4H, 1H (All clean, NO drawings).
+2. **Execution Steps:** 15m and 5m (Include Short or Long position tool based on Daily Bias).
+3. **Visual Requirements:**
+   - Use 'Alt+R' to reset scale before each screenshot.
+   - Center price (Scroll right) to avoid price being stuck to the right edge.
+   - Screenshots for W, D, H4, H1 must be CLEAN (no position tools or levels).
+4. **Obsidian Structure:**
+   - Folder: `~/MyVault/20-Trading/Analysis/YYYY-MM-DD/`
+   - File: `[PAIR]-analysis.md`
+   - Images: `~/MyVault/20-Trading/Analysis/YYYY-MM-DD/img/`
+   - Internal Image Links: `![[img/filename.png]]`
+5. **Trading Bias:** Only ONE position tool per pair (Short OR Long) based on Daily structure.
