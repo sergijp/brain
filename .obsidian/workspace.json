@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "dfa5adc13b6cd46b",
+        "id": "78a603509001d9bd",
         "type": "tabs",
         "children": [
           {
-            "id": "30c4751606e91168",
+            "id": "fad2dab8988eba74",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-Trading/TradingView-MCP-Guide.md",
+                "file": "20-Trading/SOP-TDA-Screenshots.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TradingView-MCP-Guide"
+              "title": "SOP-TDA-Screenshots"
             }
           }
         ]
@@ -41,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": true
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Файловий менеджер"
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "20-Trading/Analysis/2026-04-24/XAUUSD-analysis.md",
+                "file": "50-Resources/Templates/tpl-bug.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Зворотні посилання для XAUUSD-analysis"
+              "title": "Зворотні посилання для tpl-bug"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "20-Trading/Analysis/2026-04-24/XAUUSD-analysis.md",
+                "file": "50-Resources/Templates/tpl-bug.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Вихідні посилання з XAUUSD-analysis"
+              "title": "Вихідні посилання з tpl-bug"
             }
           },
           {
@@ -128,7 +128,7 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": false,
+                "useHierarchy": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "20-Trading/TradingView-MCP-Guide.md",
+                "file": "50-Resources/Templates/tpl-bug.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Вміст TradingView-MCP-Guide"
+              "title": "Вміст tpl-bug"
             }
           },
           {
@@ -171,16 +171,16 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "calendar"
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -194,54 +194,54 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "30c4751606e91168",
+  "active": "fad2dab8988eba74",
   "lastOpenFiles": [
-    "20-Trading/Analysis/2026-04-24/XAUUSD-analysis.md",
-    "20-Trading/TradingView-MCP-Guide.md",
-    "20-Trading/Journal/2026-04-24-retro-session.md",
+    "20-Trading/skills/tv-levels/SKILL.md",
+    "20-Trading/skills/tv-levels",
+    "20-Trading/README.md",
+    "20-Trading/Retro/2026-04-24/GBPUSD-retro.md",
+    "20-Trading/skills/tv-position/SKILL.md",
+    "20-Trading/skills/tv-position",
+    "20-Trading/skills/kassandra/SKILL.md",
+    "20-Trading/skills/dixie/SKILL.md",
+    "20-Trading/skills/kassandra",
+    "20-Trading/skills/dixie",
+    "20-Trading/Strategies/RULES.md",
+    "20-Trading/skills/tda-bias/SKILL.md",
+    "20-Trading/skills/tda-bias",
+    "20-Trading/Retro/2026-04-24/_DAILY-RETRO.md",
+    "20-Trading/Retro/2026-04-24/US500-retro.md",
+    "20-Trading/skills/tda-screenshot/SKILL.md",
+    "20-Trading/Retro/2026-04-24/US100-retro.md",
+    "20-Trading/Retro/2026-04-24/GER40-retro.md",
+    "20-Trading/Retro/2026-04-24/XAGUSD-retro.md",
+    "20-Trading/skills/tda-screenshot",
+    "20-Trading/skills",
+    "20-Trading/Retro/2026-04-24/XAUUSD-retro.md",
+    "20-Trading/Retro/2026-04-24/EURUSD-retro.md",
+    "20-Trading/Retro/2026-04-24/USDCHF-retro.md",
     "20-Trading/Retro/2026-04-23/_DAILY-RETRO.md",
-    "10-Work/Projects/trading-telegram-bot/sessions/2026-04-23-setup-telegram-bot.md",
-    "10-Work/Projects/trading-telegram-bot/sessions",
-    "10-Work/Projects/trading-telegram-bot",
-    "20-Trading/Analysis/2026-04-24/GBPUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-24/EURUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-24/img/us500_m5_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/us500_m15_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/us500_h1_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/us500_h4_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/us500_d_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/us500_w_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/xagusd_m5_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/xagusd_m15_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/xagusd_h1_improved.png",
-    "20-Trading/Analysis/2026-04-24/img/xagusd_h4_improved.png",
-    "20-Trading/Retro/2026-04-23/GER40-retro.md",
-    "20-Trading/Retro/2026-04-23/GBPUSD-retro.md",
-    "20-Trading/Retro/2026-04-23/EURUSD-retro.md",
-    "20-Trading/Journal/2026-04-24-trading-session.md",
-    "20-Trading/Retro/2026-04-23/US500-retro.md",
-    "20-Trading/Retro/2026-04-23/XAGUSD-retro.md",
-    "20-Trading/Retro/2026-04-23/USDCHF-retro.md",
-    "20-Trading/Retro/2026-04-23/USDCAD-retro.md",
-    "20-Trading/Retro/2026-04-23/USDJPY-retro.md",
-    "20-Trading/Retro/2026-04-23/US100-retro.md",
-    "20-Trading/Retro/2026-04-23/XAUUSD-retro.md",
-    "20-Trading/Retro/2026-04-23",
-    "20-Trading/Retro",
-    "20-Trading/Analysis/2026-04-24/USDCHF-analysis.md",
-    "templates/TDA-Template.md",
-    "20-Trading/Analysis/2026-04-24/US500-analysis.md",
-    "20-Trading/Analysis/2026-04-24/XAGUSD-analysis.md",
-    "20-Trading/Analysis/Full-Watchlist-Analysis-2026-04-22.md",
-    "20-Trading/Analysis/2026-04-24/USDJPY-analysis.md",
-    "20-Trading/Analysis/2026-04-24/GER40-analysis.md",
-    "20-Trading/Analysis/2026-04-23/EURUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-24/img",
-    "20-Trading/Analysis/2026-04-24",
-    "templates",
-    "20-Trading/Analysis/2026-04-23/img",
-    "20-Trading/Analysis/2026-04-23",
-    "99-Attachments/Screenshots",
+    "20-Trading/Retro/2026-04-24/USDCAD-retro.md",
+    "20-Trading/Retro/2026-04-24/USDJPY-retro.md",
+    "20-Trading/Analysis/2026-04-26/US100-analysis.md",
+    "20-Trading/Analysis/2026-04-26/GER40-analysis.md",
+    "20-Trading/Analysis/2026-04-26/GBPUSD-analysis.md",
+    "20-Trading/Retro/2026-04-24",
+    "20-Trading/Analysis/2026-04-26/img/us500_m5.png",
+    "20-Trading/Analysis/2026-04-26/img/us500_m15.png",
+    "20-Trading/Analysis/2026-04-26/img/us500_h4.png",
+    "20-Trading/Analysis/2026-04-26/img/us500_d.png",
+    "20-Trading/Analysis/2026-04-26/img/us500_w.png",
+    "20-Trading/Analysis/2026-04-26/img/us100_m5.png",
+    "20-Trading/Analysis/2026-04-26/img/us100_m15.png",
+    "20-Trading/Analysis/2026-04-26/img/us100_h4.png",
+    "20-Trading/Analysis/2026-04-26/img/us100_d.png",
+    "20-Trading/Analysis/2026-04-26/img/us100_w.png",
+    "20-Trading/Analysis/2026-04-26/EURUSD-analysis.md",
+    "20-Trading/SOP-TDA-Screenshots.md",
+    "20-Trading/Analysis/2026-04-26/US500-analysis.md",
+    "20-Trading/Analysis/2026-04-26/img",
+    "20-Trading/Analysis/2026-04-26",
     "Без назви.canvas"
   ]
 }
