@@ -24,6 +24,10 @@ Live-статус торгових систем. ТС-1/2/3 походять з 
 | **ТС-2** | [[ts-2-session-manipulation\|Session Manipulation]] | ⏸ Pine FAIL (0% WR, gross=$0) | EURUSD 15m Pine, 5.5m period | 11/30 | Потребує manual Bar Replay — не подаєтся Pine-proxy |
 | **ТС-3** | [[ts-3-inner-fvg-sniper\|Inner FVG Sniper]] | ⏸ Pine FAIL cross-pair (EURUSD PF 1.43, GBPUSD PF 0.39) | EURUSD+GBPUSD 15m Pine, 5.5m | 10/40 | v5 edge був cherry-pick — manual Bar Replay required |
 | **NS** | [[ns-strategy\|NS — Top-Down SMC]] | 🟢 Pine Validation (стартувало 2026-04-22) | EURUSD 15m Pine, 2024-05 → 2026-04 | 0/50 | Pine v1 код готовий — запуск ітерацій v1-v10 див. [[pine-ns-2026-04-22]] |
+| **ORB** | [[orb-opening-range-breakout\|Opening Range Breakout]] | ⚪ Draft | — | 0/30 | Non-SMC breakout intraday (US100/US500/GER40, Gold). 5m entry після 15m/30m OR window, London/NY open |
+| **VWAP** | [[vwap-pullback\|VWAP Pullback]] | ⚪ Draft | — | 0/30 | Non-SMC institutional intraday (indices+Gold). Pullback до session VWAP у trending day, ADX filter ≥ 20 |
+| **SD** | [[supply-demand-seiden\|Supply/Demand (Seiden)]] | ⚪ Draft | — | 0/30 | Non-SMC positional swing (FX+Gold/Silver). D1/H4 fresh zones RBR/DBD, limit entry на proximal edge, Min RR 1:3 |
+| **MR** | [[mr-bb-rsi-divergence\|MR BB+RSI]] | ⚪ Draft | — | 0/30 | Non-SMC counter-trend ranging (EURUSD/USDCHF/USDCAD). H1 BB(20,2) touch + RSI divergence, ADX < 20 filter |
 
 ### Легенда статусів
 - ⚪ **Draft** — створена, структура зафіксована, ще не запланована до тестування
@@ -106,6 +110,7 @@ Live-статус торгових систем. ТС-1/2/3 походять з 
 | 2026-04-22 | Retrospective analysis: [[retrospective-analysis-2026-04-22]] — 6-gate filter прогноз дає ~+25-50% WR improvement, але не вистачає cost hurdle. Next: manual Bar Replay 30 trades у TV app |
 | 2026-04-22 | **NS** створена як незалежна стратегія (Forex + Indices/Commodities, intraday, self-contained rules) — ⚪ Draft |
 | 2026-04-22 | NS → 🟢 Pine Validation. Створено [[pine-ns-2026-04-22]]: повний Pine v6 з 5-крок воронкою + 6-point scoring + AMD Kyiv TZ + opens + SMT (GBPUSD proxy). Запуск v1 (comm=0) → v10 (cross-pair) попереду |
+| 2026-04-22 | Додано 4 non-SMC стратегії (⚪ Draft): [[orb-opening-range-breakout\|ORB]], [[vwap-pullback\|VWAP Pullback]], [[supply-demand-seiden\|Supply/Demand Seiden]], [[mr-bb-rsi-divergence\|MR BB+RSI]]. Закривають gaps: breakout, institutional-benchmark, positional zones, ranging counter-trend |
 
 ---
 
