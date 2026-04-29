@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-Trading/Analysis/2026-04-28/EURUSD-analysis.md",
+                "file": "20-Trading/Analysis/2026-04-29/GER40-analysis.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "EURUSD-analysis"
+              "title": "GER40-analysis"
             }
           }
         ]
@@ -194,25 +194,36 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "fad2dab8988eba74",
+  "active": "694f2d4bc62a5108",
   "lastOpenFiles": [
-    "20-Trading/Analysis/2026-04-28/img/gbpusd_w.png",
+    "20-Trading/Journal/2026-04-27-trading-session.md",
+    "20-Trading/Retrospective/2026-04/Retro-2026-04-27.md",
+    "20-Trading/Retrospective/2026-04",
+    "20-Trading/Retrospective",
+    "10-Work/Projects/tradingview-mcp/sessions/2026-04-29-top-down-analysis.md",
+    "20-Trading/Analysis/2026-04-29/img/ger40_w_skill.png",
+    "20-Trading/Analysis/2026-04-29/img/ger40_m5_skill.png",
+    "20-Trading/Analysis/2026-04-29/img/ger40_m15_skill.png",
+    "20-Trading/Analysis/2026-04-29/img/ger40_h4_skill.png",
+    "20-Trading/Analysis/2026-04-29/img/ger40_h1_skill.png",
+    "20-Trading/Analysis/2026-04-29/img/ger40_d_skill.png",
+    "20-Trading/Analysis/2026-04-29/img/usdjpy_w.png",
+    "20-Trading/Analysis/2026-04-29/img/usdjpy_m5.png",
+    "20-Trading/Analysis/2026-04-29/img/usdjpy_m15.png",
+    "20-Trading/Analysis/2026-04-29/img/usdjpy_h4.png",
+    "20-Trading/Analysis/2026-04-29/DXY-analysis.md",
+    "20-Trading/Analysis/2026-04-29/GER40-analysis.md",
+    "20-Trading/Analysis/2026-04-29/TDA-Analysis-2026-04-29.md",
+    "20-Trading/Analysis/2026-04-29/EURUSD-analysis.md",
+    "20-Trading/Analysis/2026-04-29/USDCAD-analysis.md",
+    "20-Trading/Analysis/2026-04-29/USDJPY-analysis.md",
+    "20-Trading/Analysis/2026-04-29/GBPUSD-analysis.md",
+    "20-Trading/Analysis/2026-04-28/EURUSD-analysis.md",
     "20-Trading/Analysis/2026-04-28/USDJPY-analysis.md",
     "20-Trading/Analysis/2026-04-28/USDCAD-analysis.md",
     "20-Trading/Analysis/2026-04-28/GER40-analysis.md",
     "20-Trading/Analysis/2026-04-28/GBPUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-28/EURUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-28/img/usdjpy_m5.png",
-    "20-Trading/Analysis/2026-04-28/img/usdjpy_m15.png",
-    "20-Trading/Analysis/2026-04-28/img/usdjpy_h1.png",
-    "20-Trading/Analysis/2026-04-28/img/usdjpy_h4.png",
-    "20-Trading/Analysis/2026-04-28/img/usdjpy_d.png",
-    "20-Trading/Analysis/2026-04-28/img/usdjpy_w.png",
     "20-Trading/Analysis/2026-04-28/img/usdjpy",
-    "20-Trading/Analysis/2026-04-28/img/usdcad_m5.png",
-    "20-Trading/Analysis/2026-04-28/img/usdcad_m15.png",
-    "20-Trading/Analysis/2026-04-28/img/usdcad_h1.png",
-    "20-Trading/Analysis/2026-04-28/img/usdcad_h4.png",
     "20-Trading/Analysis/2026-04-28/img/usdcad",
     "20-Trading/Analysis/2026-04-28/img/ger40",
     "20-Trading/Analysis/2026-04-28/img/gbpusd",
@@ -223,8 +234,6 @@
     "20-Trading/Analysis/2026-04-28",
     "20-Trading/Analysis/2026-04-27/USDCAD-analysis.md",
     "10-Work/Projects/dashboard/sessions/2026-04-27-smc-dashboard-redesign.md",
-    "10-Work/Projects/dashboard/sessions",
-    "10-Work/Projects/dashboard",
     "10-Work/Projects/3g/sessions/2026-04-27-bus-photo-field.md",
     "20-Trading/Analysis/2026-04-27/USDJPY-analysis.md",
     "20-Trading/Analysis/2026-04-27/GER40-analysis.md",
@@ -233,15 +242,6 @@
     "20-Trading/SOP-TDA-Screenshots.md",
     "20-Trading/skills/tv-levels/SKILL.md",
     "20-Trading/README.md",
-    "20-Trading/Retro/2026-04-24/GBPUSD-retro.md",
-    "20-Trading/skills/tv-position/SKILL.md",
-    "20-Trading/skills/kassandra/SKILL.md",
-    "20-Trading/skills/dixie/SKILL.md",
-    "20-Trading/Strategies/RULES.md",
-    "20-Trading/skills/tda-bias/SKILL.md",
-    "20-Trading/Retro/2026-04-24/_DAILY-RETRO.md",
-    "20-Trading/Retro/2026-04-24/US500-retro.md",
-    "20-Trading/skills/tda-screenshot/SKILL.md",
     "Без назви.canvas"
   ]
 }

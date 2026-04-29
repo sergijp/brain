@@ -1,0 +1,52 @@
+---
+title: EURUSD Top-Down Analysis
+date: 2026-04-29
+tags: [EURUSD, forex, TDA]
+category: Analysis
+project: Trading
+status: analysis-complete
+pinecone_indexed: false
+---
+
+# EURUSD: TDA Analysis — 29.04.2026
+
+## 🏛 Weekly (W)
+- **Аналіз:** Ціна торгується в бичачому тренді. Минулого тижня був сильний імпульс вгору. Зараз спостерігаємо технічний ретест пробитої зони супротиву 1.1680, яка стала підтримкою.
+- **Вердикт:** HTF Bullish.
+![[img/eurusd_w.png]]
+
+## 📅 Daily (D)
+- **Аналіз:** Денна свічка вчора закрилася пін-баром вниз. Сьогодні ціна намагається пробити 1.1710. Наступна ціль для збору ліквідності — 1.1690 (SSL).
+- **Вердикт:** Daily Correction / Bearish.
+![[img/eurusd_d.png]]
+
+## ⏱ 4-Hour (H4)
+- **Аналіз:** Формування HL (Higher Low). Ціна знаходиться в зоні Discount. Очікуємо маніпуляцію нижче 1.1700 перед продовженням росту.
+- **Вердикт:** H4 Bullish (Retracement).
+![[img/eurusd_h4.png]]
+
+## 🕐 1-Hour (H1)
+- **Аналіз:** Ведмежий Order Flow. Ціна створює LH (Lower Highs). На рівні 1.1705 сформовано "полицю" ліквідності.
+- **Вердикт:** H1 Bearish Delivery.
+![[img/eurusd_h1.png]]
+
+## 🎯 15-Minute (M15)
+- **Аналіз:** Консолідація перед Лондоном. Схоже на модель Power of Three (Accumulation). Зараз ми в фазі маніпуляції вниз.
+- **Вердикт:** Waiting for Sweep.
+![[img/eurusd_m15.png]]
+
+## ⚡ 5-Minute (M5)
+- **Аналіз:** На M5 бачимо чітке зняття ліквідності з лоїв азіатської сесії. Очікуємо на MSS (Market Structure Shift) вгору після тесту 1.1695.
+- **Вердикт:** Entry Watch.
+![[img/eurusd_m5.png]]
+
+---
+
+## 🏛 Dixie vs Kassandra Debate
+- **Dixie:** "Євро летить у прірву. Долар занадто сильний. Продавай зараз з ціллю 1.1650!"
+- **Kassandra:** "Ти дивишся лише на M5. На H4 ми в бичачій зоні інтересу. Це класичний Judas Swing. Я буду купувати, коли всі почнуть панікувати на пробої 1.1700."
+
+## 🚀 Торговий план (Primary Scenario)
+- **Entry Zone:** 1.1695 – 1.1700 (після sweep SSL).
+- **Stop Loss:** 1.1680.
+- **Take Profit:** 1.1750 (RR 1:3).
