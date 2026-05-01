@@ -1,0 +1,12 @@
+{
+  "deposit": 10000,
+  "currency": "USD",
+  "day": "2026-04-30",
+  "day_risk_used_pct": 0.0,
+  "week_start": "2026-04-28",
+  "week_risk_used_pct": 0.0,
+  "consecutive_losses": 0,
+  "open_positions": [],
+  "last_updated": "2026-04-30T06:48:55Z",
+  "_note": "Created by risk-manager on first run (no prior state found)"
+}
