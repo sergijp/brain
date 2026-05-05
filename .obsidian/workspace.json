@@ -11,12 +11,14 @@
             "id": "fad2dab8988eba74",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "20-Trading/Analysis/2026-05-01/img/eurusd_w.png"
+                "file": "20-Trading/Analysis/2026-05-05/EURUSD-analysis.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "eurusd_w"
+              "icon": "lucide-file",
+              "title": "EURUSD-analysis"
             }
           }
         ]
@@ -192,22 +194,34 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "694f2d4bc62a5108",
+  "active": "fad2dab8988eba74",
   "lastOpenFiles": [
+    "10-Work/Projects/buktrek/sessions/2026-05-05-application-files-controller.md",
+    "10-Work/Projects/buktrek/sessions",
+    "10-Work/Projects/buktrek",
+    "20-Trading/Analysis/2026-05-04/EURUSD-analysis.md",
+    "20-Trading/Analysis/2026-05-05/GER40-analysis.md",
+    "20-Trading/Analysis/2026-05-05/img/ger40_withpos_h4.png",
+    "20-Trading/Analysis/2026-05-05/img/ger40_w.png",
+    "20-Trading/Analysis/2026-05-05/img/ger40_m5.png",
+    "20-Trading/Analysis/2026-05-05/img/ger40_m15.png",
+    "20-Trading/Analysis/2026-05-05/img/ger40_h4.png",
+    "20-Trading/Analysis/2026-05-05/img/ger40_h1.png",
+    "20-Trading/Analysis/2026-05-05/img/ger40_d.png",
+    "20-Trading/Analysis/2026-05-05/USDJPY-analysis.md",
+    "20-Trading/Analysis/2026-05-05/USDCAD-analysis.md",
+    "20-Trading/Analysis/2026-05-05/img/usdjpy_m5.png",
+    "20-Trading/Analysis/2026-05-05/img/usdjpy_m15.png",
+    "20-Trading/Analysis/2026-05-05/img/usdjpy_h1.png",
+    "20-Trading/Analysis/2026-05-05/EURUSD-analysis.md",
+    "20-Trading/Analysis/2026-05-05/GBPUSD-analysis.md",
+    "20-Trading/Analysis/2026-05-05/img",
+    "20-Trading/Analysis/2026-05-05",
+    "20-Trading/Analysis/2026-05-04/GER40-analysis.md",
     "10-Work/Projects/3g/sessions/2026-05-01-sms-templates-refactor.md",
     "20-Trading/Analysis/2026-05-01/GER40-analysis.md",
-    "20-Trading/Analysis/2026-05-01/img/eurusd_m5.png",
-    "20-Trading/Analysis/2026-05-01/img/eurusd_h4.png",
-    "20-Trading/Analysis/2026-05-01/img/eurusd_h1.png",
-    "20-Trading/Analysis/2026-05-01/img/eurusd_d.png",
     "20-Trading/Analysis/2026-05-01/EURUSD-analysis.md",
     "20-Trading/Analysis/2026-05-01/GBPUSD-analysis.md",
-    "20-Trading/Analysis/2026-05-01/img/ger40_w.png",
-    "20-Trading/Analysis/2026-05-01/img/ger40_m5.png",
-    "20-Trading/Analysis/2026-05-01/img/ger40_m15.png",
-    "20-Trading/Analysis/2026-05-01/img/ger40_h4.png",
-    "20-Trading/Analysis/2026-05-01/img/ger40_h1.png",
-    "20-Trading/Analysis/2026-05-01/img/ger40_d.png",
     "20-Trading/Analysis/2026-05-01/USDJPY-analysis.md",
     "20-Trading/Analysis/2026-05-01/USDCAD-analysis.md",
     "20-Trading/Analysis/2026-04-30/GER40-analysis.md",
@@ -228,18 +242,6 @@
     "20-Trading/Analysis/2026-04-29/DXY-analysis.md",
     "20-Trading/Analysis/2026-04-29/TDA-Analysis-2026-04-29.md",
     "20-Trading/Analysis/2026-04-29/EURUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-29/USDCAD-analysis.md",
-    "20-Trading/Analysis/2026-04-29/USDJPY-analysis.md",
-    "20-Trading/Analysis/2026-04-29/GBPUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-28/EURUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-28/USDJPY-analysis.md",
-    "20-Trading/Analysis/2026-04-28/USDCAD-analysis.md",
-    "20-Trading/Analysis/2026-04-28/GER40-analysis.md",
-    "20-Trading/Analysis/2026-04-28/GBPUSD-analysis.md",
-    "20-Trading/Analysis/2026-04-28/img/usdjpy",
-    "20-Trading/Analysis/2026-04-28/img/usdcad",
-    "20-Trading/Analysis/2026-04-28/img/ger40",
-    "20-Trading/Analysis/2026-04-28/img/gbpusd",
     "Без назви.canvas"
   ]
 }
