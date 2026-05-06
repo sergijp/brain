@@ -1,12 +1,12 @@
 {
   "deposit": 10000,
   "currency": "USD",
-  "day": "2026-05-05",
+  "day": "2026-05-06",
   "day_risk_used_pct": 0.0,
   "week_start": "2026-05-04",
   "week_risk_used_pct": 0.0,
   "consecutive_losses": 0,
   "open_positions": [],
-  "last_updated": "2026-05-05T06:14:02Z",
-  "_note": "State reset: new week (2026-05-04) and new day (2026-05-05). Previous state was stale (2026-04-30)."
+  "last_updated": "2026-05-06T06:12:53Z",
+  "_note": "Day reset to 2026-05-06 (Tuesday). Risk gate check performed for 4 plans: EURUSD short, GBPUSD long, USDJPY short (conditional), GER40 long (conditional)."
 }

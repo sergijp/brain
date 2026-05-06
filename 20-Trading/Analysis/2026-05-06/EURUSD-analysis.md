@@ -1,0 +1,56 @@
+---
+title: EURUSD Top-Down Analysis
+date: 2026-05-06
+tags: [EURUSD, TDA, bearish-corrective, forex]
+category: Analysis
+project: Trading
+status: analysis-complete
+pinecone_indexed: false
+---
+
+# EURUSD: Top-Down Analysis — 06.05.2026
+
+## 🏛 Weekly (Тижневий графік)
+W: -1.1% за 15 тижнів, range 1.1411–1.20831. Останні 5W: `1.17250 → 1.17638 → 1.17186 → 1.17212 → 1.17325` — ціна консолідується в зоні 1.17–1.18 після масштабного ралі від 1.1411 до ATH 1.20831. Нижчі хаї (1.18492 → 1.17911 → 1.17852 → 1.17502) при вищих лоу → перехід від імпульсу до **distribution/range**. HTF Bias: **Bearish-Corrective** (відкат від W ATH 1.20831).
+
+![[img/eurusd_w.png]]
+
+## 📅 Daily (Денний графік)
+20D range 1.16504–1.18492, +0.61%. Останні 5D: `1.17308 → 1.17212 → 1.16918 → 1.16930 → 1.17322` — корекція з D swing high 1.18492, ціна консолідується нижче 1.1743. Сьогодні (06.05) D відкрилась 1.16924, вже підійшла до 1.17430 — **corrective bounce** у bearish D контексті. PDH = 1.17136, PDL = 1.16766.
+
+![[img/eurusd_d.png]]
+
+## ⏱ 4-Hour (4-годинний графік)
+H4 range 1.16551–1.17852, +0.28% за 30 барів. Останні 5×H4: `1.16994 → 1.16930 → 1.17204 → 1.17370 → 1.17325` — HL від 1.16551 підтверджений, formується corrective bounce. H4 OB/Supply zone: **1.17370–1.17852** (зона, де починався останній impulse вниз). Ключовий H4 demand low: **1.16930**.
+
+![[img/eurusd_h4.png]]
+
+## 🕐 1-Hour (1-годинний графік)
+H1 range 1.16766–1.17430, +0.35% за 30 барів. Останні 5H: `1.17214 → 1.17174 → 1.17178 → 1.17370 → 1.17332` — BOS UP підтверджений (пробій swing high 1.17178 → 1.17430). H1 OB demand: **1.17156–1.17204** (останній pullback перед BOS). Поточний H1 close 1.17332 — незначний відкат від 1.17430.
+**SMT:** EURUSD ↔ GBPUSD — перевірити, чи GBPUSD робить HH разом. Якщо GBPUSD не підтверджує HH → bearish SMT дивергенція → SHORT сигнал.
+
+![[img/eurusd_h1.png]]
+
+## 🎯 15-Minute (15-хвилинний графік)
+Сценарії:
+1. **Консервативно (SHORT):** ретест H4 OB `1.17370–1.17430` + M15 bearish CHoCH → SHORT до `1.16930`.
+2. **Агресивно (SHORT):** відразу від H1 swing high 1.17430 + bearish SMT дивергенція з GBPUSD → SHORT.
+3. **LONG (контртрендово, низький пріоритет):** pullback до H1 OB `1.17156–1.17204` + M15 CHoCH вгору → LONG до 1.17430.
+
+![[img/eurusd_m15.png]]
+
+## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
+
+- **Bias:** Bearish-Corrective (W/D bearish, H4/H1 corrective bounce) 📉
+- **Entry Zone:** `1.17370 – 1.17430` (H4 OB + H1 swing high)
+- **Stop Loss:** `1.17870` (вище H4 swing high 1.17852) — **47 pts**
+- **TP1:** `1.16930` — RR 1.0 ⚠️ (частковий вихід 30%)
+- **TP2:** `1.16550` — RR 1.81 ✅
+- **TP3:** `1.16000` — RR 2.98 ✅
+- **Lot Size:** `$100 / (47 × $10) ≈ 0.21 lot` (EURUSD: 1 pip = $10/lot — перевірити брокер)
+
+![[img/eurusd_m5.png]]
+
+---
+**Коментар:** Сесія 05:21 UTC / 08:21 Kyiv — pre-London (до London KZ 06:00 UTC). ⚠️ Kyiv < 09:00 — не входити до 09:00 Kyiv. London KZ (06:00–08:00 UTC) — вікно для підтвердження сетапу. NY KZ (12:00–14:00 UTC) — альтернатива. Перевірити ForexFactory на EUR/GBP-події (ECB speakers, BOE).
+⚠️ TP1 RR = 1.0 — слабкий, брати частково. TP2 RR = 1.81 — на межі мінімуму. Обов'язково чекати підтвердження M15 CHoCH перед входом.
