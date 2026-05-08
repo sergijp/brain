@@ -166,3 +166,8 @@ UNIQUE KEY driver_trip_dates_trip_date_bus_unique (trip_id, date, bus_id)
 | `app/Http/Controllers/Api/Crud/Directories/TicketsCrudController.php` | CRUD квитків |
 | `app/Observers/BusObserver.php` | Каскад Bus → DTD → Ticket |
 | `app/Observers/DriverObserver.php` | Каскад Driver → DTD |
+
+## Пов'язані документи
+
+- [[INDEX]]
+- [[trips-dispatcher-controller]] — диспетчерський екран, споживач DTD (TICKET_EAGER, `is_planned`)

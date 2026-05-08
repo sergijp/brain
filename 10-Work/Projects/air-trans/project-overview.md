@@ -1,11 +1,12 @@
 ---
 title: "air-trans — Visson логістика (еталон)"
 date: 2026-04-19
-tags: [work, project, visson, laravel, air-trans]
-category: work
+tags: [air-trans, work, project, visson, laravel]
+category: project
 project: air-trans
 status: active
 stack: ['Laravel 11', 'Vue 3', 'Vite', 'MySQL', 'Redis', 'Docker']
+aliases: ["air-trans-overview", "air-trans-project"]
 pinecone_indexed: false
 ---
 

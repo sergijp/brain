@@ -1,11 +1,12 @@
 ---
 title: "3g — 3G-SITE клієнтський портал"
 date: 2026-04-19
-tags: [work, project, visson, laravel, 3g]
-category: work
+tags: [3g, work, project, visson, laravel]
+category: project
 project: 3g
 status: active
 stack: ['Laravel 10', 'Vue 3', 'Vite', 'MySQL', 'Docker', 'Binotel']
+aliases: ["3g-overview", "3g-project"]
 pinecone_indexed: false
 ---
 

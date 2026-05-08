@@ -1,3 +1,96 @@
+# 📚 Vault Frontmatter Standard
+
+Уся документація у vault має дотримуватись єдиного frontmatter, щоб запити по категорії/тегу/статусу через Obsidian Search/Dataview працювали стабільно.
+
+## Закрита taxonomy
+
+### `category` (обов'язково, рівно одне значення)
+
+| Значення | Призначення | Розташування |
+|----------|-------------|--------------|
+| `project` | Project overview | `10-Work/Projects/<p>/project-overview.md` |
+| `docs` | Архітектурні документи | `10-Work/Projects/<p>/docs/<topic>.md` |
+| `session` | Сесійні нотатки | `10-Work/Projects/<p>/sessions/YYYY-MM-DD-*.md` |
+| `adr` | Architectural Decision Records | `10-Work/Projects/<p>/decisions/YYYY-MM-DD-*.md` |
+| `trading-analysis` | TDA-аналіз ринку | `20-Trading/Analysis/YYYY-MM-DD/...` |
+| `trading-journal` | Журнал угод | `20-Trading/Journal/...` |
+| `trading-retro` | Ретро-сесії | `20-Trading/Retro/...` |
+| `agent` | Інструкції/SKILL.md | `60-Agents/...`, `20-Trading/skills/...` |
+| `reference` | Довідники, MCP-tools | `60-Agents/shared/...`, `50-Resources/...` |
+| `inbox` | Тимчасові, ще не класифіковані | `00-Inbox/...` |
+
+### `status` (обов'язково)
+
+`active` | `done` | `archived` | `partial` | `research` | `planned` | `superseded`
+
+### `tags` (масив, обов'язково ≥2)
+
+Перший тег — **завжди** project slug (`buktrek`, `3g`, `air-trans`, `bustrek`) або domain (`trading`).
+Решта — вільні: `architecture`, `multi-tenancy`, `notifications`, `sms`, `bus`, `tda`, `smc` тощо.
+
+### Інші обов'язкові поля
+
+- `title` — людський заголовок
+- `date` — дата створення `YYYY-MM-DD`
+- `project` — slug проекту (для work) або відсутнє (для trading/agent)
+- `aliases` — масив, мінімум один alias виду `<project>-<topic>` для wiki-link стійкості при перейменуваннях
+- `pinecone_indexed: false` — marker для майбутньої векторної індексації (див. `vault_writer.py`)
+
+### Опційні
+
+- `last_verified: YYYY-MM-DD` — для `category: docs` і `category: reference`. Дата останньої звірки змісту з реальним кодом/станом.
+- `superseded_by: "[[...]]"` — для застарілих ADR.
+
+## Шаблони
+
+Шаблони з готовим frontmatter — у `~/MyVault/templates/`:
+- `Project-Session.md`
+- `Project-Architecture-Doc.md`
+- `Project-Decision-ADR.md`
+- `TDA-Template.md` (трейдинг)
+- `Top-Down-Analysis-Template.md` (трейдинг)
+
+При створенні нового файлу — спочатку копіюй шаблон, потім заповнюй.
+
+## Поле `pinecone_indexed` — статус
+
+> **⚠ Стан 2026-05-08:** поле `pinecone_indexed: false` присутнє у всіх шаблонах і `vault_writer.py`, але **векторна індексація НЕ реалізована**. Це задумане майбутнє: коли буде налаштовано Pinecone-pipeline, скрипт-індексатор буде вибирати файли з `pinecone_indexed: false`, відправляти у векторну БД і ставити `true`.
+>
+> Поки поле — marker зарезервованого формату, не функціональне. Залишається в шаблонах для forward-compatibility.
+
+---
+
+# 🔧 Git Commit Convention для Vault
+
+Vault — це git-репо. Без message-конвенції `git log` стає read-only архівом. Усі коміти у vault мають формат:
+
+```
+<type>: YYYY-MM-DD <project|domain> <короткий-опис>
+```
+
+## Типи
+
+| Тип | Коли | Приклад |
+|-----|------|---------|
+| `session` | сесійна нотатка | `session: 2026-05-08 buktrek SMS templates refactor` |
+| `docs` | арх-документ або INDEX | `docs: 2026-05-08 buktrek + 3g docs/ skeleton` |
+| `adr` | новий ADR | `adr: 2026-05-08 air-trans DTD identity refactor` |
+| `analysis` | трейдинг-аналіз | `analysis: 2026-05-08 EURUSD H1 long setup` |
+| `journal` | трейдинг-журнал | `journal: 2026-05-08 trading session GBPUSD/XAGUSD` |
+| `retro` | трейдинг-ретро | `retro: 2026-04-23 weekly retro 3 rules` |
+| `chore` | гігієна/інфра/CLAUDE-RULES | `chore: 2026-05-08 add Frontmatter Standard` |
+| `fix` | виправлення в існуючих доках | `fix: 2026-05-08 buktrek mapping в feedback` |
+
+## Правила
+
+1. **Завжди вказуй дату YYYY-MM-DD** — навіть якщо це сьогодні.
+2. **Project/domain** — `buktrek`, `3g`, `air-trans`, `bustrek` для work; `trading`, `dixie`, `kassandra` для трейдингу; `vault` для глобальних змін.
+3. **Один коміт = одна логічна одиниця** (одна сесія, один doc, один ADR).
+4. Опис до 60 символів. Деталі — у тілі коміту, якщо потрібні.
+5. **Без `no message`** — це smell.
+
+---
+
 # 🏆 Golden Standard for Top-Down Analysis (TDA)
 
 Цей документ визначає обов'язковий регламент проведення аналізу ринку.

@@ -121,4 +121,5 @@ private const TICKET_EAGER = [
 
 ## Пов'язані документи
 
+- [[INDEX]]
 - [[driver-trip-date-system]] — повна архітектура DTD + soft-deletes

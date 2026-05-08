@@ -4,6 +4,8 @@ date: 2026-04-21
 tags: [trading, strategy, smc, price-action, multi-timeframe]
 category: trading
 status: active
+primary_pattern: sweep-ob-rejection-retest
+last_updated: 2026-05-07
 pinecone_indexed: false
 ---
 
@@ -12,6 +14,92 @@ pinecone_indexed: false
 ## 🎯 Загальний опис
 
 Top-down аналіз з використанням SMC структури на H4/H1, підтвердженням price action та входом на 15m/5m. Торгівля виключно в зонах інтересу (OB, FVG) після підтвердження через BOS/ChoCH та ліквідаційних свупів.
+
+---
+
+## ⭐ PRIMARY PATTERN — Sweep + OB Rejection + Retest
+
+> Основний і найнадійніший патерн стратегії. Використовувати як перший пріоритет на London KZ та NY KZ.
+> Додано: 2026-05-07 (підтверджено на EURUSD live trade)
+
+### Логіка (чому це працює)
+Маркет-мейкери збирають ліквідність (стопи) під/над ключовими рівнями перед справжнім рухом. Demand/Supply OB — зони де інституційний обсяг чекає. Sweep + rejection = підтвердження що зона утримала.
+
+### Умови LONG (5 кроків)
+
+```
+1. HTF Bias (W/D): BULLISH
+   → Ціна в W або D Demand OB / discount зоні
+   → HH/HL підтверджено на D або H4
+
+2. POI — зона входу:
+   → H4 + H1 confluence Demand OB (перетин двох ТФ = вища якість)
+   → Або: H1 OB + M15 FVG overlap
+
+3. SSL Sweep (Judas Swing):
+   → M15/M5 ціна пробиває вниз нижній край зони або локальний HL
+   → Sweep SSL: зніс стопів продавців + ліквідності під зоною
+   → Важливо: це НЕ обов'язково глибокий sweep (може бути 5-15 pips нижче зони)
+
+4. Bullish Rejection candle:
+   → M15 бар закривається ВИЩЕ зони після sweep (велике тіло вгору)
+   → Обсяг вищий за середній (підтвердження інституційного buy)
+   → Ця свічка = підтвердження що OB тримає
+
+5. Retest Entry:
+   → 1-2 наступних M15 бари повертаються до рівня відбою (але не нижче sweep low)
+   → Retest бар закривається ВИЩЕ рівня entry → ВХІД
+   → Або: double test (два бари тестують рівень) → закриття вище → ВХІД
+```
+
+### Параметри входу LONG
+
+| Параметр | Значення |
+|----------|---------|
+| Entry | На закритті retest бару вище рівня demand OB |
+| SL | Нижче sweep low (не нижче OB bottom) + буфер 5-10 pips |
+| TP1 | Найближчий H1 Supply OB (часткова фіксація 40-50%) |
+| TP2 | H4 HH / BSL (runner 50-60%) |
+| Min RR | 1:3 (тісний SL під sweep low дає природно великий RR) |
+
+### Умови SHORT (дзеркально)
+
+```
+1. HTF Bias (W/D): BEARISH — ціна в Supply OB / premium зоні
+2. POI: H4 + H1 confluence Supply OB
+3. BSL Sweep: M15 пробиває вгору край зони, зносить стопи покупців
+4. Bearish Rejection: M15 бар закривається нижче зони після sweep
+5. Retest Entry: 1-2 бари повертаються до рівня, закриваються нижче → SHORT
+```
+
+| Параметр | Значення |
+|----------|---------|
+| Entry | На закритті retest бару нижче рівня supply OB |
+| SL | Вище sweep high + буфер 5-10 pips |
+| TP1 | Найближчий H1 Demand OB |
+| TP2 | H4 LL / SSL |
+
+### Інвалідація
+
+- Retest бар закривається НИЖЧЕ sweep low (LONG) → зона пробита, скасувати
+- Наступний M15 бар після rejection пробиває sweep low на закритті → не входити
+- HTF bias змінився між sweep і retest (CHoCH на H4) → пропустити
+
+### Приклад (EURUSD, 07.05.2026, London KZ)
+
+```
+W/D bias: BULLISH (W Demand OB 1.17-1.18, D Midpoint 0.5 Fib @ 1.175)
+POI: H4+H1 Demand OB confluence 1.17407-1.17549
+Sweep: M15 бар low 1.17453 (нижче OB bottom 1.17407 + SSL)
+Rejection: same bar close 1.17561 (+108 pips, volume 2405 — highest)
+Double retest: бари 6-7 low 1.17450-1.17453, double test тримає
+Entry: 1.17465 (retest bar close above OB)
+SL: 1.17380 (нижче sweep low 1.17453, буфер ~7 pips)
+TP: 1.17832 (H1 Supply OB)
+RR: 4.3
+```
+
+---
 
 ---
 
