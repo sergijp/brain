@@ -19,6 +19,7 @@ pinecone_indexed: false
 - [[application-flow]] — Application → Steps (DB-конструктор) → Files → RemoveProblem.
 - [[mobile-api]] — `app/Services/AppApi/` структура, Passport-токени, маршрути `/app/*`.
 - [[db-conventions]] — Індекси, `FileUploadService` (транслітерація), Carrier↔Member email uniqueness.
+- [[downtime]] — Журнал `downtime_logs`, ліміти 14d, дашборд `drivers-downtime` + `routes-statuses`.
 
 ## Граф залежностей
 
@@ -27,7 +28,8 @@ project-overview
    ├─ multi-tenancy        ← фундамент усього
    ├─ application-flow     ← головний бізнес-процес (carrier-app)
    ├─ mobile-api           ← AppApi для водіїв
-   └─ db-conventions       ← правила для нових міграцій
+   ├─ db-conventions       ← правила для нових міграцій
+   └─ downtime             ← журнал простоїв + дашборд-звіти
 ```
 
 ## Пов'язані

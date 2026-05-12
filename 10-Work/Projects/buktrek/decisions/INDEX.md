@@ -15,7 +15,7 @@ pinecone_indexed: false
 
 ## Активні рішення
 
-_(пусто — записуй сюди при прийнятті нового рішення; старі ADR-таблиці у session-нотатках можеш не переносити)_
+- [[2026-05-11-downtime-logs-append-only]] — Append-only журнал `downtime_logs` замість підрахунку з полів Application (фікс обходу ліміту через `setStep`).
 
 ## Як заводити ADR
 

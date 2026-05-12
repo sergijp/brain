@@ -1,67 +1,45 @@
 {
   "deposit": 10000,
   "currency": "USD",
-  "day": "2026-05-07",
-  "day_risk_used_pct": 2.905,
-  "week_start": "2026-05-04",
-  "week_risk_used_pct": 2.905,
+  "day": "2026-05-11",
+  "day_risk_used_pct": 0.0,
+  "week_start": "2026-05-11",
+  "week_risk_used_pct": 0.0,
   "consecutive_losses": 0,
   "open_positions": [
     {
-      "pair": "GER40",
+      "pair": "GBPUSD",
       "dir": "long",
-      "status": "planned",
-      "risk_usd": 94.50,
-      "risk_pct": 0.945,
-      "group": "Indices EU",
-      "entry_zone": "24830-24908",
-      "sl": 24680,
-      "tp1": 25158,
-      "tp2": 25407,
-      "lot": 0.50,
-      "strategy": "smc-price-action-combo",
-      "journal": "~/MyVault/20-Trading/Journal/2026-05-07-GER40-long.md"
-    },
-    {
-      "pair": "EURUSD",
-      "dir": "long",
-      "status": "planned",
-      "scenario": "B (preferred)",
-      "risk_usd": 96,
-      "risk_pct": 0.96,
-      "entry": 1.17280,
-      "sl": 1.17160,
-      "tp1": 1.17832,
-      "tp2": 1.17965,
-      "lot": 0.08,
-      "group": "USD-major",
-      "strategy": "smc-price-action-combo",
-      "deadline": "11:45 UTC",
-      "journal": "~/MyVault/20-Trading/Journal/2026-05-07-EURUSD-long.md"
-    },
-    {
-      "pair": "USDCAD",
-      "dir": "short",
       "status": "planned_conditional",
       "risk_usd": 100,
       "risk_pct": 1.0,
       "group": "USD-major",
-      "entry_zone": "1.3700-1.3720",
-      "entry_point": 1.3705,
-      "sl": 1.3745,
-      "tp1": 1.3595,
-      "tp2": 1.3500,
-      "lot": 0.34,
+      "entry_zone": "1.35300-1.35350",
+      "entry_midzone": 1.35325,
+      "sl": 1.35080,
+      "sl_distance_pips": "22-27",
+      "tp1": 1.35792,
+      "tp2": 1.36320,
+      "lot": 0.37,
+      "rr_tp1": 2.2,
+      "rr_tp2": 4.6,
       "strategy": "smc-price-action-combo",
-      "activation_window": "14:30-17:15 UTC",
+      "activation_window": "12:00-14:00 UTC",
+      "hard_exit": "18:00 UTC (21:00 Kyiv) — intraday only, CPI/Fed Vote завтра",
       "conditions": [
-        "A: BSL sweep @ 1.3700+ (після 14:30 UTC)",
-        "B: WTI H4 без breakdown",
-        "C: M15 CHoCH + BOS нижче 1.3680 на закритій свічці"
+        "1. M15 wick <= 1.35200 (sweep weekly SSL 1.35138)",
+        "2. M15 close >= 1.35300 + bullish CHoCH",
+        "3. Volume reclaim candle >= 1.5x M15 20-bar avg"
       ],
-      "journal": "~/MyVault/20-Trading/Journal/2026-05-07-USDCAD-short.md"
+      "journal": "~/MyVault/20-Trading/Journal/2026-05-11-GBPUSD-long.md"
     }
   ],
-  "last_updated": "2026-05-07T06:13:40Z",
-  "_note": "2026-05-07: GER40 long + EURUSD long (planned) + USDCAD short (conditional planned, activation 14:30-17:15 UTC, умови A+B+C). WARN: Claims 12:30 UTC blackout, FOMC Minutes 18:00 UTC — обов'язкове управління позиціями до 17:30 UTC."
+  "last_updated": "2026-05-11T07:32:03Z",
+  "_note": "2026-05-11: State reset — попередні planned трейди 07.05 (GER40, EURUSD, USDCAD) не активувались (execution_log порожні). Тиждень 11.05 стартує з чистого листа. GBPUSD long conditional з 3 HARD conditions, activation 12:00-14:00 UTC, hard exit 18:00 UTC через CPI 12.05 12:00 UTC + Fed Vote 12.05 15:30 UTC (overnight заборонено).",
+  "_previous_state_archive": {
+    "date": "2026-05-07",
+    "planned_not_executed": ["GER40 long", "EURUSD long", "USDCAD short"],
+    "week_risk_used_pct_prior": 2.905,
+    "reset_reason": "Conditional/limit orders 07.05 не активувались до закриття сесії, execution_log empty."
+  }
 }
