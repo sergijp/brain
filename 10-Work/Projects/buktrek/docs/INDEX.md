@@ -20,6 +20,7 @@ pinecone_indexed: false
 - [[mobile-api]] — `app/Services/AppApi/` структура, Passport-токени, маршрути `/app/*`.
 - [[db-conventions]] — Індекси, `FileUploadService` (транслітерація), Carrier↔Member email uniqueness.
 - [[downtime]] — Журнал `downtime_logs`, ліміти 14d, дашборд `drivers-downtime` + `routes-statuses`.
+- [[dashboard-api]] — 14 ендпойнтів `/api/system/dashboard/*`, контракти, gotchas, мапа полів спека↔БД.
 
 ## Граф залежностей
 
