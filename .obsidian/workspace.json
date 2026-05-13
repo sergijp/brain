@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "20-Trading/Analysis/2026-05-06/EURUSD-analysis.md",
+                "file": "20-Trading/Analysis/2026-05-13/EURUSD-analysis.md",
                 "mode": "source",
                 "source": false
               },
@@ -196,6 +196,7 @@
   },
   "active": "fad2dab8988eba74",
   "lastOpenFiles": [
+    "20-Trading/Analysis/2026-05-06/EURUSD-analysis.md",
     "10-Work/Projects/bustrek/sessions/2026-05-06-send-email-broker-status.md",
     "10-Work/Projects/bustrek/sessions/2026-05-06-remove-problem.md",
     "20-Trading/Analysis/2026-05-05/EURUSD-analysis.md",
@@ -241,7 +242,6 @@
     "20-Trading/Retrospective/2026-04",
     "20-Trading/Retrospective",
     "10-Work/Projects/tradingview-mcp/sessions/2026-04-29-top-down-analysis.md",
-    "20-Trading/Analysis/2026-04-29/DXY-analysis.md",
     "Без назви.canvas"
   ]
 }
