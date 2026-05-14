@@ -15,7 +15,9 @@ pinecone_indexed: false
 
 ## Активні рішення
 
-_(пусто — записуй сюди при прийнятті нового рішення)_
+| Дата | Slug | Суть |
+|------|------|------|
+| 2026-05-14 | [[2026-05-14-route-access-global-scope]] | Global scope на Trip для route access control |
 
 ## Як заводити ADR
 
