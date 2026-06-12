@@ -42,7 +42,6 @@ pinecone_indexed: false
 
 **Weekly bias:** MIXED (macro bull, короткострокова корекція, відскок)
 
-![[GBPUSD/GBPUSD-W.png]]
 *(Скрін: /Users/serhiin/AI/tradingview-mcp-jackson/screenshots/GBPUSD-W.png)*
 
 ---
@@ -66,7 +65,6 @@ pinecone_indexed: false
 - Ключовий опір D: **1.3640-1.3700** (попередній consolidated range)
 - Ключова підтримка D: **1.3550-1.3580** (swing low)
 
-![[GBPUSD/GBPUSD-D.png]]
 *(Скрін: /Users/serhiin/AI/tradingview-mcp-jackson/screenshots/GBPUSD-D.png)*
 
 ---
@@ -96,7 +94,6 @@ pinecone_indexed: false
 
 **H4 структура:** Consoladated range після impulse вниз. Ціна у discount зоні. Потенційна база для відскоку вгору до 1.37-1.39.
 
-![[GBPUSD/GBPUSD-H4.png]]
 *(Скрін: /Users/serhiin/AI/tradingview-mcp-jackson/screenshots/GBPUSD-H4.png)*
 
 ---
@@ -122,7 +119,6 @@ pinecone_indexed: false
 
 **H1 setup:** Ціна на 1.3637 — знаходиться між SSL (1.36) та BSL (1.37). Немає чіткого entry поки що.
 
-![[GBPUSD/GBPUSD-H1.png]]
 *(Скрін: /Users/serhiin/AI/tradingview-mcp-jackson/screenshots/GBPUSD-H1.png)*
 
 ---
@@ -155,7 +151,6 @@ pinecone_indexed: false
 - BULL: закриття вище PDH 1.3642 → вхід на pullback до 1.3620-1.3632 (DO + OTE)
 - BEAR: пробій SSL 1.3600 → short до 1.3550
 
-![[GBPUSD/GBPUSD-M15.png]]
 *(Скрін: /Users/serhiin/AI/tradingview-mcp-jackson/screenshots/GBPUSD-M15.png)*
 
 ---
@@ -169,7 +164,6 @@ pinecone_indexed: false
 
 **M5 pattern:** Ціна консолідується у вузькому діапазоні 1.3632-1.3642. Pre-London consolidation phase (08:22 EEST = передлондонська сесія).
 
-![[GBPUSD/GBPUSD-M5.png]]
 *(Скрін: /Users/serhiin/AI/tradingview-mcp-jackson/screenshots/GBPUSD-M5.png)*
 
 ---

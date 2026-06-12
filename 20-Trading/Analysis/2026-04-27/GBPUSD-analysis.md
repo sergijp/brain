@@ -12,19 +12,15 @@ pinecone_indexed: false
 
 ## 🏛 Weekly: HTF Bullish
 Сильний вихід з діапазону. Мета — 1.3600.
-![[img/gbpusd_w.png]]
 
 ## 📅 Daily: Bullish Expansion
 Ціна на річних максимумах. Пріоритет — лонг.
-![[img/gbpusd_d.png]]
 
 ## ⏱ 4-Hour: BOS UP
 Злам структури на 1.3510. Чекаємо ретест POI.
-![[img/gbpusd_h4.png]]
 
 ## 🕐 1-Hour: SMT Context
 Дивергенція з EURUSD підтверджує силу.
-![[img/gbpusd_h1.png]]
 
 ## 🎯 LTF & Trade Plan
 - **Bias:** Bullish 📈
@@ -32,7 +28,6 @@ pinecone_indexed: false
 - **Stop Loss:** 1.3485
 - **TP2:** 1.3600 (RR 3.6)
 - **Lot:** 0.20 lot (Risk 0.5% на $10k)
-![[img/gbpusd_m5.png]]
 
 ---
 ## 📝 Висновок та План

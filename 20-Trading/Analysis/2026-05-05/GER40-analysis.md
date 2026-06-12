@@ -31,8 +31,6 @@ W: 30-тижневий range `21 860 – 25 512` (3 652 pts). Тиждень W-0
 
 **HTF Bias: Bullish-Corrective.** Структура HH/HL цілісна, тренд вгору домінує. Поточна позиція: верхня третина W-range, наближення до W-HH зони 24 640–24 798. Invalidation: тижневий close нижче 23 613 (W swing low).
 
-![[img/ger40_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -49,8 +47,6 @@ PDH (04.05) = `24 486` (H4 swing high досягнутий), PDL = `24 283`.
 
 **Daily Bias: Bullish (continuation).** Ціна в momentum-фазі після sweep; найближча ціль — D ATH 24 798.
 
-![[img/ger40_d.png]]
-
 ---
 
 ## 4-Hour (4-годинний графік)
@@ -64,8 +60,6 @@ H4 range (станом на 04.05 EOD): `24 283 – 24 486`, зміна +0.53%.
 Сьогодні (05.05) до London open ціна повинна утримати H4 HL вище `24 283`. Якщо overnight (Asia-session) пройшов тихо — очікуємо continuation до `24 486+`.
 
 **H4 Bias: Bullish-Continuation.** Тиск up, re-accumulation completed, expansion очікується у London/NY.
-
-![[img/ger40_h4.png]]
 
 ---
 
@@ -86,8 +80,6 @@ SMC на H1 (стан на 04.05):
 
 **H1 Bias: Bullish.** Утримання HL → expectation of continuation.
 
-![[img/ger40_h1.png]]
-
 ---
 
 ## 15-Minute (15-хвилинний графік)
@@ -104,8 +96,6 @@ M15 діапазон (04.05 EOD): `24 283–24 408`. Pre-London (зараз 05:4
 1. **Консервативний (LONG):** London open sweep EQL `24 289.5` → M5 CHoCH bullish → entry long `24 295–24 320` → TP1 `24 486`, TP2 `24 640`.
 2. **Агресивний (LONG):** breakout PDH `24 486` + retest → long continuation → `24 600–24 798`.
 3. **Bearish (low-prob):** провал нижче `24 270` M15 close → re-test H4 OB `24 165–24 200` → short-term bear до `24 088`.
-
-![[img/ger40_m15.png]]
 
 ---
 
@@ -152,8 +142,6 @@ M15 діапазон (04.05 EOD): `24 283–24 408`. Pre-London (зараз 05:4
 - M15 close нижче `24 265` після entry sweep → exit
 - H4 close нижче `24 200` → HTF bias під питанням
 - Вхід у blackout window (якщо є news) → пауза
-
-![[img/ger40_m5.png]]
 
 ---
 

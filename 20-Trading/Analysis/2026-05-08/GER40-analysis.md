@@ -37,8 +37,6 @@ pinecone_indexed: false
 - W demand: 22 852 (попередній W low)
 - W ATL корекції: 21 860 (Mar 2026 — Strong Low)
 
-![[img/ger40_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -64,8 +62,6 @@ pinecone_indexed: false
 - Ціна знаходиться між Daily demand zone ~24000-24142 (жовта зона з чарту) та Recent High 25158
 
 **Daily Bias: Bearish-Corrective** — відбій від 25 000–25 158 supply + CHoCH, очікується ретест 24 000–24 200 зони
-
-![[img/ger40_d.png]]
 
 ---
 
@@ -96,8 +92,6 @@ pinecone_indexed: false
 
 **H4 Bias: Bearish** — CHoCH + LH формується + ціна під H4 OB
 
-![[img/ger40_h4.png]]
-
 ---
 
 ## 1-Hour (1-годинний графік)
@@ -126,8 +120,6 @@ pinecone_indexed: false
 
 **H1 Bias: Bearish-Corrective** — ціна під H1 OB, очікується відновлення до 24 865+ перед шортом або continuation down до 24 200
 
-![[img/ger40_h1.png]]
-
 ---
 
 ## 15-Minute (15-хвилинний графік)
@@ -144,8 +136,6 @@ pinecone_indexed: false
 2. **Агресивний (SHORT):** Sweep M15 high (24 472–24 480) → CHoCH вниз → SHORT entry з SL вище 24 500. Мета: 24 200 area.
 
 3. **Альтернатива (LONG — LOW probability):** Якщо ціна свіпне 24 372 (H1 Weak Low) + M15 BOS вгору + SMT divergence з US500 → LONG до H4 OB 24 877. Мала ймовірність при поточному ведмежому H4.
-
-![[img/ger40_m15.png]]
 
 ---
 
@@ -171,8 +161,6 @@ pinecone_indexed: false
 **Умова входу:** Дочекатись London KZ (06:00–08:00 UTC). Ідеальна схема: sweep BSL 24 472–24 490 → M5 CHoCH вниз → вхід на retest + confirmation candle.
 
 **Інвалідація:** Закриття H1 бару вище 24 979 (відновлення H1 структури bullish) → план скасовується.
-
-![[img/ger40_m5.png]]
 
 ---
 

@@ -24,15 +24,11 @@ agent: analyst
 **Структура:** ціна за ~70 пунктів від 100W high (1.38700). Це зона equal highs / ймовірний buy-side liquidity pool 1.387-1.395 (psychological 1.40).
 **HTF Bias:** `Bullish-Corrective / Exhausted` — тренд живий, але близько до supply. Очікується або grab 1.387 highs з reversal, або continuation з ретесту ~1.345-1.350.
 
-![[img/gbpusd_w.png]]
-
 ## 📅 Daily (Денний графік)
 100D range: `1.31596 – 1.38700`, +1.47%. Останні 5D: `1.35180 → 1.34764 → 1.36034 → 1.35750 → 1.35883`.
 **Структура:** очевидний sweep низу 1.34578 → recovery до 1.36124 → консолідація. Формується HL-схема: low 1.34542 (H4) як key support, supply 1.36034-1.36578.
 - **Key levels D:** PDH = 1.36053, PDL = 1.35751, weekly high = 1.36578 (=PWH, equal до 5-day high — sell-side magnet НЕ, **buy-side liquidity pool**).
 - Position у W range: верхня третина (~75%).
-
-![[img/gbpusd_d.png]]
 
 ## ⏱ 4-Hour (4-годинний графік)
 100×H4 range: `1.33809 – 1.36578`, +1.07%. Останні 5×H4: `1.35990 → 1.35750 → 1.35867 → 1.35880 → 1.35884`.
@@ -40,15 +36,11 @@ agent: analyst
 - Видно H4 BOS UP від 1.34542 → 1.36578, потім pullback. Зараз — фаза балансу всередині premium 50-70% impulse leg.
 - Немає чіткого CHoCH вниз — bias H4 ще bullish, але momentum згас.
 
-![[img/gbpusd_h4.png]]
-
 ## 🕐 1-Hour (1-годинний графік)
 H1 range (~4 доби): `1.34542 – 1.36578`, +0.48%. Останні 5H: `1.35846 → 1.35854 → 1.35978 → 1.35880 → 1.35880`.
 **Структура:** equal highs ~1.35990-1.36016 (3 рази тестувалось — buy-side liquidity), equal lows ~1.35856-1.35870 (sell-side liquidity внизу range).
 Локальний H1 OB: `1.35790-1.35850` (bullish, bullish-OB після last impulse).
 **SMT з EURUSD:** EURUSD робить аналогічну компресію — кореляція синхронна, **немає bullish дивергенції**. Це знижує ймовірність breakout вгору без зовнішнього drivera (а через UK holiday — драйверa немає).
-
-![[img/gbpusd_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 M15 range: `1.35688 – 1.36578` (~25 H). Last 5×M15: `1.35873 → 1.35867 → 1.35880 → 1.35872 → 1.35882` — мертва зона ±10 пунктів.
@@ -56,8 +48,6 @@ M15 range: `1.35688 – 1.36578` (~25 H). Last 5×M15: `1.35873 → 1.35867 → 
 1. **Конс. (LONG):** sweep equal lows `1.35688-1.35750` (Asia low + PDL) → CHoCH M5 → entry в H1 OB `1.35790-1.35850` → ціль 1.36016 (H1 EQH liquidity).
 2. **Агр. (SHORT):** sweep equal highs `1.35990-1.36053` (PDH + H1 EQH) → CHoCH M5 → SHORT з 1.36016-1.36050 → ціль `1.35688` (M15 low / PDL).
 3. **PASS:** через UK Bank Holiday і slow flow — 70% ймовірність всю сесію провести у range 1.3585-1.3600 без trigger.
-
-![[img/gbpusd_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -90,8 +80,6 @@ M15 range: `1.35688 – 1.36578` (~25 H). Last 5×M15: `1.35873 → 1.35867 → 
 - **TP2:** 1.36000 (H1 EQH) — RR 1.5 ⚠️
 - **TP3:** 1.36050 (PDH) — RR 1.85
 - **Висновок B:** RR недостатній, **сетап B = SKIP**, тільки A торгується.
-
-![[img/gbpusd_m5.png]]
 
 ---
 

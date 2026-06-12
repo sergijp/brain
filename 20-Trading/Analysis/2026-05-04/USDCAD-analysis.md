@@ -19,24 +19,16 @@ pinecone_indexed: false
 ## 🏛 Weekly (Тижневий графік)
 W: **-1.27%**, 15W range `1.34197 – 1.47937`. Останні 5W closes: `1.38431 → 1.36934 → 1.36692 → 1.35938 → 1.35914` — **чітка серія LH/LL, weekly bearish continuation**. Ціна за 5 тижнів зробила 4 червоні свічки поспіль і знаходиться у нижній 12% W-діапазону. **HTF Bearish-Strong**.
 
-![[img/usdcad_w.png]]
-
 ## 📅 Daily (Денний графік)
 20D **-1.31%**, 100D range `1.34818 – 1.39670`. Останні 5D: `1.36842 → 1.36838 → 1.35822 → 1.35938 → 1.35914` — distribution під рівнем 1.3690, **D BOS вниз через 1.3582** на 3-й сесії. Ціна тестує локальний support 1.3590 (psych) перед потенційним протяжкою на 1.34818 (D liquidity нижче 100D-low).
 
-![[img/usdcad_d.png]]
-
 ## ⏱ 4-Hour (4-годинний графік)
 H4 100b range `1.35501 – 1.38780`, **-1.64%**. Останні 5×4H: `1.35880 → 1.35938 → 1.35884 → 1.35902 → 1.35915` — **H4 swept low 1.35501** і робить **corrective bounce** до 1.3590-х. Це класична post-sweep accumulation перед продовженням або справжнім reversal. H4 swing high лишився `1.36360`. H4 OB зона `1.3610 – 1.3625` (last consolidation перед sell-off).
-
-![[img/usdcad_h4.png]]
 
 ## 🕐 1-Hour (1-годинний графік)
 H1 **-0.33%** за останні 100h, range `1.35501 – 1.37111`. Останні 5h: `1.35900 → 1.35908 → 1.35856 → 1.35902 → 1.35915` — **tight coil 1.3585–1.3596**, формується EQH `1.35961`. Якщо ціна знесе EQH у London KZ — first target M15 short trigger у H1 OB 1.3610.
 
 **SMT (USDCAD ↔ DXY):** USDCAD за тиждень -1.64% при відносно стабільному DXY → **це CAD-strength move**, не USD weakness. Корелят з нафтою (WTI вгору) пояснює тиск. Pre-BoC speech це додатково b​ullish для CAD (Macklem hawkish risk).
-
-![[img/usdcad_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 M15 range `1.35501 – 1.35961`. Coil під EQH, потенційний liquidity grab.
@@ -44,8 +36,6 @@ M15 range `1.35501 – 1.35961`. Coil під EQH, потенційний liquidi
 Сценарії:
 1. **Консервативно (SHORT continuation):** sweep EQH `1.35961` → ретест H1 OB `1.36050 – 1.36250` → CHoCH вниз → entry SHORT з ціллю 1.3578/1.3550.
 2. **Агресивно (LONG fade pre-news):** sweep `1.35501` (H4 low) ще раз → CHoCH вгору на M5 → scalp до 1.3625 з обов'язковим виходом до 17:00 UTC.
-
-![[img/usdcad_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -78,8 +68,6 @@ M15 range `1.35501 – 1.35961`. Coil під EQH, потенційний liquidi
 - SL: `1.35450`
 - TP1: `1.35900` — RR ≈ 2.5; TP2: `1.36050` — RR ≈ 4
 - Тільки на чітких bullish triggers (CHoCH M15 + sweep 1.3550). HTF проти, тому B-tier setup.
-
-![[img/usdcad_m5.png]]
 
 ---
 

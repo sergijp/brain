@@ -21,16 +21,12 @@ pinecone_indexed: false
 W (100W back) **+7.49%**, range `1.0178 – 1.2083`.
 Останні 5W closes: `1.1522 → 1.1725 → 1.1764 → 1.1719 → 1.1661` — HH досягнуто на 1.1849, далі слабкий LH 1.1791 і поточний нижчий close. Структура **HTF Bullish**, але четвертий тиждень з нижчими closes — **bullish-corrective / momentum slowing**. Жодного W BOS вниз поки немає, ціна тримається над key W demand 1.15–1.1565.
 
-![[img/eurusd_w.png]]
-
 ## 📅 Daily (Денний графік)
 
 D 20-day **+0.31%**, range `1.1411 – 1.2083`. Останні 5D: `1.1719 → 1.1721 → 1.1713 → 1.1676 → 1.1663` — **LH/LL серія**, retracement в межах W bull. Ціна вийшла вниз із D consolidation 1.17–1.1849 і тестує D OB demand 1.1635–1.1655 (попередній accumulation block перед імпульсом 06.04 → 14.04).
 
 Sweeps: PDL 1.1665 sweep сьогодні (М15 low 1.16551). PDH 1.1721 цілий.
 Position у W range — middle (53%), у D range — bottom третина.
-
-![[img/eurusd_d.png]]
 
 ## ⏱ 4-Hour (4-годинний графік)
 
@@ -42,8 +38,6 @@ Key levels:
 - **Liquidity above:** 1.1755 → 1.1791 → 1.1849 (multiple equal highs)
 - **Liquidity below:** 1.1655 (свіжо sweept) → 1.1566 (нижче weekly support)
 
-![[img/eurusd_h4.png]]
-
 ## 🕐 1-Hour (1-годинний графік)
 
 H1 30-bar range `1.1655 – 1.1755`, **−0.14%**. Останні 5×H1 closes: `1.1667 → 1.1666 → 1.1660 → 1.1659 → 1.1663` — поточний бар робить **internal sweep H1 low 1.1655** (low 1.16551) і повертається всередину. Це перший сигнал для потенційного reversal в межах H4 demand.
@@ -52,8 +46,6 @@ H1 30-bar range `1.1655 – 1.1755`, **−0.14%**. Останні 5×H1 closes: 
 - **vs DXY (D):** EURUSD робить LL (1.1660 < 1.1676), DXY теж робить higher low/slight push (98.97 → 99.04) — **синхронно**, без bullish-divergence, USD-strength підтверджено.
 - **vs GBPUSD (D):** GBPUSD `1.3517 → 1.3477 → 1.3465` — теж LH/LL, синхронно з EURUSD. Немає FX-divergence.
 - **Висновок SMT:** наразі **нейтральний-небулліш** — EURUSD не має SMT-аргументу для негайного long. Потрібен M15 CHoCH UP як підтвердження.
-
-![[img/eurusd_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 
@@ -70,8 +62,6 @@ M15 30-bar **−0.35%**, low 1.16551 (свіжо). Поточна ціна 1.166
 3. **Continuation SHORT (контр-W, тільки якщо H4 close < 1.1632):**
    Очікувати breakdown H4 demand → retest 1.1640 як new supply → target 1.1566. Лише як reactive план, не пріоритет.
 
-![[img/eurusd_m15.png]]
-
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план (preliminary)
 
 > ⚠️ План **preliminary**: дає `strategy-picker → dixie` визначити фінальний playbook. M15 CHoCH UP ще не відбувся.
@@ -86,8 +76,6 @@ M15 30-bar **−0.35%**, low 1.16551 (свіжо). Поточна ціна 1.166
 - **Lot Size:** `$100 / (35 × $10) ≈ 0.29 lot` (FX major, OANDA: 1 pt = $10/lot — перевірити брокер)
 
 **Trigger umova:** entry лише після M15 close > 1.1670 з confirmed CHoCH UP. Без CHoCH = no-trade, ризик breakdown 1.1632.
-
-![[img/eurusd_m5.png]]
 
 ---
 

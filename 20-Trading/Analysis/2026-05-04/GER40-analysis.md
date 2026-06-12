@@ -24,8 +24,6 @@ W: +0.72% за останній тиждень. 30-тижневий range `21 86
 
 **HTF Bias: Bullish-Corrective.** Не імпульсний моментум, але структура HH/HL цілісна; тренд вгору домінує до пробою `23 613` вниз.
 
-![[img/ger40_w.png]]
-
 ## 📅 Daily (Денний графік)
 
 20D `+6.92%`, range `21 934.5 – 24 798`. Останні 5D closes: `23 994 → 23 774 → 24 308 → 24 309 → 24 352` — **V-recovery з 23 613**, чотири послідовно вищі closes після sweep PDL.
@@ -34,8 +32,6 @@ W: +0.72% за останній тиждень. 30-тижневий range `21 86
 
 **Daily Bias: Bullish (recovery).** Прорив `24 408` відкриє шлях на ретест `24 798` ATH-локального; провал нижче `24 283` → знову `24 050 / 23 850`.
 
-![[img/ger40_d.png]]
-
 ## ⏱ 4-Hour (4-годинний графік)
 
 H4 range (30 барів) `23 613 – 24 486.07`, +0.53%. Останні 5×4H closes: `24 364 → 24 310 → 24 322 → 24 333 → 24 352`.
@@ -43,8 +39,6 @@ H4 range (30 барів) `23 613 – 24 486.07`, +0.53%. Останні 5×4H cl
 Структура: BOS вгору на пробої `24 363`, після чого compression `24 283–24 408`. Це **класичний H4 re-accumulation** після imp-leg вгору. H4 swing high `24 486.07`, swing low `24 283.5` — рівні для SL/TP.
 
 **H4 Bias: Bullish-Compression.** Готовність до експансії; напрям визначить London open.
-
-![[img/ger40_h4.png]]
 
 ## 🕐 1-Hour (1-годинний графік)
 
@@ -59,8 +53,6 @@ SMC ([LuxAlgo]):
 
 **SMT vs US500:** обидва індекси зробили swing low ~30 квітня, recovery синхронний — divergence відсутня → bullish bias підтверджено.
 
-![[img/ger40_h1.png]]
-
 ## 🎯 15-Minute (15-хвилинний графік)
 
 M15 range за 30 барів `24 283.5 – 24 408.5`. Перед London open (06:00 UTC summer) поточна ціна біля `24 350` — у середині pre-market range.
@@ -70,8 +62,6 @@ M15 range за 30 барів `24 283.5 – 24 408.5`. Перед London open (06
 1. **Bullish LOR-B (preferred):** перший 30-60 хв London cash open сформує opening range; пробій його високу `R_high` з ретестом — long до `24 486 → 24 600`.
 2. **Bear sweep first:** sweep EQL `24 289.5` (sell-side liquidity grab) → CHoCH M5 → reversal long з кращим RR.
 3. **Bear continuation (low-prob):** провал `24 283` D-low → шорт до `24 150`, але це проти HTF.
-
-![[img/ger40_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -108,8 +98,6 @@ M15 range за 30 барів `24 283.5 – 24 408.5`. Перед London open (06
 
 - M15 close нижче `24 270` після entry → закрити трейд
 - Денний close нижче `24 200` → bias переглянути на bearish
-
-![[img/ger40_m5.png]]
 
 ---
 

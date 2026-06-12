@@ -20,8 +20,6 @@ W: +0.13% за 30 тижнів, range `1.30102–1.38700`. Останні 5W clo
 
 **Verdict:** `Bullish-Exhausted` — HTF висхідна структура зберігається, але momentum згасає; ймовірний deeper pullback у зону 1.330–1.335 перед продовженням.
 
-![[img/gbpusd_w.png]]
-
 ## 📅 Daily (Денний графік)
 20D range `1.31596–1.35996`, +0.20%. Останні 5D closes: `1.35308 → 1.35334 → 1.35180 → 1.34764 → 1.34580` — sweep ATH тижня 1.35763 у вівторок, потім **3 червоних свічки поспіль** з BOS вниз через 1.34632 (Mon low). Чітка denverse після failed breakout.
 
@@ -30,8 +28,6 @@ W: +0.13% за 30 тижнів, range `1.30102–1.38700`. Останні 5W clo
 - D OB bearish: `1.35180–1.35400` (середа open + четвер open)
 
 **Verdict:** `Bearish-Strong` (corrective leg усередині HTF bullish-exhausted).
-
-![[img/gbpusd_d.png]]
 
 ## ⏱ 4-Hour (4-годинний графік)
 H4 range `1.34479–1.35763`, -0.35%. Останні 5×4H closes: `1.34813 → 1.34764 → 1.34846 → 1.34609 → 1.34580` — серія LH/LL після sweep 1.358. BOS down через 1.347.
@@ -43,8 +39,6 @@ H4 range `1.34479–1.35763`, -0.35%. Останні 5×4H closes: `1.34813 → 
 
 **Verdict:** `Bearish-Strong`, активна distribution.
 
-![[img/gbpusd_h4.png]]
-
 ## 🕐 1-Hour (1-годинний графік)
 H1 -0.5% за 30 барів, range `1.34542–1.35255`. Останні 5H closes: `1.34748 → 1.34758 → 1.34609 → 1.34597 → 1.34574` — низький volatility drift вниз, тестує 1.3454 (Asia low). Tight distribution під H1 OB.
 
@@ -53,8 +47,6 @@ H1 -0.5% за 30 барів, range `1.34542–1.35255`. Останні 5H closes
 - **Liquidity below:** `1.34479` (H4 swing low + sell-stops)
 
 **SMT з DXY:** DXY = 99.07 (HH 5-day, +0.47% intraday), GBPUSD = LL. **Кореляція аліґнована** (USD сила підтверджена) — **немає reversal SMT**, тренд продовжується. Якщо DXY раптом зробить LH при GBPUSD на новому LL → це буде reversal-сигнал, але зараз — продовження bearish.
-
-![[img/gbpusd_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 Тримає лоу 1.34542. Структура під H1 OB.
@@ -65,8 +57,6 @@ H1 -0.5% за 30 барів, range `1.34542–1.35255`. Останні 5H closes
 3. **Sweep+continuation:** breach 1.34479 → BOS на M15 → поглиблення до **1.34000–1.34100** (D demand зона).
 
 ⚠️ **Усі сценарії скасовуються в 10:00 UTC** — за 30 хв до blackout (BOE).
-
-![[img/gbpusd_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -82,8 +72,6 @@ H1 -0.5% за 30 барів, range `1.34542–1.35255`. Останні 5H closes
 - **Lot Size:** `$100 / (22 × $10) ≈ 0.45 lot` (FX major: 1 pt = $10 на 1 lot — перевірити брокер OANDA)
 
 > Якщо M15 CHoCH вгору (close > 1.34960) — план **скасовується**, шукати лонг від D demand 1.340–1.342.
-
-![[img/gbpusd_m5.png]]
 
 ---
 

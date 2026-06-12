@@ -22,8 +22,6 @@ pinecone_indexed: false
 
 Структура: три consecutive Lower Highs (24 640 → 24 405 → 24 129) — ведмежа корекція від HTF максимуму 25 407.5. Ціна знаходиться у нижній третині 15W range. W BOS донизу ще не підтверджений (попередній W low ~21 860 недоторканий), але структура формує LH/LL pattern. Щотижневий imbalance 24 000–24 500 частково закритий. **HTF: Bearish-Corrective** — розподіл від хаю, пошук нижчої ліквідності.
 
-![[img/ger40_w.png]]
-
 ## Daily (Денний графік)
 
 20D range `23 613 – 25 158.2` (1 545.2 pts, -2.07%). Останні 5D closes:
@@ -31,16 +29,12 @@ pinecone_indexed: false
 
 Ціна нижче mid 20D range (~24 385). PDH = 24 495.2, PDL = 24 112.2. Сьогодні ціна вже торкнулась PDL area (24 112). Розподіл: consecutive lower closes з короткими корекційними bounce. D структура — BOS DOWN із корекцією до рівнів PDH без захоплення. Ключова D зона supply: 24 400–24 500 (rejection area від вчора). **D: Bearish-Corrective**, ціна шукає liquidity нижче PDL 24 112.
 
-![[img/ger40_d.png]]
-
 ## 4-Hour (4-годинний графік)
 
 H4 range (30 барів) `23 927.2 – 24 516.2` (589 pts, -1.16%). Останні 5×4H closes:
 `24 379.2 → 24 328.3 → 24 285.2 → 24 138.7 → 24 130.7`
 
 H4 структура: BOS DOWN підтверджений — ціна пробила swing low ~24 275 з закриттям нижче. Серія LL/LH на H4. H4 swing high = 24 516.2 (недоторканий — SL reference), H4 swing low = 23 927.2 (потенційний TP2). Активний H4 Bearish OB: 24 280–24 355 (зона де відбувся BOS). FVG: 24 188–24 252 (imbalance від імпульсного падіння). **H4: BOS DOWN, continuation sell**.
-
-![[img/ger40_h4.png]]
 
 ## 1-Hour (1-годинний графік)
 
@@ -51,8 +45,6 @@ H1 downtrend: consecutive LH/LL. Ціна у нижній зоні H1 range. H1 
 
 **SMT:** GER40 vs US500 — GER40 показує слабший bounce від мінімумів (якщо US500 відновлюється сильніше — SMT divergence підтверджує ведмежий bias GER40).
 
-![[img/ger40_h1.png]]
-
 ## 15-Minute (15-хвилинний графік)
 
 M15 range `24 112.2 – 24 352.95` (240.75 pts, -0.81%). Ціна у tight consolidation 24 112–24 180.
@@ -62,8 +54,6 @@ M15 range `24 112.2 – 24 352.95` (240.75 pts, -0.81%). Ціна у tight conso
 2. **Агресивно:** sweep SSL 24 112 → bounce → reversal BOS UP відсутній → continuation short з 24 140–24 160.
 
 Ключові M15 рівні: SSL 24 112, BSL 24 352, OB supply 24 280–24 310.
-
-![[img/ger40_m15.png]]
 
 ## 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -76,8 +66,6 @@ M15 range `24 112.2 – 24 352.95` (240.75 pts, -0.81%). Ціна у tight conso
 - **Lot Size:** `$100 / (220 pts × $1) ≈ 0.45 contract` (GER40: 1 pt = $1 на 1 contract — **перевірити брокера**)
 
 > TP2 RR = 2.1 — мінімальний поріг 1:2 виконаний.
-
-![[img/ger40_m5.png]]
 
 ---
 

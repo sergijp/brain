@@ -18,22 +18,14 @@ pinecone_indexed: false
 ## 🏛 Weekly (Тижневий графік)
 Double sweep pattern — спочатку BSL sweep 160.726 (W-3), потім SSL sweep 155.032 (W-2). Поточний тижневий бар рухається вгору від 156.557 до 157.655 — bullish reclaim після очищення обох ліквідностей. 5 тижнів поспіль HH/HL структура на W. **HTF bias: Bullish Strong.**
 
-![[img/usdjpy_w.png]]
-
 ## 📅 Daily (Денний графік)
 BOS підтверджений вгору після sweep 155.032 (06.05). 5 днів поспіль HH/HL структура. Поточний D бар: 157.161 → 157.655 (close). Momentum bullish на D. **D bias: Bullish.**
-
-![[img/usdjpy_d.png]]
 
 ## ⏱ 4-Hour (4-годинний графік)
 CHoCH від 155.032 (06.05 06:00 UTC). Серія H4 HH: 155.032 → 156.567 → 157.094 → 157.276 → 157.655 (поточний high). Структура не має bearish перерви — мікробичачий тренд. **H4 bias: Bullish continuation.**
 
-![[img/usdjpy_h4.png]]
-
 ## 🕐 1-Hour (1-годинний графік)
 H1 London KZ momentum push. Серія нових HH без pullback. **H1 Demand OB: 157.376-157.422** (impulse origin сьогодні вранці). **SMT:** USDJPY vs DXY — синхронне зростання, кореляція підтверджена.
-
-![[img/usdjpy_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 Чекати M15 pullback + sweep SSL нижче 157.376 → bullish rejection candle, що закривається вище 157.422 → ENTRY. Альтернатива: M15 BOS вище 157.94 з ретестом.
@@ -41,8 +33,6 @@ H1 London KZ momentum push. Серія нових HH без pullback. **H1 Deman
 Сценарії:
 1. **Консервативно (LONG):** sweep SSL 157.376 → M15 CHoCH → Entry 157.390-157.430.
 2. **Агресивно:** breakout вище 157.94 OB → retest → Entry.
-
-![[img/usdjpy_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -53,8 +43,6 @@ H1 London KZ momentum push. Серія нових HH без pullback. **H1 Deman
 - **TP2:** `157.940` — RR ~7.0 (H4 Supply OB)
 - **TP3:** `158.616` — RR ~15.0 (W/D resistance)
 - **Lot Size:** `$100 / (8 × $7) ≈ 1.78 lot` (USDJPY: 1 pip ≈ $7/lot — перевірити брокер)
-
-![[img/usdjpy_m5.png]]
 
 ---
 **Setup score: 7/10**

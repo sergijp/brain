@@ -12,19 +12,15 @@ pinecone_indexed: false
 
 ## 🏛 Weekly: HTF Bullish
 Discovery mode на історичних хаях. Мета — 160.00+.
-![[img/usdjpy_w.png]]
 
 ## 📅 Daily: Overextended
 Консолідація вище 159.00. Високий ризик інтервенції.
-![[img/usdjpy_d.png]]
 
 ## ⏱ 4-Hour: Local Structural Shift
 Злам структури вниз на 159.80. Формування корекційного сетапу.
-![[img/usdjpy_h4.png]]
 
 ## 🕐 1-Hour: Rejection Zone
 Ціна під Daily Open. SMT вказує на слабкість єни.
-![[img/usdjpy_h1.png]]
 
 ## 🎯 LTF & Trade Plan (Short Correction)
 - **Bias:** Bearish (Correction) 📉
@@ -32,7 +28,6 @@ Discovery mode на історичних хаях. Мета — 160.00+.
 - **Stop Loss:** 160.10 (50 pts, захищено психологічним рівнем)
 - **TP2:** 158.80 (RR 1.6)
 - **Lot:** 0.05 lot (Risk 0.25% на $10k)
-![[img/usdjpy_m5.png]]
 
 ---
 ## 📝 Висновок та План

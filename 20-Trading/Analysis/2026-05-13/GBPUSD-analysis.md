@@ -30,8 +30,6 @@ pinecone_indexed: false
 
 **HTF Bias: Bullish Strong.** Структура HH/HL на W збережена. Ціна у premium над W 50% (mid = ~1.297), тобто у distribution area W, але ще не показала reversal-структури.
 
-![[img/gbpusd_w.png]]
-
 ---
 
 ## 📅 Daily (Денний графік)
@@ -49,8 +47,6 @@ pinecone_indexed: false
 - Support: **1.34479** — major H4/D demand OB
 
 **D Bias: Bullish, фаза корекції.** D зробив BOS UP через 1.36324, потім pullback до demand 1.35575-1.35724. Якщо demand тримається — continuation LONG до 1.36536+.
-
-![[img/gbpusd_d.png]]
 
 ---
 
@@ -73,8 +69,6 @@ pinecone_indexed: false
 
 **H4 structure: BOS UP → корекція до demand. Healthy correction — без BOS вниз на H4.**
 
-![[img/gbpusd_h4.png]]
-
 ---
 
 ## 🕐 1-Hour (1-годинний графік)
@@ -89,8 +83,6 @@ pinecone_indexed: false
 - H1 SSL: нижче **1.35575** — ключова ліквідність для sweep
 
 **SMT (Smart Money Technique):** EURUSD паралельно у pullback від highs (~1.1260 area). Кореляція USD-major збережена — обидві пари синхронні у корекції. Відсутність SMT divergence = підтвердження загального USD-зміцнення, а не GBP-специфічний рух. При появі SMT divergence (EURUSD нове low без GBPUSD new low) — посилений сигнал для LONG на GBPUSD.
-
-![[img/gbpusd_h1.png]]
 
 ---
 
@@ -111,8 +103,6 @@ pinecone_indexed: false
 
 3. **Bearish (low-prob):** чистий пробій нижче 1.35310 + D close нижче demand → SHORT з ретесту. Проти HTF bias — тільки при сильному USD catalyst (NFP/FOMC rerate).
 
-![[img/gbpusd_m15.png]]
-
 ---
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
@@ -126,8 +116,6 @@ pinecone_indexed: false
 - **Lot Size:** `$100 / (28 × $10) ≈ 0.36 lot` (GBPUSD: 1 pt = $10/lot — перевірити брокер)
 
 ⚠️ **TP2 RR = 1.7** — нижче мінімального 1:2. Для покращення: entry ближче до 1.35580 дає RR ≈ 1.9 на TP2, або чекати sweep нижче 1.35575 (tight SL за sweep low).
-
-![[img/gbpusd_m5.png]]
 
 ---
 

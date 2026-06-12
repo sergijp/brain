@@ -13,31 +13,25 @@ pinecone_indexed: false
 ## 🏛 Weekly (HTF Bias)
 - **Аналіз:** Ціна торгується нижче рівня 1.1718. Попередній бичачий імпульс згасає під тиском DXY. Структура починає виглядати як distribution на топі.
 - **Вердикт:** HTF Bearish / Corrective.
-![[img/eurusd_w.png]]
 
 ## 📅 Daily (Structure)
 - **Аналіз:** Денна свічка впевнено поглинає попередні лонги. Ціна пробила локальну підтримку 1.1710. Наступна мета — PDL.
 - **Вердикт:** Daily Bearish.
-![[img/eurusd_d.png]]
 
 ## ⏱ 4-Hour (Market Structure)
 - **Аналіз:** Підтверджений BOS DOWN. Ціна формує LH. Спостерігається агресивна доставка ціни вниз.
 - **Вердикт:** Bearish Delivery.
-![[img/eurusd_h4.png]]
 
 ## 🕐 1-Hour (Session Context)
 - **Аналіз:** Ретест H1 Order Block (1.1718–1.1725). SMT з GBPUSD підтверджує слабкість європейських валют.
 - **Вердикт:** Bearish Rejection at POI.
-![[img/eurusd_h1.png]]
 
 ## 🎯 15-Minute (Execution Setup)
 - **Аналіз:** Консолідація після імпульсу. Очікуємо Judas Swing до 1.1720 на відкритті Лондона перед падінням.
-![[img/eurusd_m15.png]]
 
 ## ⚡ 5-Minute (Local Trigger)
 - **Аналіз:** На M5 бачимо формування рівних лоїв (Equal Lows). Потрібен sweep 1.1720 (BSL) та моментальний MSS (зміна структури) вниз. Якщо ціна закриється над 1.1725 тілом, сценарій шорту відміняється.
 - **Вердикт:** Waiting for Reversal Trigger.
-![[img/eurusd_m5.png]]
 
 ---
 

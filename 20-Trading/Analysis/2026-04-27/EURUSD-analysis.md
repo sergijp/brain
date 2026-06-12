@@ -13,27 +13,21 @@ pinecone_indexed: false
 ## 🏛 Weekly (HTF Bias)
 - **Аналіз:** Weekly Close вище 1.1718 підтверджує вихід з тривалої зони накопичення (1.1400–1.1500). Структура HH/HL зберігається.
 - **Вердикт:** HTF Bullish.
-![[img/eurusd_w.png]]
 
 ## 📅 Daily (Structure)
 - **Аналіз:** Ціна відштовхнулася від Equal Lows (1.1670), сформувавши бичачий імпульс. Головна мета — зняття ліквідності PDH на 1.1732.
 - **Вердикт:** Daily Bullish.
-![[img/eurusd_d.png]]
 
 ## ⏱ 4-Hour (Market Structure)
 - **Аналіз:** Підтверджений BOS UP на 1.1716. Зараз спостерігається корекція до H4 Order Block (1.1700–1.1715).
 - **Вердикт:** Bullish BOS / Retrace to POI.
-![[img/eurusd_h4.png]]
 
 ## 🕐 1-Hour (Session Context)
 - **Аналіз:** SMT Divergence з DXY (EUR не оновив лоу, DXY не оновив хай). Ціна утримується над EMA 1.1716.
 - **Вердикт:** Bullish Divergence.
-![[img/eurusd_h1.png]]
 
 ## 🎯 15-Minute & 5-Minute (Local Action)
 - **Аналіз:** Консолідація в Asian Range (1.1699–1.1732). Очікуємо Judas Swing (маніпуляцію) під час відкриття Лондона.
-![[img/eurusd_m15.png]]
-![[img/eurusd_m5.png]]
 
 ---
 

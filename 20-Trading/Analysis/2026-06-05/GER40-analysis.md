@@ -36,8 +36,6 @@ pinecone_indexed: false
 
 **HTF Bias: Bullish-exhausted** — тренд bullish, але ціна в зоні ATH / near-ATH. Ймовірність distribution або глибокої корекції перед наступним leg up зростає.
 
-![[img/ger40_w.png]]
-
 ---
 
 ## 📅 Daily (Денний графік)
@@ -58,8 +56,6 @@ PDL (04.06): оцінка `25 150–25 300`.
 - D resistance: **25 512** (ATH) / **25 600–25 700** (якщо ATH пробитий і новий діапазон)
 - D support: **25 100–25 150** (H1 SSL zone, multiple touch)
 - D OB (Bullish): **24 800–25 044** (незакрита FVG з 26.05)
-
-![[img/ger40_d.png]]
 
 ---
 
@@ -82,8 +78,6 @@ PDL (04.06): оцінка `25 150–25 300`.
 - H4 Support OB: `25 100–25 150` (HL zone)
 - H4 FVG: `24 808–25 044` (відкрита — significant if revisited)
 - H4 SSL (ліквідність нижче): `25 040`, `24 808`
-
-![[img/ger40_h4.png]]
 
 ---
 
@@ -110,8 +104,6 @@ Option 2 — Bearish H1 (п'ятниця profit-taking): H1 CHoCH DOWN від ov
 - Якщо US500 futures нижче, а GER40 утримується → SMT bullish divergence → LONG setup.
 - Перевірити US pre-market перед входом.
 
-![[img/ger40_h1.png]]
-
 ---
 
 ## 🎯 15-Minute (15-хвилинний графік)
@@ -135,8 +127,6 @@ Option 2 — Bearish H1 (п'ятниця profit-taking): H1 CHoCH DOWN від ov
 
 4. **NO TRADE:**
    П'ятниця після 15:00 UTC → не входити (weekend gap risk). Якщо ціна між 25 150–25 380 без чіткої структури — чекати.
-
-![[img/ger40_m15.png]]
 
 ---
 
@@ -168,8 +158,6 @@ Option 2 — Bearish H1 (п'ятниця profit-taking): H1 CHoCH DOWN від ov
 - Setup A (LONG): H1 close під `25 040` → bullish thesis відкладається, не входити.
 - Setup B (SHORT): H1 close вище `25 512` (ATH пробитий з об'ємом) → bullish continuation, не входити short.
 - Обидва сетапи: **не входити після 15:00 UTC (18:00 Kyiv)** — п'ятничний weekend gap risk.
-
-![[img/ger40_m5.png]]
 
 ---
 

@@ -27,8 +27,6 @@ pinecone_indexed: false
 
 **HTF Bias: Bullish-Corrective** — macro trend bullish, але моментум вичерпується під W supply. Ймовірна ширша корекція до `1.155–1.165` перед наступним leg up.
 
-![[img/eurusd_w.png]]
-
 ---
 
 ## 📅 Daily (Денний графік)
@@ -42,8 +40,6 @@ pinecone_indexed: false
 - **D Demand OB:** `1.16766 – 1.17000` (ключова зона для глибшої корекції)
 - **PDH (12.05):** ~1.17878 (prior day high = BSL)
 - **PDL (12.05):** ~1.17488–1.17516 (prior day low = SSL)
-
-![[img/eurusd_d.png]]
 
 ---
 
@@ -59,8 +55,6 @@ pinecone_indexed: false
 - **H4 OB вужча (ближча):** `1.17523 – 1.17572` — де відбулась реакція 12.05 London open
 
 **H4 bias:** Bullish у контексті, але на рівні supply. Short-term retracement до 1.17480–1.17520 або 1.17230–1.17380 перед наступним impulse up.
-
-![[img/eurusd_h4.png]]
 
 ---
 
@@ -79,8 +73,6 @@ pinecone_indexed: false
 - Після US CPI: якщо reaction bullish EUR — SMT alignment підтверджений
 - **Вердикт SMT:** нейтральний до слабко-bullish. Немає критичного SMT блокера, але обережно з momentum — GBPUSD лідирує.
 
-![[img/eurusd_h1.png]]
-
 ---
 
 ## 🎯 15-Minute (15-хвилинний графік)
@@ -96,8 +88,6 @@ pinecone_indexed: false
 2. **Агресивно LONG:** якщо ціна вже над 1.17700 на відкритті London — пошук pullback до FVG M15 + M5 retest → entry continuation.
 3. **SHORT (контртренд, низький пріоритет):** тільки при відхиленні від H4 Supply `1.17850–1.18000` + M15 BOS DOWN + DXY розворот вгору. TP: 1.17480. Ймовірність низька через HTF bullish bias.
 4. **No-trade:** тіснення Asia < 20 pts без sweep і без CHoCH на London open — пасуємо до NY KZ.
-
-![[img/eurusd_m15.png]]
 
 ---
 
@@ -123,8 +113,6 @@ pinecone_indexed: false
 4. Retest рівня CHoCH + закриття M5 bullish
 5. Вхід після 09:00 Kyiv (07:00 UTC) — EEST, Kyiv вже пройшов
 6. Kill-switch: закрити до 18:00 Kyiv (16:00 UTC) — інтрадей правило
-
-![[img/eurusd_m5.png]]
 
 ---
 

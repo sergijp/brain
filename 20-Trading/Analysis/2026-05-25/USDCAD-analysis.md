@@ -21,27 +21,19 @@ pinecone_indexed: false
 
 W +1.01%, 15W range `1.342 – 1.479`. Останні 5W: `1.3575 → 1.36324 → 1.33242 → 1.34312 → 1.38167` — після корекції з 1.4793 high поточний тиждень потужно реверсний (+1% за 5 діб). Структура HL → формується новий swing leg вгору. **HTF Bullish-Corrective Recovery** — основний тренд (DXY-driven), корекція завершена.
 
-![[img/usdcad_w.png]]
-
 ## 📅 Daily (Денний графік)
 
 20D +0.32%, range `1.34820 – 1.39670`. Ціна в верхній третині 20D-діапазону. Останні 5D closes: `1.33948 → 1.34348 → 1.34296 → 1.378 → 1.38168` — 3 поспіль бичих свічок з прискоренням. **D BOS вгору**, формується новий HH. Liquidity вище — Daily PDH region 1.3967 (key resistance, sweep target).
 
-![[img/usdcad_d.png]]
-
 ## ⏱ 4-Hour (4-годинний графік)
 
 H4 +1.50%, range `1.35505 – 1.38246`. Останні 5×4H: `1.38085 → 1.382 → 1.3812 → 1.38167` — accumulation під 1.38246 swing high. **H4 BOS UP** від 1.355 → 1.382. POI: H4 Demand OB `1.3795 – 1.3805` (origin of breakout). Key resistance: 1.38246 (H4 swing high, ймовірний sweep target).
-
-![[img/usdcad_h4.png]]
 
 ## 🕐 1-Hour (1-годинний графік)
 
 H1 +0.51% за останні 6 діб, range `1.37312 – 1.38246`. Останні 5H: `1.38007 → 1.380885 → 1.38063 → 1.38167` — тісне накопичення під 1.38246. Tight range, low volatility — типова pre-breakout / pre-sweep структура.
 
 **SMT:** ↔ DXY (TVC:DXY) — DXY H4 +1.10%, синхронно бичий. **Без розбіжностей** — USD strength підтверджена. Bias = LONG.
-
-![[img/usdcad_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 
@@ -50,8 +42,6 @@ M15 +0.18%, range `1.37839 – 1.38246`. Накопичення під H4 high. 
 1. **Сценарій A — Sweep + Reversal Retest (PRIMARY ⭐):** sweep 1.38246 (judas swing), потім CHoCH M15 → ретест 1.3795–1.3805 (H4 OB) → LONG continuation на 1.39+. Це базовий патерн з SMC+PA Combo.
 2. **Сценарій B — Direct Breakout:** clean break 1.38246 + 2 close above + retest 1.38246 → LONG. Менш надійний (low probability under London KZ alone).
 3. **Сценарій C — інвалідація:** close H1 < 1.3784 → bias порушено, чекати.
-
-![[img/usdcad_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -67,8 +57,6 @@ M5 +0.12%, range `1.37958 – 1.38207`. Тонке стиснення під 1.3
 - **Lot Size:** `$100 / (30 × $10) ≈ 0.33 lot` (FX major, 1 pip = $10/lot — перевірити брокер)
 
 ⚠️ **Умова входу:** дочекатись sweep 1.38246 + M15 CHoCH + ретест 1.380. Без sweep — не входити (немає liquidity для smart money to fill).
-
-![[img/usdcad_m5.png]]
 
 ---
 

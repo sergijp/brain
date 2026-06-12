@@ -27,8 +27,6 @@ pinecone_indexed: false
 
 **HTF Verdict: Bearish-Corrective** — ціна у downswing від W ATH 1.1849, але weekly demand 1.14–1.145 тримається.
 
-![[img/eurusd_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -44,8 +42,6 @@ D resistance: `1.1600 – 1.1610` (попередні D closes, FVG)
 D support: `1.1497 – 1.1500` (psy level + W demand base)
 
 **D Verdict: Bearish-Corrective / Bounce** — ціна нижче D supply, але bounces від demand. Intraday bullish recovery.
-
-![[img/eurusd_d.png]]
 
 ---
 
@@ -63,8 +59,6 @@ Liquidity above: `1.1555` (H1 swing high), `1.1600–1.1610` (D level / BSL)
 Liquidity below: `1.1497` (swept Monday), `1.1450` (older SSL)
 
 **H4 Verdict: BOS DOWN + HL forming** — структура bearish, але HL від 1.14997 починає формуватись.
-
-![[img/eurusd_h4.png]]
 
 ---
 
@@ -84,8 +78,6 @@ H1 CHoCH level: `1.1538` (пробитий swing для CHoCH)
 
 **H1 Verdict: CHoCH confirmed bullish** — Setup LONG при pullback до H1 OB 1.1530–1.1540.
 
-![[img/eurusd_h1.png]]
-
 ---
 
 ## 15-Minute (15-хвилинний графік)
@@ -101,8 +93,6 @@ SSL below: `1.1527`, `1.1497`
 1. **Консервативно (LONG):** pullback до M15 Bullish OB `1.1530 – 1.1540` + M15 BOS/CHoCH вгору → LONG до `1.1590–1.1600` (H4 FVG верх).
 2. **Агресивно:** після підтвердження London sweep 1.14997 (вже відбувся) → вхід на ретесті `1.1527–1.1535` при першому pullback → LONG до `1.1590`.
 3. **SHORT (альтернативний):** якщо ціна пробиває 1.1527 вниз із закриттям M15 нижче → SHORT continuation до 1.1500 / 1.1497.
-
-![[img/eurusd_m15.png]]
 
 ---
 
@@ -124,8 +114,6 @@ M5 range (50 барів): `1.15348 – 1.15536`, +0.04%. Tight accumulation post
 ⚠️ **RR TP2 = 1.3 — нижче мінімальних 1:2.** Setup торгувальний лише при вході глибше в OB:  
 Альтернативний вхід: `1.1527–1.1530` → SL `1.1493` → TP2 `1.1590` → RR ~1.8 (все ще нижче 2.0).  
 **TP3 RR = 2.6 — єдиний RR >= 2.** Торгувати лише якщо тримати до TP3 як основної цілі.
-
-![[img/eurusd_m5.png]]
 
 ---
 

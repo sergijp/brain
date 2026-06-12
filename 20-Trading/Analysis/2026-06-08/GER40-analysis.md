@@ -36,8 +36,6 @@ W: +30.72% за 100 тижнів. Останні 5W: `23906 → 24808 → 25054 
 Supply zone W: 25 364–25 447 (зона BSL — тут стоп-лосси биків)
 Demand zone W: 23 631–23 862 (W2 sweep low — сильна OB зона попиту)
 
-![[img/ger40_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -54,8 +52,6 @@ Demand zone W: 23 631–23 862 (W2 sweep low — сильна OB зона поп
 **D Bearish OB (Supply):** 25 063–25 115 (тіло Jun 2 бару = класичний bearish OB)
 **D FVG zone:** 25 031–25 063 (перекриття між Jun 1 close і Jun 4 high — часткове)
 **D SSL (liquidity below):** 24 357 (сьогоднішній мінімум, ймовірно ще не повністю знятий)
-
-![[img/ger40_d.png]]
 
 ---
 
@@ -75,8 +71,6 @@ H4 range (100 барів): 23 630–25 447. Останні 5×4H:
 
 **H4 Bearish OB:** 24 907–24 961 (Jun 5 13:00 бар — potential retest POI)
 **H4 структура:** BEARISH (sequential LH, Asia ranging at lows)
-
-![[img/ger40_h4.png]]
 
 ---
 
@@ -98,8 +92,6 @@ H1 range (Jun 8, 100 барів): 24 357–25 364. Останні 5H:
 
 **SMT (GER40 ↔ US500/EURUSD):** GER40 впав до 24 357 vs US500 (індекс USD-номінований) — можлива SMT divergence на відкритті Лондону, якщо US500 тримається вище попередніх low. Підтверджує bear momentum на GER40.
 
-![[img/ger40_h1.png]]
-
 ---
 
 ## 15-Minute (15-хвилинний графік)
@@ -115,8 +107,6 @@ M15 range: 24 357–25 030 (Jun 8 Asia session).
 
 **Сценарій B (агресивний — SHORT):**
 Price touches 24 614 BSL (H1 swing high) → sweep + M5 CHoCH вниз → SHORT entry ~24 610
-
-![[img/ger40_m15.png]]
 
 ---
 
@@ -142,8 +132,6 @@ Price touches 24 614 BSL (H1 swing high) → sweep + M5 CHoCH вниз → SHORT
 - TP1: 24 565 | TP2: 24 515 | TP3: 24 465
 
 **Інвалідація:** Закриття H1 бару вище 24 665 → setup скасовано
-
-![[img/ger40_m5.png]]
 
 ---
 

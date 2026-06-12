@@ -12,19 +12,15 @@ pinecone_indexed: false
 
 ## 🏛 Weekly: HTF Bullish
 Індекс на історичних максимумах. Пріоритет — Bullish.
-![[img/ger40_w.png]]
 
 ## 📅 Daily: Expansion Phase
 Ціна утримується вище 24000. Очікуємо продовження росту.
-![[img/ger40_d.png]]
 
 ## ⏱ 4-Hour: BOS UP
 Злам структури вгору на 24150. Зараз ретест зони Demand.
-![[img/ger40_h4.png]]
 
 ## 🕐 1-Hour: Bullish Bias
 Ціна вище Daily Open (24185). SMT з US100 підтверджує силу.
-![[img/ger40_h1.png]]
 
 ## 🎯 LTF & Trade Plan (Long)
 - **Bias:** Bullish 📈
@@ -32,7 +28,6 @@ pinecone_indexed: false
 - **Stop Loss:** 24085 (100 pts)
 - **TP2:** 24500 (RR 3.1)
 - **Lot:** 0.05 lot (Risk 0.5% на $10k)
-![[img/ger40_m5.png]]
 
 ---
 ## 📝 Висновок та План

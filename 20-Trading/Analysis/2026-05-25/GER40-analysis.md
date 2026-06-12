@@ -18,30 +18,20 @@ pinecone_indexed: false
 ## 🏛 Weekly (Тижневий графік)
 W: +1.27% поточний, попередні 5W `24310 → 24406 → 23906 → 24808 → 25125`. 100W range `17021–25512`, change +37.67%. Bullish-структура: серія HH/HL, цей тиждень пробив попередній W-high (24957), але впритул до **ATH 25512** — зона потенційного **виснаження/distribution**. HTF bias: **Bullish-strong** з оглядом на reversal/exhaustion біля ATH.
 
-![[img/ger40_w.png]]
-
 ## 📅 Daily (Денний графік)
 20D `21860–25512`, current 25128 = **89% позиції в range** (top zone). 5 днів вгору: `24314 → 24740 → 24843 → 24808 → 25128`. Сьогодні D-bar: `open 24808 → high 25234 → current 25128`. Pip-pos: 5 послідовних зелених свічок — overextended стан. Bias: **Bullish momentum, перекуплений**.
-
-![[img/ger40_d.png]]
 
 ## ⏱ 4-Hour (4-годинний графік)
 H4 range `23630–25234`, +3.52% за тиждень. Останні 5×H4: `24851 → 24808 (Fri close) → 25044 (Mon gap-up) → 25180 → 25126 (consolidation)`. **Гепом** на відкритті понеділка: 24808 → 25044 (~236 pts gap), потім impulse до 25234. Зараз pullback. **FVG / Imbalance 24808–25044** залишається відкритим — high probability retest. Bias: **Bullish impulse + pending mean reversion на gap**.
 
-![[img/ger40_h4.png]]
-
 ## 🕐 1-Hour (1-годинний графік)
 H1 +2.87% від low 24159. Останні H1: `25112 → 25150 → 25180 → 25234 (high) → 25155 → 25127`. CHoCH вгору з 25000, поточний pullback від BSL 25234. Структура bullish, mid-correction. **SMT:** з US500 / EURUSD очікуємо позитивну кореляцію — після відкриття US пре-маркету бажано перевірити (не зчитано в цій сесії).
-
-![[img/ger40_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 Сценарії:
 1. **Консервативно (LONG, PRIMARY PATTERN — sweep + OB rejection):** ретест зони `25040–25060` (Monday open gap edge / H4 OB), bullish reaction → entry LONG до 25234 → 25400 → 25512. SL під 24790.
 2. **Агресивно (LONG, deep sweep):** sweep SSL `24808` (Friday close / gap fill), bullish reversal candle → entry з 24850 → TP 25234 → 25400. SL 24750.
 3. **Контр-сетап (SHORT, low conviction):** якщо H1 закриється під 25040 з BOS → short з 25040 retest до 24808 (gap fill only). Проти HTF bias — не торгувати без явного reversal на H4.
-
-![[img/ger40_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -64,8 +54,6 @@ H1 +2.87% від low 24159. Останні H1: `25112 → 25150 → 25180 → 25
 ### Setup C — Breakout continuation (агресивний)
 - Якщо ціна не дає sweep і пробиває **25234** з H1 close → entry на retest 25240–25260
 - SL 25130 (–100 pts), TP1 25400 (RR 1.6), TP2 25512 (RR 2.7)
-
-![[img/ger40_m5.png]]
 
 ---
 

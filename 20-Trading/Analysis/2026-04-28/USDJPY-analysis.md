@@ -13,17 +13,13 @@ pinecone_indexed: false
 ## 🏛 Weekly (HTF Bias)
 - **Аналіз:** Екстремальні максимуми. Ризик інтервенції BOJ.
 - **Вердикт:** HTF Bullish-Exhausted.
-![[img/usdjpy_w.png]]
 
 ## 📅 Daily (Structure)
 - **Аналіз:** Ціна стоїть на місці. Покупець втомлений.
 - **Вердикт:** Neutral / Distribution.
-![[img/usdjpy_d.png]]
 
 ## ⏱ 4-Hour / H1
 - **Аналіз:** Немає чіткого BOS.
-![[img/usdjpy_h4.png]]
-![[img/usdjpy_h1.png]]
 
 ---
 

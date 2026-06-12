@@ -37,8 +37,6 @@ pinecone_indexed: false
 
 **W Bias: BULLISH-CORRECTIVE** — macro trend bullish, ціна у W demand зоні після pullback від HH. Tight weekly range 5 тижнів = accumulation перед продовженням.
 
-![[img/eurusd_w.png]]
-
 ---
 
 ## D — Daily Structure
@@ -57,8 +55,6 @@ pinecone_indexed: false
 - PDH: 1.17784 | PDL: 1.17224
 
 **D Bias: BULLISH CORRECTIVE** — ціна відкатила від D HH 1.1797 до demand зони 1.1722–1.1728 і відштовхнулась вгору. Denний CHoCH bearish на рівні ~1.1742 — потрібен BOS вгору для confirmation.
-
-![[img/eurusd_d.png]]
 
 ---
 
@@ -81,8 +77,6 @@ pinecone_indexed: false
 
 **H4 Bias: RANGE/CONSOLIDATION** — ціна у tight range 1.17230–1.17480 останні 3 H4 бари. CHoCH bearish підтверджений. Очікуємо або BOS вгору через 1.17480 (bullish) або BOS вниз через 1.17230 (bearish continuation).
 
-![[img/eurusd_h4.png]]
-
 ---
 
 ## H1 — Setup Watch
@@ -102,8 +96,6 @@ pinecone_indexed: false
 **SMT (Smart Money Technique):** EURUSD ↔ GBPUSD — обидва у схожому корективному режимі, без divergence = без SMT сигналу. DXY слабкий = підтримка EURUSD bullish.
 
 **H1 Setup: PARTIAL** — ціна консолідує у Tokyo session range. Немає чіткого H1 BOS вгору для підтвердження entry. CHoCH bearish активний на H1.
-
-![[img/eurusd_h1.png]]
 
 ---
 
@@ -135,8 +127,6 @@ pinecone_indexed: false
 1. **Bullish (консервативний):** ціна повертається до demand 1.17260–1.17300 → M15 CHoCH bullish → BOS вгору через 1.17388 → вхід → ціль 1.17500, потім 1.17768
 2. **Bullish (агресивний):** sweep SSL @ 1.17247 → rejection → BOS вгору → вхід від 1.17270 → ціль 1.17500+
 3. **Bearish (якщо BOS down через 1.17232):** continuation вниз до H4 demand 1.17000–1.17100
-
-![[img/eurusd_m15.png]]
 
 ---
 

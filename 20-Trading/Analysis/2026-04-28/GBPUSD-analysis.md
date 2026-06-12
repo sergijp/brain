@@ -13,27 +13,21 @@ pinecone_indexed: false
 ## 🏛 Weekly (HTF Bias)
 - **Аналіз:** Фунт не зміг закріпитися вище 1.3600. Повернення в діапазон вказує на хибний пробій.
 - **Вердикт:** HTF Bearish.
-![[img/gbpusd_w.png]]
 
 ## 📅 Daily (Structure)
 - **Аналіз:** Послідовні червоні свічки. Ціна прямує до рівня 1.3500.
 - **Вердикт:** Daily Bearish.
-![[img/gbpusd_d.png]]
 
 ## ⏱ 4-Hour (Market Structure)
 - **Аналіз:** Чіткий Order Flow вниз. Зони Demand не тримають ціну.
 - **Вердикт:** Bearish Flow.
-![[img/gbpusd_h4.png]]
 
 ## 🕐 1-Hour (Session Context)
 - **Аналіз:** Формування ведмежого прапора під рівнем 1.3540.
 - **Вердикт:** Bearish Consolidation.
-![[img/gbpusd_h1.png]]
 
 ## 🎯 15-Minute & 5-Minute (Local Action)
 - **Аналіз:** Скейлінг у шорт після зняття азіатського хаю.
-![[img/gbpusd_m15.png]]
-![[img/gbpusd_m5.png]]
 
 ---
 

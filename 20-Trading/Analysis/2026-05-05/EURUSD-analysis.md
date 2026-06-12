@@ -44,8 +44,6 @@ HTF: серія HH/HL не зламана. Momentum flat, але bias залиш
 
 **Verdict: HTF Bullish-Corrective.** Покупки пріоритет, але обережно у premium.
 
-![[img/eurusd_w.png]]
-
 ---
 
 ## 📅 Daily (Денний графік)
@@ -65,8 +63,6 @@ HTF: серія HH/HL не зламана. Momentum flat, але bias залиш
 
 **Verdict: Daily bullish.** Consolidation над SSL grab → bias up до PDH 1.17852.
 
-![[img/eurusd_d.png]]
-
 ---
 
 ## ⏱ 4-Hour (4-годинний графік)
@@ -83,8 +79,6 @@ H4 структура: Inside-bar box між 1.1716 і 1.1785. LH sequence (ни
 Сценарій на 05.05: якщо London KZ дасть sweep під 1.17200 (H4 mid pivot) → BOS M15 вгору → H4 target 1.17852.
 
 **Verdict: H4 Neutral-to-Bullish.** Consolidation. Bias up за HTF alignment.
-
-![[img/eurusd_h4.png]]
 
 ---
 
@@ -106,8 +100,6 @@ H1 OB/FVG candidates:
 
 **Verdict: H1 bullish-accumulation.** London sweep expected → long.
 
-![[img/eurusd_h1.png]]
-
 ---
 
 ## 🎯 15-Minute (15-хвилинний графік)
@@ -121,8 +113,6 @@ M15 overnight: tight range, Asian liquidity accumulated above ~1.1740 and below 
 3. **Anti-scenario (SHORT):** якщо M15 close НИЖЧЕ 1.17100 з імпульсом → sweep glide до 1.16551 SSL. Bias SHORT тільки якщо H4 close нижче 1.1715.
 
 **Тригер-умова:** M15 sweep + BOS. **Мінімум для входу — sweep + закрита BOS свічка вгору.**
-
-![[img/eurusd_m15.png]]
 
 ---
 
@@ -168,8 +158,6 @@ M5 overnight: micro-consolidation над 1.1725. London KZ (06:00 UTC) очік�
 - **SL:** 1.17280 (вище H1 rejection zone)
 - **TP1:** 1.16850 | **TP2:** 1.16551 | **TP3:** 1.16000
 - **RR TP2:** ~3.0
-
-![[img/eurusd_m5.png]]
 
 ---
 

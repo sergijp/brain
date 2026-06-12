@@ -30,8 +30,6 @@ Key W levels:
 - **W Liquidity above:** 161.808 (ATH BSL)
 - **W Liquidity below:** 155.032 (weak low / SSL)
 
-![[img/usdjpy_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -54,8 +52,6 @@ Key D levels:
 - **PDH:** 159.654 / **PDL:** 159.298
 - **BSL above:** 160.726 (D swing high, target для HTF bull)
 
-![[img/usdjpy_d.png]]
-
 ---
 
 ## H4 (4-годинний графік)
@@ -76,8 +72,6 @@ Key H4 levels:
 
 **H4 Verdict: BOS UP + consolidation** — структура бичача, ціна консолідується після BOS. Чекає breakout вище 159.654 або pullback до OB 158.864.
 
-![[img/usdjpy_h4.png]]
-
 ---
 
 ## H1 (1-годинний графік)
@@ -95,8 +89,6 @@ Key H1 levels:
 - **H1 Demand OB:** 159.10 – 159.30 (зона ретесту для LONG)
 - **H1 FVG:** 158.86 – 159.09 (bearish gap, вхід для aggressive LONG)
 
-![[img/usdjpy_h1.png]]
-
 ---
 
 ## M15 (15-хвилинний графік)
@@ -112,8 +104,6 @@ M15 range: `159.099 – 159.498` (0.4 pts). Зміна: `+0.12%`.
 2. **Агресивно (LONG):** Sweep SSL нижче 159.099 → reversal candle → LONG від 159.10 із SL нижче 158.759.
 
 3. **SHORT (контртренд):** Якщо ціна досягне 159.65-159.90 і покаже rejection (велика верхня тінь, M15 BOS down) → SHORT зі SL вище 159.92, TP до 159.10-158.76.
-
-![[img/usdjpy_m15.png]]
 
 ---
 
@@ -141,8 +131,6 @@ M15 range: `159.099 – 159.498` (0.4 pts). Зміна: `+0.12%`.
 - **TP2:** `158.76` — RR 3.30
 - **TP3:** `158.10` — RR 5.74
 - **Lot Size:** `$100 / (27 pts × $6.27) ≈ 0.59 lot`
-
-![[img/usdjpy_m5.png]]
 
 ---
 

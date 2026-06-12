@@ -12,19 +12,15 @@ pinecone_indexed: false
 
 ## 🏛 Weekly: HTF Bearish
 Ціна формує Lower High. Глобальний пріоритет — вниз.
-![[img/usdcad_w.png]]
 
 ## 📅 Daily: Bearish Reversal
 Rejection від 1.3715. П'ятниця закрилася ведмеже.
-![[img/usdcad_d.png]]
 
 ## ⏱ 4-Hour: Bearish BOS
 Злам структури вниз на 1.3680. Ретест опору.
-![[img/usdcad_h4.png]]
 
 ## 🕐 1-Hour: Sell Zone
 Ціна під Daily Open (1.3674) та NY Open (1.3664).
-![[img/usdcad_h1.png]]
 
 ## 🎯 LTF & Trade Plan (Short)
 - **Bias:** Bearish 📉
@@ -32,7 +28,6 @@ Rejection від 1.3715. П'ятниця закрилася ведмеже.
 - **Stop Loss:** 1.3720 (55 pts, захищено PDH)
 - **TP2:** 1.3580 (RR 1.6)
 - **Lot:** 0.09 lot (Risk 0.5% на $10k)
-![[img/usdcad_m5.png]]
 
 ---
 ## 📝 Висновок та План

@@ -37,8 +37,6 @@ Weekly OTE zone: 1.36 (поточна ціна в нижній частині)
 Weekly BSL (liquidity above): 1.3700-1.3720 (cluster попередніх тижневих high)
 Weekly SSL (liquidity below): 1.3480-1.3500 (наступний swing low target)
 
-![[img/usdcad_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -59,8 +57,6 @@ Weekly SSL (liquidity below): 1.3480-1.3500 (наступний swing low target
 - Daily структурна підтримка: 1.3480-1.3500
 
 **HTF Daily Verdict: BEARISH** — ціна робить корекційний відскік в Daily OTE зону 1.3650-1.3720 після досягнення LL @ 1.35501. Зона 1.3700-1.3720 = ключова зона продажів для продовження downtrend.
-
-![[img/usdcad_d.png]]
 
 ---
 
@@ -87,8 +83,6 @@ H4 range (30 барів, ~5 днів): `1.35501 – 1.36658` | Change: +0.6%
 
 **H4 Verdict:** Корекція від LL @ 1.35501 у зону H4 OB 1.3660-1.3720. Rejection від цієї зони = сигнал для SHORT. Потрібен H4 bearish candle close нижче 1.3640 для підтвердження CHoCH.
 
-![[img/usdcad_h4.png]]
-
 ---
 
 ## H1 (1-годинний графік)
@@ -112,8 +106,6 @@ H1 range (30 барів, ~30 год): `1.36202 – 1.36658` | Change: +0.12%
 
 **H1 Setup: PARTIAL** — консолідація під OB. Потрібен M15 trigger (CHoCH або BOS down) для входу в SHORT.
 
-![[img/usdcad_h1.png]]
-
 ---
 
 ## M15 (15-хвилинний графік)
@@ -130,8 +122,6 @@ M15 range (остання година): `1.36536 – 1.36648` | Range = 0.00112
 Сценарії на M15:
 1. **Консервативно (SHORT):** ціна піднімається до 1.3660-1.3680 (M15 bearish OB реtest) → M15 bearish CHoCH → вхід SHORT → TP1 @ 1.3620 (M15 SSL), TP2 @ 1.3550, TP3 @ 1.3500
 2. **Агресивно (SHORT):** sweep вище M15 high @ 1.36648 → immediate reversal → SHORT від 1.3665-1.3670
-
-![[img/usdcad_m15.png]]
 
 ---
 
@@ -164,8 +154,6 @@ M5 range: `1.36536 – 1.36608` | Range = 0.00072 | Change: -0.04%
 4. DXY confirmaton: ведмежий сигнал або rejection від resistance
 
 **Інвалідація:** Закриття H4 свічки вище 1.3720 → план скасований, setup invalidated
-
-![[img/usdcad_m5.png]]
 
 ---
 

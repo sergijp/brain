@@ -21,8 +21,6 @@ pinecone_indexed: false
 
 15W range `1.14110 – 1.18728`. Останні 5W closes: `1.17212 → 1.17852 → 1.16252 → 1.16023 → 1.16356` — **distribution з 1.17967 (10 May high), -1.6% і -0.4% подряд два тижні, поточний W consolidation біля 1.163**. HTF структура: bearish corrective leg у межах ширшого March-May ranging (не пробите 1.14110 березневе дно). **HTF Bearish-Corrective** — корекція в межах коридору, не реверс тренду.
 
-![[img/eurusd_w.png]]
-
 ## 📅 Daily (Денний графік)
 
 20D range `1.15763 – 1.17967`, change `-0.44%`. Останні 5D closes: `1.16255 → 1.16175 → 1.16023 → 1.16433 → 1.16356`.
@@ -31,8 +29,6 @@ pinecone_indexed: false
 - 25 May indecisive doji 1.16273-1.16443
 - **D-Bias:** accumulation з sweep 1.158 → формується HL на D, готується bounce до 1.17 OB
 - PDH `1.16443`, PDL `1.16273`
-
-![[img/eurusd_d.png]]
 
 ## ⏱ 4-Hour (4-годинний графік)
 
@@ -46,8 +42,6 @@ H4 range за останні 30 барів `1.15763 – 1.17967`, `-0.87%`. Ос
   - Liquidity above: `1.16618` (W high 17 May)
   - Liquidity below: `1.15883` (D low 21 May)
 
-![[img/eurusd_h4.png]]
-
 ## 🕐 1-Hour (1-годинний графік)
 
 H1 `+0.33%`. Останні 5H closes: `1.16340 → 1.16360 → 1.16298 → 1.16280 → 1.16360`.
@@ -57,8 +51,6 @@ H1 `+0.33%`. Останні 5H closes: `1.16340 → 1.16360 → 1.16298 → 1.16
 - Класичний Asia liquidity grab з London reversal — точка входу за SMC+PA Combo PRIMARY PATTERN
 
 **SMT (vs GBPUSD H1):** GBPUSD +0.65% за день, EURUSD +0.33% — **обидва ↑ синхронно, no divergence**. USD weakness підтверджено через обидві USD-major пари → bullish confluence.
-
-![[img/eurusd_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 
@@ -71,8 +63,6 @@ H1 `+0.33%`. Останні 5H closes: `1.16340 → 1.16360 → 1.16298 → 1.16
 1. **Консервативно (LONG) ⭐ PRIMARY:** ретест H1 OB `1.16290-1.16310` + M15 CHoCH/BOS confirmation → entry на reclaim 1.16320. Ціль: 1.16528 → 1.16618.
 2. **Агресивно (LONG):** ринковий вхід зараз 1.16360 (без ретесту), SL на 1.16240 — гірший RR, але швидше тригер на London open.
 3. **Invalidation:** close H4 < 1.16240 → flip до bearish, ціль 1.15883 (D liquidity).
-
-![[img/eurusd_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -99,8 +89,6 @@ H1 `+0.33%`. Останні 5H closes: `1.16340 → 1.16360 → 1.16298 → 1.16
 - **Lot:** `$100 / (70 pts × $1) = 1.43 lot` → округлити до **1.40 lot** (ризик $98)
 
 ⚠️ **Перевірити брокер** — pip value може відрізнятись на іншому брокері/account currency.
-
-![[img/eurusd_m5.png]]
 
 ---
 

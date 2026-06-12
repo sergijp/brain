@@ -52,8 +52,6 @@ Weekly SSL (liquidity below): **1.3500-1.3550** — swing low target, TP2/TP3
 
 **HTF Weekly Verdict: BEARISH** — downtrend підтверджено. Поточний тижневий відскік — correcive move до Weekly BSL @ 1.3700-1.3720. NFP kick може завершити цей sweep.
 
-![[img/usdcad_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -80,8 +78,6 @@ Weekly SSL (liquidity below): **1.3500-1.3550** — swing low target, TP2/TP3
 
 **HTF Daily Verdict: BEARISH**, але ціна в OTE зоні — підтвердження rejection потрібне для входу.
 
-![[img/usdcad_d.png]]
-
 ---
 
 ## H4 (4-годинний графік)
@@ -107,8 +103,6 @@ H4 range (100 барів): `1.35501 – 1.37406` | Change -0.40%
 
 **H4 Verdict:** Критично спостерігати H4 close (13:00 UTC). Наразі ціна @ 1.36828 — вище H4 OB. SHORT план вимагає rejection та H4 close нижче 1.3680.
 
-![[img/usdcad_h4.png]]
-
 ---
 
 ## H1 (1-годинний графік)
@@ -130,8 +124,6 @@ H1 range (100 барів): `1.35781 – 1.36860` | Change +0.61%
 **SMT (Smart Money Technique):** USDCAD з DXY — NFP beat → DXY strong → USDCAD up. Кореляція підтверджена. Для SHORT потрібно бачити DXY rejection від resistance та USDCAD divergence (USDCAD new high, DXY fail).
 
 **H1 Setup:** Post-NFP = bullish continuation H1. Для SHORT entry потрібен H1 bearish reversal candle з rejection wick від 1.3686-1.3720 зони.
-
-![[img/usdcad_h1.png]]
 
 ---
 
@@ -170,8 +162,6 @@ M15 range (100 барів): `1.36241 – 1.36860` | Change +0.38%
    - NFP beat = USD momentum, ціна продовжує до 1.3700-1.3750
    - NB: UoM Sentiment 14:00 UTC — якщо Bullish for USD → може продовжити ріст
    - Пробиття + закриття H4 вище 1.3720 → SHORT plan INVALIDATED
-
-![[img/usdcad_m15.png]]
 
 ---
 
@@ -213,8 +203,6 @@ M5 range (100 барів): `1.36428 – 1.36860` | Change +0.17%
 **Інвалідація:**
 - H4 candle close (13:00 UTC) вище 1.3720 → SHORT plan INVALIDATED
 - Ціна після UoM (14:00 UTC) продовжує вище 1.3750 → план скасований
-
-![[img/usdcad_m5.png]]
 
 ---
 

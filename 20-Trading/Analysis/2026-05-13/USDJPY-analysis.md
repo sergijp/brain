@@ -51,8 +51,6 @@ pinecone_indexed: false
 
 **HTF Bias: BULLISH STRONG.** Double sweep pattern завершено (BSL + SSL). Ціна робить "premium reclaim" після очищення обох сторін. Наступна ціль W: 158.5–160.0 (повернення у premium W range). Немає W-level resistance до ~158.5.
 
-![[img/usdjpy_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -78,8 +76,6 @@ PDL (12.05): **156.557** (оцінка daily low).
 
 **D Bias: BULLISH CONTINUATION.** Ціна зробила чіткий BOS на D, momentum не згасає. Найближча D resistance: 157.94 (supply OB).
 
-![[img/usdjpy_d.png]]
-
 ---
 
 ## H4 (4-годинний графік)
@@ -100,8 +96,6 @@ PDL (12.05): **156.557** (оцінка daily low).
 - SSL below: 156.557 (PDL, H4 HL)
 
 **H4 Bias: BULLISH CONTINUATION.** Чистий bullish trend без bearish BOS. Ризик: 5 барів поспіль вгору без корекції = overextension. Можлива корекція в H4 demand OB 156.557–156.70 перед наступним push.
-
-![[img/usdjpy_h4.png]]
 
 ---
 
@@ -126,8 +120,6 @@ USDJPY ↔ DXY: якщо DXY показує bearish divergence при новом
 Поточна оцінка: DXY мав зростання паралельно з USDJPY (кореляція 0.8+) → bias підтверджений.
 
 **H1 Bias: BULLISH, потенційний pullback до OB#1 або OB#2 перед continuation.**
-
-![[img/usdjpy_h1.png]]
 
 ---
 
@@ -154,8 +146,6 @@ USDJPY ↔ DXY: якщо DXY показує bearish divergence при новом
 
 **Пріоритет: Сценарій 1 (primary conservative LONG).**
 
-![[img/usdjpy_m15.png]]
-
 ---
 
 ## M5 (5-хвилинний графік) — Торговий план
@@ -180,8 +170,6 @@ USDJPY ↔ DXY: якщо DXY показує bearish divergence при новом
 - **TP1:** `157.940` — RR ~3.0
 - **TP2:** `158.300` — RR ~6.5
 - **Lot Size:** `$100 / (10 × $6.7) ≈ 1.49 lot`
-
-![[img/usdjpy_m5.png]]
 
 ---
 

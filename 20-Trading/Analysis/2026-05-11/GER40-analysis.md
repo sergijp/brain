@@ -25,8 +25,6 @@ pinecone_indexed: false
 
 **HTF verdict:** **Bullish-Exhausted**. Структура тижневих HH/HL зберігається (price над всіма W-EMA), але momentum згасає — wicks на топах, низькі closes над відкриттям, ATH (25 507) не оновлюється другий тиждень поспіль.
 
-![[img/ger40_w.png]]
-
 ## 📅 Daily (Денний графік)
 
 20D range `21 863 – 25 507`, +0.86% за останній день (D-1 = -1.31%). Останні 5D closes:
@@ -40,8 +38,6 @@ pinecone_indexed: false
 - D-OB supply: 24 900–25 150 (зона D-1 high + sweep).
 
 **PDH (08.05):** 24 513. **PDL (08.05):** 24 289. Це базові liquidity рівні на 11.05.
-
-![[img/ger40_d.png]]
 
 ## ⏱ 4-Hour (4-годинний графік)
 
@@ -58,8 +54,6 @@ pinecone_indexed: false
 
 **H4 verdict:** локальна **корекція в межах W-bullish** — short-term bearish, structural bullish HTF. Очікую або (а) тест 24 100–24 290 для D-демі-демі-OB + bounce, або (б) пробій 24 289 → continuation до 23 950 (W-OB top).
 
-![[img/ger40_h4.png]]
-
 ## 🕐 1-Hour (1-годинний графік)
 
 H1 range за 60 барів `23 715 – 25 152`. Останні 5H closes: `24 435 → 24 400 → 24 482 → 24 341 → 24 308`.
@@ -71,8 +65,6 @@ H1 range за 60 барів `23 715 – 25 152`. Останні 5H closes: `24 4
 - H1 demand: **24 290–24 340** (двічі тестована опора 08.05 пізнього сесію).
 
 **SMT (vs US500/SPX500):** CLI не дає коректний крос-символ pull, але візуально на DAX 08.05 high = 25 152, тоді як US500/US100 у цей самий період показали нижчий high (за пам'яттю watchlist) → **SMT bearish divergence на H4** ⇒ підтверджує локальний bearish bias.
-
-![[img/ger40_h1.png]]
 
 ## 🎯 15-Minute (15-хвилинний графік)
 
@@ -90,8 +82,6 @@ H1 range за 60 барів `23 715 – 25 152`. Останні 5H closes: `24 4
 
 3. **No-trade (висока ймовірність):**
    - Понеділок XETR відкриття часто має слабкий volume. Якщо немає ні sweep PDH ні sweep PDL — пропускаємо до London KZ overlap (10:00 EEST = 07:00 UTC = London open).
-
-![[img/ger40_m15.png]]
 
 ## ⚡ 5-Minute (5-хвилинний графік) — Торговий план
 
@@ -114,8 +104,6 @@ H1 range за 60 барів `23 715 – 25 152`. Останні 5H closes: `24 4
 **Invalidation:** H1 closing > 24 545 → setup невалідний (структура назад на bullish).
 
 **Min RR досягнуто (TP2 = 4.5).** Setup трейдабельний.
-
-![[img/ger40_m5.png]]
 
 ---
 

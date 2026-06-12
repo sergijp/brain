@@ -27,8 +27,6 @@ W +1.18% за 100 тижнів. Поточна тижнева свічка (по
 
 **W Bias: Bullish-Exhausted** — macro bullish, але поточна корекція ще не завершена.
 
-![[img/eurusd_w.png]]
-
 ---
 
 ## Daily (Денний графік)
@@ -42,8 +40,6 @@ ATH **1.20831** досягнуто ~8 травня. Від там sharp bearish 
 **D Bias: Bearish-Corrective** — price відновлюється від D low, але ще в зоні потенційного bearish continuation. Key resistance: 1.168–1.172 (previous D structure zone). Key support: 1.158–1.160 (D OB / previous consolidation base).
 
 D OB (Bearish): зона 1.168–1.172 — остання bearish daily candle перед падінням. PDH: 1.16859 (29 травня), PDL: 1.16416 (31 травня).
-
-![[img/eurusd_d.png]]
 
 ---
 
@@ -62,8 +58,6 @@ H4 range 1.15763–1.17881 (100 барів = ~17 днів). Останні 5×H4
 
 **H4 Bias: Bullish (corrective від D bearish trend)** — short-term bullish відновлення але під D resistance.
 
-![[img/eurusd_h4.png]]
-
 ---
 
 ## H1 (1-годинний графік)
@@ -75,8 +69,6 @@ Micro-accumulation у зоні 1.163–1.166 впродовж 29-31 травня
 **SMT:** EURUSD vs GBPUSD та DXY — без доступу до SMT даних в реальному часі. Зазвичай EURUSD/GBPUSD позитивно корельовані — якщо GBPUSD також утримується вище нещодавніх лоу, bias bullish confluent.
 
 H1 структура: tight accumulation pre-London, ціна ~1.1654. Key H1 level: 1.1686 (swing high від 29 травня — BSL / liquidity target).
-
-![[img/eurusd_h1.png]]
 
 ---
 
@@ -94,8 +86,6 @@ M15 key levels:
 - Resistance: 1.16859 (swing high / BSL)
 - Support: 1.16250 (M15 swing low / liquidity below)
 - Current consolidation: 1.1641–1.1655 (Pre-London range)
-
-![[img/eurusd_m15.png]]
 
 ---
 
@@ -116,8 +106,6 @@ SL = 19 pips × $10/pip (FX major, 1 lot) = $190 на 1 lot
 Lot = $100 / $190 ≈ 0.53 lot
 ```
 ⚠️ Перевірити pip value у свого брокера (OANDA: 1 pip EURUSD ≈ $10 на 1 lot стандартний).
-
-![[img/eurusd_m5.png]]
 
 ---
 

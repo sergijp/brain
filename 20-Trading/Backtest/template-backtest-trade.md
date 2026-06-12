@@ -112,8 +112,6 @@ mistakes: []           # якщо є — короткий опис
 Що було би якби setup не спрацював? Який рівень / подія інвалідувала би бік?
 
 ### Screenshots
-![H1 setup](screenshots/2026-04-22-h1-setup.png)
-![M15 entry](screenshots/2026-04-22-m15-entry.png)
 
 ---
 
