@@ -1,14 +1,14 @@
 {
   "deposit": 10000,
   "currency": "USD",
-  "day": "2026-05-14",
+  "day": "2026-06-15",
   "day_risk_used_pct": 0.0,
-  "week_start": "2026-05-12",
+  "week_start": "2026-06-15",
   "week_risk_used_pct": 0.0,
   "consecutive_losses": 0,
   "open_positions": [],
-  "last_updated": "2026-05-14T06:20:00Z",
-  "_note": "2026-05-14: Всі позиції від 12.05 (GBPUSD long, USDJPY long, GER40 long) закриті користувачем. Slate чистий. Поточний аналіз: 5 пар TDA 14.05 — debate в процесі.",
+  "last_updated": "2026-06-15T06:49:58Z",
+  "_note": "2026-06-15 (Пн): Новий торговий тиждень. Дати day/week_start синхронізовано. Лічильники чисті (0/0/0), позицій немає. Депозит 10000 без змін.",
   "_archived_2026-05-12": {
     "gbpusd_long": "closed",
     "usdjpy_long": "closed",
