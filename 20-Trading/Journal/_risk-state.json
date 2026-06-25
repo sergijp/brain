@@ -1,14 +1,56 @@
 {
   "deposit": 10000,
   "currency": "USD",
-  "day": "2026-06-15",
+  "day": "2026-06-22",
   "day_risk_used_pct": 0.0,
-  "week_start": "2026-06-15",
+  "week_start": "2026-06-22",
   "week_risk_used_pct": 0.0,
   "consecutive_losses": 0,
   "open_positions": [],
-  "last_updated": "2026-06-15T06:49:58Z",
-  "_note": "2026-06-15 (Пн): Новий торговий тиждень. Дати day/week_start синхронізовано. Лічильники чисті (0/0/0), позицій немає. Депозит 10000 без змін.",
+  "repeated_focus_watch": [
+    {
+      "id": "EURUSD-long-AMD",
+      "pair": "EURUSD",
+      "dir": "long",
+      "pattern": "discretionary-smc-amd / AMD-long",
+      "attempts": [
+        {"date": "2026-05-07", "result": "loss", "note": "широкий SL"},
+        {"date": "2026-05-12", "result": "blocked-then-paper", "note": "BLOCK через SMT → paper"},
+        {"date": "2026-06-17", "result": "loss-paper", "note": "override paper, SL вибито проколом 1.16008"}
+      ],
+      "clean_wins": 0,
+      "window_days": 30,
+      "status": "ACTIVE-BLOCK-WATCH",
+      "rule": "3+ спроби за ~30 днів без чистого win → наступна (4-та) спроба = BLOCK до бектесту (performance-analyst) або вимагає додаткового підтвердження",
+      "next_attempt_action": "BLOCK — направити в performance-analyst на бектест перед будь-яким реальним входом",
+      "source": "Retro/weekly/2026-06-21.md (проблема #4, action item)"
+    }
+  ],
+  "override_log": [
+    {
+      "date": "2026-06-17",
+      "pair": "EURUSD",
+      "dir": "long",
+      "reason": "ASR F1 FAIL (Asia range ~8 pips), RR ~1:1 < min — команда дала SKIP/BLOCK, користувач узяв override",
+      "mode": "paper/demo",
+      "real_account_touched": false,
+      "journal_tag": "#risk-override",
+      "policy_note": "Коректно: override виконано як paper. За оновленою політикою ASR F1 FAIL = HARD SKIP, override дозволено ЛИШЕ як paper/демо, НІКОЛИ на реальний рахунок."
+    }
+  ],
+  "policy_flags": {
+    "asr_f1_fail": "HARD-SKIP — не override-кандидат на реальний рахунок",
+    "override_scope": "paper/demo only, real account forbidden",
+    "intraday_only": true,
+    "flat_time_kyiv": "17:45-18:00",
+    "no_overnight_hold": true
+  },
+  "last_updated": "2026-06-22T06:57:16Z",
+  "_note": "2026-06-22: Оновлено за тижневою ретро Retro/weekly/2026-06-21.md. Новий торговий тиждень (week_start 2026-06-22, week_risk reset 0). День скинуто на 2026-06-22, day_risk 0. consecutive_losses=0 (минулотижневий paper не рахується як реальний збиток). Додано: repeated_focus_watch (EURUSD-long-AMD = ACTIVE-BLOCK-WATCH), override_log (17.06 paper), policy_flags (ASR F1 FAIL hard-skip, override=paper-only, intraday-only/no-overnight). Реальний депозит весь час недоторканий — 0/0 ризику.",
+  "_archived_2026-06-17": {
+    "paper_trade": "EURUSD long pos 9jg9bX (discretionary-smc-amd, override paper) — closed, P&L залежав від ручної фіксації TP1. Реальний депозит не задіяний.",
+    "details": "Journal/2026-06-17-EURUSD-long.md"
+  },
   "_archived_2026-05-12": {
     "gbpusd_long": "closed",
     "usdjpy_long": "closed",

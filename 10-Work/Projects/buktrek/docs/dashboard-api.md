@@ -7,7 +7,7 @@ project: buktrek
 status: active
 aliases: ["buktrek-dashboard-api", "dashboard-endpoints"]
 pinecone_indexed: false
-last_verified: 2026-05-12
+last_verified: 2026-06-22
 ---
 
 # dashboard-api
@@ -53,9 +53,16 @@ Customer, DowntimeLog) — не зачіпає tenant-БД.
    успадковуються від `DashboardRequest` (там вже `manager_id/customer_id/carrier_id/search_query/year/month/date_range`).
    Нові додають regex для `period`.
 
-3. **Currency — відкладено.** Усі finance-агрегації сумують `amount`/`freight`
-   без фільтра по `amount_currency_id`. Як з'явиться `Setting::get('dashboard_currency')`
-   — додати фільтр у kpi + finance + directions.revenue.
+3. **Currency — групування по валютах (оновлено 2026-06-22).** `kpi` (earned/expected),
+   `directions` (revenue/avg_freight) **і `finance`** (received/expected + clients[].freight)
+   групують по валютах через спільний `sumColumnByCurrency(Builder, $column, $currencyFk,
+   $fallback)` (leftJoin currencies, group by code) → `list<{code, amount}>`.
+   `sumAmountByCurrency` = тонкий wrapper для `amount`/`amount_currency_id`.
+   **Важливо:** `amount` → `amount_currency_id` (revenue/received/expected),
+   `freight` → `freight_currency_id` (clients[].freight) — РІЗНІ валютні FK.
+   Заявки без валюти → дефолтна (`resolveDefaultCurrencyCode()`, fallback `EUR`).
+   Нульові бакети фільтруються. На фронті — кілька рядків `{symbol} {amount}` на плитку
+   (KpiBar, FinanceView; total = merge received+expected по коду).
 
 4. **`is_problem` — поточний прапор, не журнал.** `applications.is_problem` —
    toggle (ставить `start-trip` коли проблема, `ApplicationsCrudController::removeProblem`
@@ -74,6 +81,34 @@ Customer, DowntimeLog) — не зачіпає tenant-БД.
 7. **Carriers selector** — спільний хелпер `buildCarriersFilter()` повертає
    `[{id:0, label:"Всі перевізники"}, {id:N, label:legal_name}, ...]`.
    Використовується у `getDirections` і `getDrivers`.
+
+8. **Default carrier — усі 6 табів (2026-06-22).** `carriers.default` (boolean,
+   one-default через `Carrier::boot::saved`). **Усі 6 ендпойнтів** — `kpi`,
+   `directions`, `kanban`, `gantt`, `fleet`, `drivers` — без явного `carrier_id`
+   роблять fallback на `resolveDefaultCarrierId()` → відкриваються pre-scoped, і
+   повертають резолвлений `carrier_id` + `carriers` (`buildCarriersFilter`).
+   Конвенція: `carrier_id=0` = «всі» (явно), `null`/відсутній = застосувати default.
+   На фронті очищення/вибір «всі» шле `0`, не `null`.
+   - `getKanban`/`getGantt` раніше **взагалі не фільтрували** по перевізнику (baseQuery
+     цього не робить) — тепер додано `->when($carrierId, ...)`.
+   - **Drivers**: фільтр перевізника переведено з клієнтського на **серверний**
+     (re-fetch), як у решти.
+   - **Селектори (фронт):** об'єктний біндинг (`v-model` = повний `{id,label}`,
+     без `:reduce`) + watch на `selectedCarrierId`/`carriers` — інакше vue-select
+     показував сирий id замість назви. Стосується DirectionsStats/Kanban/Gantt/
+     FleetGantt/DriversView.
+
+9. **KPI problems = заявки, idle = транспорти (2026-06-22).** `kpi.fleet.problems` =
+   `count()` проблемних **заявок** (збіг з `getDriversTimeline` node `problem`). Але
+   `idle = total − in_transit − problemTransports`, де `problemTransports` =
+   `distinct count(transport_id)` — інакше кілька проблемних заявок на одному тягачі
+   занижують idle. `total`/`in_transit` — теж транспорти.
+
+10. **Directions drill-down (2026-06-22).** Картка напрямку → `getTickets` з
+    `loading_location`+`unloading_location`+`carrier_id` картки (+ виключення cancelled,
+    щоб збігалось з `dir.total`). Період береться з `directions.period` (НЕ
+    chartMonth/chartYear — ті можуть бути null). `carrier_legal_name` alias у
+    `getDirections` (бо `Application::getCarrierNameAttribute` перехоплює `carrier_name`).
 
 ## Callsite-и
 
