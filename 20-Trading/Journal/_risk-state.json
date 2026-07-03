@@ -1,28 +1,56 @@
 {
   "deposit": 10000,
   "currency": "USD",
-  "day": "2026-06-22",
+  "day": "2026-07-02",
   "day_risk_used_pct": 0.0,
-  "week_start": "2026-06-22",
+  "week_start": "2026-06-29",
   "week_risk_used_pct": 0.0,
   "consecutive_losses": 0,
+  "paper_consecutive_losses": 2,
   "open_positions": [],
+  "paper_positions": [
+    {
+      "id": "EURUSD-long-paper-2026-07-01",
+      "chart_position_id": "rPgmI2",
+      "pair": "EURUSD",
+      "dir": "long",
+      "status": "closed",
+      "result": "loss",
+      "closed_at": "2026-07-01",
+      "strategy": "smc-price-action-combo",
+      "entry": 1.13870,
+      "sl": 1.13770,
+      "tp": [1.14004, 1.14219, 1.14367],
+      "blended_rr": 3.3,
+      "paper_risk_usd": 100,
+      "real_risk_usd": 0,
+      "real_account_touched": false,
+      "hold_type": "swing-paper",
+      "risk_manager_verdict": "OK(PAPER)",
+      "real_verdict_would_be": "BLOCK (news-blackout Lagarde + repeated-focus #4 + overnight vs intraday-policy)",
+      "repeated_focus_attempt": 4,
+      "journal": "Journal/2026-07-01-EURUSD-long-paper.md",
+      "note": "Закрито LOSS 2026-07-01/02 (форвард-тест). Реальний ризик-стан не змінено."
+    }
+  ],
   "repeated_focus_watch": [
     {
       "id": "EURUSD-long-AMD",
       "pair": "EURUSD",
       "dir": "long",
-      "pattern": "discretionary-smc-amd / AMD-long",
+      "pattern": "discretionary-smc-amd / AMD-long / discretionary-SMC",
       "attempts": [
         {"date": "2026-05-07", "result": "loss", "note": "широкий SL"},
         {"date": "2026-05-12", "result": "blocked-then-paper", "note": "BLOCK через SMT → paper"},
-        {"date": "2026-06-17", "result": "loss-paper", "note": "override paper, SL вибито проколом 1.16008"}
+        {"date": "2026-06-17", "result": "loss-paper", "note": "override paper, SL вибито проколом 1.16008"},
+        {"date": "2026-07-01", "result": "loss-paper", "note": "attempt #4 — contra-W confirmation-entry SMC+PA, закрито LOSS. Real would be BLOCK. Journal/2026-07-01-EURUSD-long-paper.md"}
       ],
       "clean_wins": 0,
       "window_days": 30,
       "status": "ACTIVE-BLOCK-WATCH",
-      "rule": "3+ спроби за ~30 днів без чистого win → наступна (4-та) спроба = BLOCK до бектесту (performance-analyst) або вимагає додаткового підтвердження",
+      "rule": "3+ спроби за ~30 днів без чистого win → наступна спроба = BLOCK до бектесту (performance-analyst) або вимагає додаткового підтвердження",
       "next_attempt_action": "BLOCK — направити в performance-analyst на бектест перед будь-яким реальним входом",
+      "scope_note": "Watch стосується напрямку LONG (discretionary-SMC). EURUSD SHORT за системою ASR — інший патерн, під watch НЕ підпадає, але пара під підвищеною увагою.",
       "source": "Retro/weekly/2026-06-21.md (проблема #4, action item)"
     }
   ],
@@ -43,10 +71,14 @@
     "override_scope": "paper/demo only, real account forbidden",
     "intraday_only": true,
     "flat_time_kyiv": "17:45-18:00",
-    "no_overnight_hold": true
+    "no_overnight_hold": true,
+    "asr_live_status": "signal-mode/форвард-тест — live BLOCK до проходження бектесту",
+    "g2_combined_open_risk_cap_pct": 2.0
   },
-  "last_updated": "2026-06-22T06:57:16Z",
-  "_note": "2026-06-22: Оновлено за тижневою ретро Retro/weekly/2026-06-21.md. Новий торговий тиждень (week_start 2026-06-22, week_risk reset 0). День скинуто на 2026-06-22, day_risk 0. consecutive_losses=0 (минулотижневий paper не рахується як реальний збиток). Додано: repeated_focus_watch (EURUSD-long-AMD = ACTIVE-BLOCK-WATCH), override_log (17.06 paper), policy_flags (ASR F1 FAIL hard-skip, override=paper-only, intraday-only/no-overnight). Реальний депозит весь час недоторканий — 0/0 ризику.",
+  "last_updated": "2026-07-02T06:00:00Z",
+  "_note": "2026-07-02 06:00 UTC: День переведено на 2026-07-02 (day_risk 0.0, тиждень той самий 2026-06-29, week_risk 0.0). Paper EURUSD long 2026-07-01 закрито LOSS → paper_consecutive_losses=2 (06-17, 07-01); real consecutive_losses=0 (paper не рахується у реальний лічильник — політика з ретро 2026-06-21). repeated_focus_watch attempt #4 → loss-paper, clean_wins=0, ACTIVE-BLOCK-WATCH (LONG-scope). Далі: risk-check EURUSD SHORT ASR paper (NFP-день, NFP 12:30 UTC перенесено на четвер через 4 липня). Реальний депозит недоторканий — 0/0.",
+  "_prev_note_2026-07-01": "Записано PAPER-угоду EURUSD long (форвард-тест, real $0) — Journal/2026-07-01-EURUSD-long-paper.md. Реальний ризик НЕ змінено. Додано repeated_focus_watch attempt #4. risk-manager OK лише бо real $0; REAL-verdict був би BLOCK (news-blackout Lagarde + repeated-focus #4 + overnight vs intraday). day оновлено 2026-06-22→2026-07-01, week_start 2026-06-29.",
+  "_prev_note_2026-06-22": "Оновлено за тижневою ретро Retro/weekly/2026-06-21.md. Новий торговий тиждень (week_start 2026-06-22, week_risk reset 0). День скинуто на 2026-06-22, day_risk 0. consecutive_losses=0 (минулотижневий paper не рахується як реальний збиток). Додано: repeated_focus_watch (EURUSD-long-AMD = ACTIVE-BLOCK-WATCH), override_log (17.06 paper), policy_flags (ASR F1 FAIL hard-skip, override=paper-only, intraday-only/no-overnight). Реальний депозит весь час недоторканий — 0/0 ризику.",
   "_archived_2026-06-17": {
     "paper_trade": "EURUSD long pos 9jg9bX (discretionary-smc-amd, override paper) — closed, P&L залежав від ручної фіксації TP1. Реальний депозит не задіяний.",
     "details": "Journal/2026-06-17-EURUSD-long.md"
