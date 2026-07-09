@@ -76,14 +76,25 @@ POST /echeck/receipts/{order}/cancel     echeck-manage  (ReceiptCancelJob::dispa
 - `user_id` FK → таблиця **`members`** (не `users`; Passport provider = Member).
 - `echeck_receipts.order_id` = `cascadeOnDelete`.
 
+## Сесія 2026-07-07 (продовження) — ЕТАП 4
+- **4а Build:** `npm run build` ✅ чисто з першого разу (16.8s), echeck-код у бандлі, помилок компіляції немає.
+- **4б Тести:** ❌ ЗУПИНЕНО guard-ом — `.env.testing` НЕМАЄ, `phpunit.xml` SQLite-override закоментований → тести били б у ОСНОВНУ БД `3g`. Рішення власника: **пропустити тести поки**. Раннер = Pest.
+- **4в CSS:** новий `resources/sass/echeck.scss` (під `.echeck-page`) + 1 рядок `@import "echeck";` у `app.scss`. Тема-залежні CSS-змінні проєкту, власний inline-спінер `echeck-spin`. Vue-компоненти не чіпані. Build ✅ (22.5s).
+- **4г Валідація:** інлайн `$request->validate()` у EcheckController (candidates: tab in pending,sold + q + дати + per_page max:100; shiftHistory/receipts: дати+пагінація) через приватний хелпер `paginationDateRules()`. Логіку не чіпав. Pint ✅.
+
+## ⚠️ Стан git (важливо!)
+Гілка **`echeck_dashboard`**, HEAD `76ed104a`. Середовище АВТОМАТИЧНО закомітило Етапи 1-3 (+build). **Етапи 4в (echeck.scss, app.scss) і 4г (EcheckController.php) — НЕЗАКОМІЧЕНІ** (`git status`: M EcheckController.php, M app.scss, ?? echeck.scss). Тобто останні правки поза комітом.
+
 ## ⏭️ Що ще треба зробити (для продовження)
-1. **Запустити міграції** (рішення власника): `php artisan migrate` — 3 нові міграції. Без них модуль недоступний (немає прав/таблиць). ⛔ БЕЗ `--seed`.
-2. **Перевірити frontend build**: `npm run build` (або `dev`) — компоненти НЕ збирались, можливі помилки компіляції Vue/шляхів.
-3. **CSS/стилі**: класи `echeck-*`, бейджі статусу, анімація спінера — зараз без стилів (виглядає сиро). Додати SCSS-партіал.
-4. **Backend тести (PHPUnit feature)**: на 8 endpoints — happy path + edge (зміна закрита/timeout, немає прав, скасування→повторна відправка, дублікат number).
-5. **Валідація параметрів** GET (`tab`, дати, `per_page`) — зараз інлайн/відсутня; додати Form Request або guard.
-6. **Edge-кейси до тестів**: квиток без ордера; дублікати `number`; ордер із вже наявним `echeck_id` (idempotent-hit → новий receipt не пишеться); z-report повільніший за 20с.
-7. **Опційно**: forget кешу токена при 401; глобальна серіалізація продажів (зараз send/cancel не під `echeck-shift` локом, покладаються на `echeck_id`+lockForUpdate).
+1. **Закомітити 4в/4г** (echeck.scss, app.scss, EcheckController.php) — незакомічені.
+2. **Запустити міграції** (рішення власника): `php artisan migrate` — 3 нові. Без них модуль недоступний. ⛔ БЕЗ `--seed`.
+3. **Backend тести** — заблоковані відсутністю безпечної тестової БД. Спершу: створити `.env.testing` (окрема `3g_testing`) АБО розкоментувати SQLite in-memory у `phpunit.xml` (ризик несумісності json/FK міграцій). Потім feature-тести на 8 endpoints (мокати Http::fake — НЕ бити prod e-check).
+4. **Візуальна перевірка** в браузері (qa/Playwright) — build-only, у браузері не тестувалось; піксель-перфект + перевірка тем.
+5. **Edge-кейси**: квиток без ордера; дублі `number`; idempotent-hit (echeck_id вже є → receipt не пишеться); z-report >20с.
+6. **Опційно**: forget кешу токена при 401; глобальна серіалізація продажів (send/cancel не під `echeck-shift` локом).
+
+## Готовність
+Backend + frontend + стилі + валідація — **функціонально повні**. Не перевірено: реальний браузер, автотести, реальний e-check (він недоступний — cURL 28). Модуль запрацює після `migrate` і за наявності OPEN-зміни в e-check.
 
 ## Пов'язані нотатки
 - [[project_echeck_fiscal]] — базова система фіскальних чеків (T0-T10, dry-run)

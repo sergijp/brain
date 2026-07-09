@@ -1,9 +1,9 @@
 {
   "deposit": 10000,
   "currency": "USD",
-  "day": "2026-07-02",
+  "day": "2026-07-09",
   "day_risk_used_pct": 0.0,
-  "week_start": "2026-06-29",
+  "week_start": "2026-07-06",
   "week_risk_used_pct": 0.0,
   "consecutive_losses": 0,
   "paper_consecutive_losses": 2,
@@ -18,9 +18,13 @@
       "result": "loss",
       "closed_at": "2026-07-01",
       "strategy": "smc-price-action-combo",
-      "entry": 1.13870,
-      "sl": 1.13770,
-      "tp": [1.14004, 1.14219, 1.14367],
+      "entry": 1.1387,
+      "sl": 1.1377,
+      "tp": [
+        1.14004,
+        1.14219,
+        1.14367
+      ],
       "blended_rr": 3.3,
       "paper_risk_usd": 100,
       "real_risk_usd": 0,
@@ -40,10 +44,26 @@
       "dir": "long",
       "pattern": "discretionary-smc-amd / AMD-long / discretionary-SMC",
       "attempts": [
-        {"date": "2026-05-07", "result": "loss", "note": "широкий SL"},
-        {"date": "2026-05-12", "result": "blocked-then-paper", "note": "BLOCK через SMT → paper"},
-        {"date": "2026-06-17", "result": "loss-paper", "note": "override paper, SL вибито проколом 1.16008"},
-        {"date": "2026-07-01", "result": "loss-paper", "note": "attempt #4 — contra-W confirmation-entry SMC+PA, закрито LOSS. Real would be BLOCK. Journal/2026-07-01-EURUSD-long-paper.md"}
+        {
+          "date": "2026-05-07",
+          "result": "loss",
+          "note": "широкий SL"
+        },
+        {
+          "date": "2026-05-12",
+          "result": "blocked-then-paper",
+          "note": "BLOCK через SMT → paper"
+        },
+        {
+          "date": "2026-06-17",
+          "result": "loss-paper",
+          "note": "override paper, SL вибито проколом 1.16008"
+        },
+        {
+          "date": "2026-07-01",
+          "result": "loss-paper",
+          "note": "attempt #4 — contra-W confirmation-entry SMC+PA, закрито LOSS. Real would be BLOCK. Journal/2026-07-01-EURUSD-long-paper.md"
+        }
       ],
       "clean_wins": 0,
       "window_days": 30,
@@ -52,6 +72,14 @@
       "next_attempt_action": "BLOCK — направити в performance-analyst на бектест перед будь-яким реальним входом",
       "scope_note": "Watch стосується напрямку LONG (discretionary-SMC). EURUSD SHORT за системою ASR — інший патерн, під watch НЕ підпадає, але пара під підвищеною увагою.",
       "source": "Retro/weekly/2026-06-21.md (проблема #4, action item)"
+    },
+    {
+      "id": "EURUSD-pair-heat-2026-07-08",
+      "pair": "EURUSD",
+      "note": "Kassandra 2026-07-08: EURUSD 5 спроб/0 wins тижня (repeated-focus #5). 07-08 SHORT ASR = 6-та. 07-09 SHORT ts-1 range-fade = 7-ма спроба в парі цього тижня. Пара PAIR-HEAT — real-вхід потребує чистого win або бектесту.",
+      "attempts_this_week": 7,
+      "wins_this_week": 0,
+      "flag": "PAIR-HEAT — real-вхід у EURUSD потребує чистого win або бектесту"
     }
   ],
   "override_log": [
@@ -73,14 +101,16 @@
     "flat_time_kyiv": "17:45-18:00",
     "no_overnight_hold": true,
     "asr_live_status": "signal-mode/форвард-тест — live BLOCK до проходження бектесту",
-    "g2_combined_open_risk_cap_pct": 2.0
+    "g2_combined_open_risk_cap_pct": 2.0,
+    "g3_one_idea_usd": "EURUSD-short + GBPUSD-short = один USD-long напрям (USD-major). Одночасне live-тримання = корельована одна ідея → лише ОДИН live-вхід або спільний cap 2%."
   },
-  "last_updated": "2026-07-02T06:00:00Z",
-  "_note": "2026-07-02 06:00 UTC: День переведено на 2026-07-02 (day_risk 0.0, тиждень той самий 2026-06-29, week_risk 0.0). Paper EURUSD long 2026-07-01 закрито LOSS → paper_consecutive_losses=2 (06-17, 07-01); real consecutive_losses=0 (paper не рахується у реальний лічильник — політика з ретро 2026-06-21). repeated_focus_watch attempt #4 → loss-paper, clean_wins=0, ACTIVE-BLOCK-WATCH (LONG-scope). Далі: risk-check EURUSD SHORT ASR paper (NFP-день, NFP 12:30 UTC перенесено на четвер через 4 липня). Реальний депозит недоторканий — 0/0.",
-  "_prev_note_2026-07-01": "Записано PAPER-угоду EURUSD long (форвард-тест, real $0) — Journal/2026-07-01-EURUSD-long-paper.md. Реальний ризик НЕ змінено. Додано repeated_focus_watch attempt #4. risk-manager OK лише бо real $0; REAL-verdict був би BLOCK (news-blackout Lagarde + repeated-focus #4 + overnight vs intraday). day оновлено 2026-06-22→2026-07-01, week_start 2026-06-29.",
-  "_prev_note_2026-06-22": "Оновлено за тижневою ретро Retro/weekly/2026-06-21.md. Новий торговий тиждень (week_start 2026-06-22, week_risk reset 0). День скинуто на 2026-06-22, day_risk 0. consecutive_losses=0 (минулотижневий paper не рахується як реальний збиток). Додано: repeated_focus_watch (EURUSD-long-AMD = ACTIVE-BLOCK-WATCH), override_log (17.06 paper), policy_flags (ASR F1 FAIL hard-skip, override=paper-only, intraday-only/no-overnight). Реальний депозит весь час недоторканий — 0/0 ризику.",
+  "last_updated": "2026-07-09T06:22:00Z",
+  "_note": "2026-07-09 06:22 UTC (09:22 Kyiv, четвер): ROLL-OVER дня 07-08->07-09. Тиждень той самий (week_start 2026-07-06), week_risk 0.0. REAL: consecutive_losses=0, депозит недоторканий, day 0% / week 0%. Risk-gate EURUSD SHORT (ts-1-reversal-at-poi, contra-HTF range-fade, convergence dixie<->kassandra rd2, WATCH-ONLY - валідного входу цю хвилину немає). VERDICT: WARN (умовний). Pattern-check пройдено умовно; pair-heat 7/0 цього тижня -> real live-вхід гейтований (distinct-pattern SHORT != ACTIVE-BLOCK-WATCH LONG-cluster, тому не hard-BLOCK, але highest-caution). HARD-GATE: RR до TP1 >=1.8 інакше SKIP; entry тільки 1.1448-1.1451 (глибше 1.1446=skip). Floating lot 100/(SL_pips*10): 15p=0.66, 18p=0.55, 20p=0.50. Max real day-risk 1% ($100). Claims 12:30 UTC (medium) blackout 12:00-13:00 UTC -> TP1+BE або flat до 12:00; повний обсяг крізь Claims НЕ тримати. GER40 stand-aside real $0 (ASR #1 OFF, F4 trend-series bearish), GBPUSD skip real $0 -> фактично лише EURUSD. Кореляція EUR/GER40 + G3 USD-one-idea cap 2% активувати якщо GER40/GBPUSD оживуть. flat 17:45 Kyiv.",
+  "_prev_note_2026-07-02": "День переведено на 2026-07-02, тиждень 2026-06-29, week_risk 0.0. Paper EURUSD long 2026-07-01 закрито LOSS → paper_consecutive_losses=2; real consecutive_losses=0.",
+  "_prev_note_2026-07-01": "Записано PAPER-угоду EURUSD long (форвард-тест, real $0). Реальний ризик НЕ змінено. Додано repeated_focus_watch attempt #4.",
+  "_prev_note_2026-06-22": "Оновлено за тижневою ретро. Новий тиждень (week_start 2026-06-22). consecutive_losses=0. Додано repeated_focus_watch, override_log, policy_flags.",
   "_archived_2026-06-17": {
-    "paper_trade": "EURUSD long pos 9jg9bX (discretionary-smc-amd, override paper) — closed, P&L залежав від ручної фіксації TP1. Реальний депозит не задіяний.",
+    "paper_trade": "EURUSD long pos 9jg9bX (discretionary-smc-amd, override paper) — closed. Реальний депозит не задіяний.",
     "details": "Journal/2026-06-17-EURUSD-long.md"
   },
   "_archived_2026-05-12": {
@@ -88,5 +118,6 @@
     "usdjpy_long": "closed",
     "ger40_long": "closed",
     "note": "Всі три позиції (planned 12.05) підтверджені закритими користувачем 14.05.2026"
-  }
+  },
+  "_prev_note_2026-07-08": "2026-07-08 06:35 UTC (09:35 Kyiv, середа): ROLL-OVER — новий тиждень week_start 2026-07-06 (week_risk reset 0.0), day→2026-07-08 (day_risk 0.0). REAL consecutive_losses=0, депозит недоторканий 0/0. Risk-gate для 3 сетапів (усі convergence dixie⇄kassandra, ЖОДЕН не має негайного live-входу): (1) EURUSD SHORT signal-only ASR → live BLOCK (asr signal-mode + pair-heat 6/0), paper/signal OK; (2) GBPUSD SHORT-fade alert-watch NY KZ → OK-conditional, HARD-фільтр RR>=1.8 до TP1 інакше SKIP, floating lot; (3) GER40 LONG stand-aside → live BLOCK (signal-mode + gate 10:05 найімовірніше FAIL). Корекція G3: якщо EURUSD-short і GBPUSD-short обидва тригернуть — корельована одна USD-ідея, лише один live. Практично real-eligible лише GBPUSD → макс real day-risk 1%. News: day CLEAR, FOMC Minutes 18:00 UTC поза інтрадей-вікном (flat 17:45). Додано repeated_focus_watch pair-heat EURUSD."
 }
