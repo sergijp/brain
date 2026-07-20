@@ -4,7 +4,7 @@ date: 2026-06-11
 tags: [trading, forward-test, paper, asr-orb]
 category: trading
 strategy: asr-orb-intraday-system
-agent: journal-writer-setup
+agent: journal-writer
 status: active
 pinecone_indexed: false
 ---
@@ -45,7 +45,7 @@ pinecone_indexed: false
 
 | # | Дата | Час (Kyiv) | Sys | Пара | Dir | Entry | SL | TP1 | TP2 | RR | Наслідок | R | News? | Нотатка |
 |---|------|------------|-----|------|-----|-------|----|-----|-----|----|----------|---|-------|---------|
-| 0 | 2026-00-00 | 00:00 | ASR | EURUSD | LONG | 0.00000 | 0.00000 | 0.00000 | 0.00000 | 0.0 | — | — | — | *(placeholder — замінити першим реальним сигналом)* |
+| 1 | 2026-07-17 | filled ~11:5x-12:00 → closed ~13:54 | ASR | EURUSD | SHORT | 1.14450 | ~~1.14534~~→BE | 1.14346 ✅ | 1.14278 ✅ | 2.05 | **CLOSED WIN (TP1+TP2)** | **+1.64** | `news` | Перший ЗАКРИТИЙ ASR-сигнал форварду — **РЕЗОЛЮЦІЯ WIN**. Тригер: sweep Asia high 1.14520 (торкнув 1.14516) → reclaim M15 close тілом <1.14482 → filled @ 1.14450. EUR CPI Final 12:00 (2.8% дезінфляція, in-line) підштовхнув униз. **TP1 1.14346 HIT 13:34 → 50% (+10.4p), SL→BE. TP2-A 1.14278 HIT ~13:54** (low бара 1.14267 проколов ціль на 1.1p) → runner 0.595 lot закрито (+17.2p). Blended на 1.19 lot екв **+13.8p / +1.64R** (~+$164 paper). Ціна зупинилась ВИЩЕ H4 demand 1.14128 (G3 спрацював — вийшли на TP2-A, ціна відскочила від demand). Вихід задовго до flat 17:00. Напрям за USD-потоком (контраст: вчорашній long проти потоку вибило −1R). paper, TV pos sXGFx4, risk-override (real BLOCK: signal-mode+pair-heat 7/0; **paper-win real-block НЕ знімає**). [[Journal/2026-07-17-EURUSD-short-paper]] |
 
 ---
 
@@ -55,14 +55,16 @@ pinecone_indexed: false
 
 | Показник | Значення |
 |----------|----------|
-| N сигналів (без cancel) | 0 |
+| N сигналів (без cancel) | **1** *(перший закритий ASR-сигнал: #1 EURUSD SHORT TP1+TP2 WIN)* |
 | N STOP (−1R) | 0 |
 | N BE (+0.5R) | 0 |
-| N FULL (full R) | 0 |
-| Сума R | 0.0 |
-| p_stop факт | — |
-| p_BE факт | — |
-| p_full факт | — |
+| N FULL (full R) | **1** |
+| Сума R | **+1.64** |
+| p_stop факт | — *(N=1, замало для оцінки; коридор перевіряти від N≥5)* |
+| p_BE факт | 0/1 |
+| p_full факт | 1/1 |
+
+> ⚠️ N=1 — це лише перший датапоінт. Жодних рішень до N≥20 (порог форварду). Live-допуск ASR — тільки після повного бектесту; paper-WIN НЕ знімає real-block.
 
 ---
 
@@ -70,7 +72,7 @@ pinecone_indexed: false
 
 | # | Дата | Подія | Sys | Пара | Наслідок | Нотатка |
 |---|------|-------|-----|------|----------|---------|
-| — | — | — | — | — | — | *(перший запис після новинного дня)* |
+| 1 | 2026-07-17 | EUR CPI Final 12:00 Kyiv (2.8% vs 3.2%, дезінфляція, in-line) | ASR | EURUSD | **CLOSED WIN +1.64R** | CPI підштовхнув униз за short-тезою; TP1 1.14346 (13:34) + TP2-A 1.14278 (~13:54) обидва досягнуто. Blended +13.8p / +1.64R (~+$164 paper). Ціна відскочила від H4 demand 1.14128 (G3). [[Journal/2026-07-17-EURUSD-short-paper]] |
 
 ---
 
