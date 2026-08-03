@@ -7,7 +7,7 @@ project: mono-system
 status: active
 aliases: ["mono-system-connection-search", "transfers-v2"]
 pinecone_indexed: false
-last_verified: 2026-07-29
+last_verified: 2026-08-03
 ---
 
 # Пошук стиковок (Transfers v2)
@@ -145,7 +145,9 @@ departure_at, arrival_at, is_transfer_hub` через Query Builder, **без м
 | `app/Services/ConnectionSearchService.php` | пошук |
 | `app/Services/BookingService.php` | `bookJourney()`, `buildLegTickets()`, `validateJourney()` |
 | `app/Http/Controllers/Api/System/BookingController.php` | `searchTrips` (+`journeys`, `search_ms`), `getJourney`, `bookTickets` |
-| `app/Entities/Tenant/Ticket.php` | `journeyChain()`, `isJourneyLeg()` |
+| `app/Entities/Tenant/Ticket.php` | `journeyChain()`, `isJourneyLeg()`, `scopeWithoutLegacyTransferChildren()`, `number_html` |
+| `app/Http/Controllers/Api/Crud/TicketsCrudController.php` | список квитків: скоуп + eager-load parent/child |
+| `app/Http/Controllers/Api/Crud/Community/ClientsListCrudController.php` | квитки клієнта: той самий скоуп |
 | `app/Entities/Tenant/TripStation.php` | `scheduleTimestamp()`, `applyScheduleTimestamps()`, хук `saving` |
 | `app/Helpers/TransfersSettings.php` | типізовані геттери налаштувань |
 | `app/Console/Commands/TransfersDoctor.php` | перевірка перед вмиканням |
@@ -204,6 +206,44 @@ departure_at, arrival_at, is_transfer_hub` через Query Builder, **без м
   ціни. Досяжним це робить те, що `GlobalApi\OrderController::orderinfo` і
   `External`/`Busfor` `getOrderWithTickets` **не фільтрують за `member_id`**.
   Перевірено практично 2026-07-29; рішення власника не ухвалене.
+
+- **Списки квитків ховали друге плече.** У `TicketsCrudController::setupListOperation`
+  і `ClientsListCrudController::getTicketsByClient` стояло `whereNull('parent_id')` —
+  фільтр, що ховав «тіньові» квитки legacy-пересадок (113 штук у базі, часто з ціною 0).
+  Плече v2 має `parent_id` так само й теж зникало: квиток пересадкового рейсу не можна
+  було ні відкрити, ні роздрукувати. Замінено на скоуп
+  `Ticket::scopeWithoutLegacyTransferChildren()` — «корінь **або** батько в тому самому
+  ордері». Перевірено 2026-08-03: ховає рівно ті самі 113 рядків, що й раніше.
+  **Будь-який новий список квитків має вживати цей скоуп, а не `whereNull('parent_id')`.**
+
+- **Опис подорожі збирає `Ticket::journeySummary()`.** Повертає плечі, пересадки й повну
+  суму, або `null` для звичайного квитка й legacy-пересадки. Метод живе на моделі, бо
+  потрібен двом місцям: полю `journey_legs` у картці квитка (`GetJourneyLegsField`) і
+  PDF-квитку, який отримує пасажир (`pdf.ticket.index`, змінна `$journey`). Раніше логіка
+  була тільки в CRUD-полі, і PDF нічого про подорож не знав — пасажир бачив «Прага → Львів»
+  без згадки, що далі є друге плече.
+
+- **Дефолтний фільтр списку квитків розривав подорож.** Без заданих фільтрів
+  `TicketsCrudController` показує лише квитки з рейсами **на сьогодні**. Плечі подорожі
+  майже завжди їдуть різними днями (перше сьогодні, друге завтра), тож одразу після
+  продажу оператор бачив половину. Додано `orWhere`: показати квиток, якщо інше плече
+  того самого ордера їде сьогодні. `whereNotNull('parent_id')` стоїть **перед** підзапитом
+  — без цього відсіву EXISTS виконувався б для кожного зі 100 тис. квитків і список
+  важчав уп'ятеро (1110 мс проти 221; з відсівом — 201 мс). `where`, а не `whereDate`:
+  `trips.date` має тип DATE та індекс, функція над колонкою його вимикає.
+  Свідоме обмеження: якщо перше плече проїхало вчора, у дефолтному списку його не буде.
+
+- **`getJourney` мусить вантажити `tickets`.** Карта місць (`BusPlaces::isBooked`)
+  рахує зайняті **виключно** з `trip.tickets`. У `getJourney` цього eager-load спершу
+  не було, і оператор бачив повністю вільний автобус на першому плечі. Набір полів той
+  самий, що в `getTrip`: `trip_id, place, from_id, to_id` + `activeStatus()`.
+
+- **Автопідбір місць іде з кінця салону.** `buildLegTickets` робить `reverse()` над
+  `getFreeSeatsByFromTo()` — передні місця цінніші й лишаються під ручний продаж.
+  `reverse()` навмисно **в `buildLegTickets`, а не в `getFreeSeatsByFromTo`**: той метод
+  викликають ще сім місць, зокрема `GlobalApi` й `SiteApi` `OrderController` — зміна
+  порядку в ньому поїхала б у зовнішні контракти. «Кінець» тут — кінець у порядку схеми
+  автобуса, а не «найдалі від водія».
 
 - **Глобальні скоупи не діють на Query Builder.** `TripScope`/`TicketScope`/`RouteScope`
   застосовуються тільки до Eloquent. BFS іде через Query Builder, тому фільтри
