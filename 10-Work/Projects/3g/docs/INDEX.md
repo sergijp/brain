@@ -15,6 +15,7 @@ pinecone_indexed: false
 
 ## Активні документи
 
+- [[Modularization-Design]] — Розбиття платформи на CORE + модулі (варіант b, легкий реєстр). Фази 0-6 реалізації.
 - [[notifications]] — `SmsTemplate` CRUD + `TicketNotificationService` + AlphaSms (sms/viber) + `ShortLink` + плейсхолдери.
 - [[legacy-controllers]] — Стан і план розбиття `TripsCrudController` (1709 ряд.) і `WidgetsController` (1154 ряд.).
 - [[busfor-api]] — Аудит провайдера Busfor: контрактні розбіжності зі spec, runtime баги, патчі A-J.
@@ -27,13 +28,14 @@ pinecone_indexed: false
 
 ```
 project-overview
-   ├─ notifications        ← SMS/Viber/Telegram інтеграція
-   ├─ legacy-controllers   ← техдовг (паралельний апгрейд L10→L11)
-   ├─ busfor-api           ← зовнішня інтеграція (audit)
-   ├─ echeck-fiscal        ← фіскалізація
-   ├─ bus-photo            ← окремий photo-флоу для месенджерів
-   ├─ infobus-sync         ← трансферні квитки (status: partial)
-   └─ desktop-tauri        ← future (research only)
+   ├─ Modularization-Design  ← архітектура (Fase 0-6)
+   ├─ notifications          ← SMS/Viber/Telegram інтеграція (модуль Fase-3)
+   ├─ legacy-controllers     ← техдовг (паралельний апгрейд L10→L11)
+   ├─ busfor-api             ← зовнішня інтеграція (audit, модуль Fase-5)
+   ├─ echeck-fiscal          ← фіскалізація (модуль Fase-4)
+   ├─ bus-photo              ← окремий photo-флоу для месенджерів
+   ├─ infobus-sync           ← трансферні квитки (status: partial, модуль Fase-5)
+   └─ desktop-tauri          ← future (research only)
 ```
 
 ## Пов'язані

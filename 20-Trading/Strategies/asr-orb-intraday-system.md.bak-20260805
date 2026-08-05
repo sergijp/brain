@@ -7,7 +7,6 @@ strategy: asr-orb-intraday-system
 agent: dixie
 status: primary-active-forward-test
 primary: true
-last_updated: 2026-08-05
 pinecone_indexed: false
 ---
 
@@ -62,7 +61,7 @@ RECLAIM:
 SL:  sweep_low − BUFFER
 TP1: AH (закрити 50%, решта SL→BE)
 TP2: варіант A = AH + 0.5×RW; варіант B = AH + 1.0×RW — ОБИДВА у бектест, рішення за фактичним p_full (P4)
-PRE-TRADE GATE: RR(entry→TP2 vs entry→SL) ≥ 1.8 (нетто, див. «Модель витрат» → «Конвенція нарахування»), інакше skip
+PRE-TRADE GATE: RR(entry→TP2 vs entry→SL) ≥ 1.8, інакше skip
 ЛІМІТИ: 1 вхід/напрямок/день; max 2 сетапи/день/інструмент (re-entry/повторне озброєння РАХУЄТЬСЯ у ліміт);
         2 стопи поспіль на інструменті → off до завтра
 FLAT 17:45 Київ
@@ -82,7 +81,7 @@ OR: ORH/ORL барів [10:00, 10:30) Київ (Pine session timezone="Europe/Be
 ОРДЕРИ (10:30): OCO buy-stop @ ORH+1 тік / sell-stop @ ORL−1 тік; одна сторона виконалась → друга cancel негайно; до 13:00
 SL: протилежний край OR
 TP1: 1×ORW (50%, SL→BE); TP2: max(2×ORW, 0.5×ATR_D)
-PRE-TRADE GATE: RR(TP2) ≥ 1.8 (нетто, див. «Модель витрат» → «Конвенція нарахування») на 10:30, інакше OCO не ставиться
+PRE-TRADE GATE: RR(TP2) ≥ 1.8 на 10:30, інакше OCO не ставиться
 RE-ENTRY: після стоп-ауту одне повторне OCO до 13:00; після 2-го стопу done; cancel за часом ре-вхід не дає
 БАР-ГОНКА: бектест bar magnifier M1 / fallback «стоп перший»; бот server-side OCO; signal-mode: двотригерний бар = no-trade
 FLAT 17:45
@@ -133,8 +132,6 @@ G7 FLAT 17:45; п'ятниця після 17:00 — без нових вході
 | EURUSD 09:00–10:00 | 2.0 pips | EURUSD 10:00–17:45 | 1.5 pips |
 | GBPUSD 09:00–10:00 | 2.2 pips | GBPUSD 10:00–17:45 | 1.8 pips |
 | GER40 10:05–17:45 | 3.5 pt | GER40 до 10:05 | торгівлі немає |
-
-**Конвенція нарахування:** round-trip нараховується **симетрично** — віднімається від чисельника І додається до знаменника: `RR = (target_pips − cost) / (sl_pips + cost)`. Ця сама формула застосовується у pre-trade gate обох стратегій (ASR — по TP2-A, ORB — по TP2) і у пост-фактум обліку R форварду. Варіант «витрати лише переможцю» заборонений.
 
 ---
 
