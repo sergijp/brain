@@ -20,14 +20,14 @@ Live-статус торгових систем. ТС-1/2/3 походять з 
 
 | ТС | Назва | Status | Тестується | Sample | Decision |
 |----|-------|--------|------------|--------|----------|
-| **ТС-1** | [[ts-1-reversal-at-poi\|Reversal at POI]] | ⏸ Pine FAIL (PF 0.79 post-cost) | EURUSD 15m Pine, 5.5m period | 24/30 | Потребує rework — див. гіпотези |
-| **ТС-2** | [[ts-2-session-manipulation\|Session Manipulation]] | ⏸ Pine FAIL (0% WR, gross=$0) | EURUSD 15m Pine, 5.5m period | 11/30 | Потребує manual Bar Replay — не подаєтся Pine-proxy |
-| **ТС-3** | [[ts-3-inner-fvg-sniper\|Inner FVG Sniper]] | ⏸ Pine FAIL cross-pair (EURUSD PF 1.43, GBPUSD PF 0.39) | EURUSD+GBPUSD 15m Pine, 5.5m | 10/40 | v5 edge був cherry-pick — manual Bar Replay required |
-| **NS** | [[ns-strategy\|NS — Top-Down SMC]] | 🟢 Pine Validation (стартувало 2026-04-22) | EURUSD 15m Pine, 2024-05 → 2026-04 | 0/50 | Pine v1 код готовий — запуск ітерацій v1-v10 див. [[pine-ns-2026-04-22]] |
-| **ORB** | [[orb-opening-range-breakout\|Opening Range Breakout]] | ⚪ Draft | — | 0/30 | Non-SMC breakout intraday (US100/US500/GER40, Gold). 5m entry після 15m/30m OR window, London/NY open |
-| **VWAP** | [[vwap-pullback\|VWAP Pullback]] | ⚪ Draft | — | 0/30 | Non-SMC institutional intraday (indices+Gold). Pullback до session VWAP у trending day, ADX filter ≥ 20 |
-| **SD** | [[supply-demand-seiden\|Supply/Demand (Seiden)]] | ⚪ Draft | — | 0/30 | Non-SMC positional swing (FX+Gold/Silver). D1/H4 fresh zones RBR/DBD, limit entry на proximal edge, Min RR 1:3 |
-| **MR** | [[mr-bb-rsi-divergence\|MR BB+RSI]] | ⚪ Draft | — | 0/30 | Non-SMC counter-trend ranging (EURUSD/USDCHF/USDCAD). H1 BB(20,2) touch + RSI divergence, ADX < 20 filter |
+| **ТС-1** | [[_archive/ts-1-reversal-at-poi\|Reversal at POI]] | 🗄 **АРХІВ** (24.08) — PF 0.79 post-cost, едж < спреду | EURUSD 15m Pine, 5.5m period | 24/30 | Потребує rework — див. гіпотези |
+| **ТС-2** | [[ts-2-session-manipulation\|Session Manipulation]] | 🔧 **REWORK** (24.08) — Pine провалив метод, не стратегію | EURUSD 15m Pine, 5.5m period | 11/30 | Потребує manual Bar Replay — не подаєтся Pine-proxy |
+| **ТС-3** | [[ts-3-inner-fvg-sniper\|Inner FVG Sniper]] | 🔧 **REWORK** (24.08) — cross-pair FAIL, але EURUSD-only не перевіряли | EURUSD+GBPUSD 15m Pine, 5.5m | 10/40 | v5 edge був cherry-pick — manual Bar Replay required |
+| **NS** | [[_archive/ns-strategy\|NS — Top-Down SMC]] | 🟢 Pine Validation (стартувало 2026-04-22) | EURUSD 15m Pine, 2024-05 → 2026-04 | 0/50 | Pine v1 код готовий — запуск ітерацій v1-v10 див. [[pine-ns-2026-04-22]] |
+| **ORB** | [[_archive/orb-opening-range-breakout\|Opening Range Breakout]] | ⚪ Draft | — | 0/30 | Non-SMC breakout intraday (US100/US500/GER40, Gold). 5m entry після 15m/30m OR window, London/NY open |
+| **VWAP** | [[_archive/vwap-pullback\|VWAP Pullback]] | ⚪ Draft | — | 0/30 | Non-SMC institutional intraday (indices+Gold). Pullback до session VWAP у trending day, ADX filter ≥ 20 |
+| **SD** | [[_archive/supply-demand-seiden\|Supply/Demand (Seiden)]] | ⚪ Draft | — | 0/30 | Non-SMC positional swing (FX+Gold/Silver). D1/H4 fresh zones RBR/DBD, limit entry на proximal edge, Min RR 1:3 |
+| **MR** | [[_archive/mr-bb-rsi-divergence\|MR BB+RSI]] | ⚪ Draft | — | 0/30 | Non-SMC counter-trend ranging (EURUSD/USDCHF/USDCAD). H1 BB(20,2) touch + RSI divergence, ADX < 20 filter |
 
 ### Легенда статусів
 - ⚪ **Draft** — створена, структура зафіксована, ще не запланована до тестування
@@ -110,7 +110,7 @@ Live-статус торгових систем. ТС-1/2/3 походять з 
 | 2026-04-22 | Retrospective analysis: [[retrospective-analysis-2026-04-22]] — 6-gate filter прогноз дає ~+25-50% WR improvement, але не вистачає cost hurdle. Next: manual Bar Replay 30 trades у TV app |
 | 2026-04-22 | **NS** створена як незалежна стратегія (Forex + Indices/Commodities, intraday, self-contained rules) — ⚪ Draft |
 | 2026-04-22 | NS → 🟢 Pine Validation. Створено [[pine-ns-2026-04-22]]: повний Pine v6 з 5-крок воронкою + 6-point scoring + AMD Kyiv TZ + opens + SMT (GBPUSD proxy). Запуск v1 (comm=0) → v10 (cross-pair) попереду |
-| 2026-04-22 | Додано 4 non-SMC стратегії (⚪ Draft): [[orb-opening-range-breakout\|ORB]], [[vwap-pullback\|VWAP Pullback]], [[supply-demand-seiden\|Supply/Demand Seiden]], [[mr-bb-rsi-divergence\|MR BB+RSI]]. Закривають gaps: breakout, institutional-benchmark, positional zones, ranging counter-trend |
+| 2026-04-22 | Додано 4 non-SMC стратегії (⚪ Draft): [[_archive/orb-opening-range-breakout\|ORB]], [[_archive/vwap-pullback\|VWAP Pullback]], [[_archive/supply-demand-seiden\|Supply/Demand Seiden]], [[_archive/mr-bb-rsi-divergence\|MR BB+RSI]]. Закривають gaps: breakout, institutional-benchmark, positional zones, ranging counter-trend |
 
 ---
 
@@ -120,3 +120,45 @@ Live-статус торгових систем. ТС-1/2/3 походять з 
 - [[20-Trading/Backtest/template-backtest-trade]] — YAML schema
 - [[20-Trading/Checklists/pre-trade-checklist]]
 - [[10-Work/Projects/trading/rollout-plan-strategy-v2]]
+
+---
+
+## 📅 2026-08-24 — ревізія бібліотеки
+
+| Дія | Що |
+|---|---|
+| 🗄 **Архів** | ТС-1 → `_archive/`. Pine PF 1.135 (comm=0) → **0.79** post-cost. Едж реальний, але менший за спред. Критерій виходу (WR<40% на 30+) виконано на 24/30 |
+| 🔧 **Rework** | ТС-2 — попередній тест провалив **метод**, а не стратегію. Pine не підходить для discretionary edge; едж жодного разу не виміряли |
+| 🔧 **Rework** | ТС-3 — відбраковку робили за **cross-pair** критерієм, а торгівля ведеться **тільки по EURUSD**. «Не універсальний» ≠ «не працює на EURUSD» |
+| ✅ **Активовано** | [[liquidity-sweep-88]] і [[quasimodo-534]] — перші стратегії зі сліпим гейтом |
+
+### 🔑 Що змінилось методологічно
+
+З дослідження 962 стратегій з'явився **чесний симулятор без lookahead**:
+- `~/AI/research/strategies/s88/sim.py`
+- `~/AI/research/strategies/s534/simlib.py`
+
+Саме він показав, що більшість «прибуткових» стратегій були артефактом підглядання. **Pine як бектест-proxy більше не використовується** — ТС-2 і ТС-3 переганяються на цей движок за протоколом DEV / CHECKPOINT / сліпий ГЕЙТ.
+
+### ⚠️ Наскрізний ризик обох rework
+
+ТС-2 ловить killzone-маніпуляцію — те саме роблять [[asr-orb-intraday-system]] (ASR) і [[liquidity-sweep-88]]. Перед повним бектестом перевірити, чи ТС-2 дає **нові** сигнали, а не третю обгортку тієї самої ідеї.
+
+ТС-3 має тісний SL і RR 1:4-1:6 → **максимальна чутливість до моделі витрат**. У ТС-1 едж помер саме на цьому. Рахувати за симетричною конвенцією `(target − cost)/(SL + cost)`.
+
+---
+
+## 📅 2026-08-24 (вечір) — ASR архівована
+
+Перший бектест основної системи за 74 дні. Дані: 11 244 бари M15 (січ–сер 2026), 0 дірок.
+
+| Вікно | N | winrate | expectancy |
+|---|---|---|---|
+| DEV | **6** | 33% | **−0.373** |
+| CHECKPOINT | **2** | **0%** | −0.635 |
+
+Стійко негативна через 6 конфігурацій. **Архівована** → [[_archive/asr-orb-intraday-system]] · звіт [[Backtest/asr-2026-08-24]]
+
+**Нова основна система: [[liquidity-sweep-88]]** — та сама ідея (Asia sweep & reclaim), але на ідентичних даних дає **33 угоди / 75.8% / +104.1п** проти 6 / 33% / −2.24R.
+
+**Відтворюваність перевірено:** №88 і №534 збіглися з опублікованими цифрами до десятої. Код і дані цілі.

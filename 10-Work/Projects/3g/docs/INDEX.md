@@ -15,6 +15,7 @@ pinecone_indexed: false
 
 ## Активні документи
 
+- [[app-api]] — API мобільного застосунку пасажира `/api/v1/app`: адаптери над контролерами сайту, токени `ClientApiToken`, 5 middleware.
 - [[Modularization-Design]] — Розбиття платформи на CORE + модулі (варіант b, легкий реєстр). Фази 0-6 реалізації.
 - [[notifications]] — `SmsTemplate` CRUD + `TicketNotificationService` + AlphaSms (sms/viber) + `ShortLink` + плейсхолдери.
 - [[legacy-controllers]] — Стан і план розбиття `TripsCrudController` (1709 ряд.) і `WidgetsController` (1154 ряд.).

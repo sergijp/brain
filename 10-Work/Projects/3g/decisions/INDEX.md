@@ -18,6 +18,7 @@ pinecone_indexed: false
 | Дата | Slug | Суть |
 |------|------|------|
 | 2026-05-14 | [[2026-05-14-route-access-global-scope]] | Global scope на Trip для route access control |
+| 2026-08-24 | [[2026-08-24-app-api-adapter-guards]] | Захист і сумісність мобільного API — у адаптерах, не в коді сайту |
 
 ## Як заводити ADR
 

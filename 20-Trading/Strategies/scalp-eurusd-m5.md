@@ -5,13 +5,21 @@ tags: [trading, strategy, scalp, eurusd, m5, fvg, killzone, smc, draft]
 category: trading
 strategy: scalp-eurusd-m5
 agent: dixie
-status: draft
+status: rework
 pinecone_indexed: false
 ---
 
 > 🟠 **DRAFT / signal-mode.** Live заблоковано до проходження бектесту. Створено 2026-07-13. Round 2 convergence з Kassandra внесено 2026-07-13. Наступний крок — variance-тест (step 0), потім бектест.
 
 # Scalp EURUSD M5 — KZ Sweep-FVG Sniper
+
+> 🔧 **REWORK (2026-08-24).** Лишається в роботі. Черга — Пріоритет 4 у [[_ROADMAP]].
+>
+> **`Roadmap step 0` з цієї ж нотатки досі не виконано** (створено 13.07, минуло 6 тижнів):
+> формально порахувати `P(серії)` для реального WR і довести, що лікуємо **cost/edge, а не варіанс**.
+> Умова, записана тут же: *не доведено → плейбук у смітник*.
+>
+> Це найдешевша задача роадмапу — розрахунок на пів години, який або відкриває шлях до бектесту, або закриває тему.
 
 ## ⚠️ Дисклеймер походження (чесна рамка, round 2)
 

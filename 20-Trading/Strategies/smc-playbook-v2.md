@@ -1,13 +1,21 @@
 ---
 title: "SMC + PA Combo v2 — Розширений Playbook"
 date: 2026-04-21
-tags: [trading, strategy, smc, price-action, playbook, v2]
+tags: [trading, reference, smc, price-action, concepts, v2]
 category: trading
 status: active
 pinecone_indexed: false
 ---
 
 # 📊 SMC + Price Action Combo — v2 (Extended)
+
+> 📖 **ПЕРЕКЛАСИФІКОВАНО 2026-08-24: це REFERENCE, а не стратегія.**
+>
+> Файл не описує окремий торговий сетап — він описує **словник концепцій**, на які спираються всі інші: Order Block, FVG/Imbalance, Breaker Block, BOS/CHoCH, Liquidity (SSL/BSL), POI, bias definition, intraday hold rules.
+>
+> Виконувані правила живуть у [[smc-price-action-combo]]. Звідси також походять [[ts-2-session-manipulation]] і [[ts-3-inner-fvg-sniper]] — тому файл лишається в роботі як їхнє джерело.
+>
+> **До вдосконалення:** звірити визначення з тим, як вони фактично застосовуються в ASR і №88 — за 4 місяці практики частина термінів уточнилась (напр. «пул ліквідності цілий / з'їдений» тут не описано взагалі).
 
 **Version:** 2.0
 **Replaces:** [[20-Trading/Strategies/smc-price-action-combo]] (v1, legacy)
