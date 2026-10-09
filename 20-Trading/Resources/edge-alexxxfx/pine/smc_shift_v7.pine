@@ -1,0 +1,469 @@
+//@version=6
+// ═══════════════════════════════════════════════════════════════════════════
+//  SMC Shift v7 · EURUSD M5
+//  Формалізація дискреційного методу (SMC/ICT) за реплеєм лютого 2026.
+//
+//  ЛОГІКА ДНЯ:
+//    1. Напрямок тижня — базова модель D1, застосована до ЗАВЕРШЕНОГО тижня
+//       (w-1 проти w-2). Без заглядання вперед.
+//    2. Карта рівнів о 06:00 UTC — H1-півоти за N днів + PDH/PDL + Asia H/L + PWH/PWL.
+//    3. Екстремум сесії (від 06:00) вважається остаточним ЛИШЕ після Shift:
+//       закриття тілом за протилежний свінг, утворений ПІСЛЯ екстремуму,
+//       з імпульсним поглинанням (тіло >= minBody і більше тіла попередньої свічки).
+//    4. Вхід — на знятті рівня карти (sweep) у вікні 09:00–17:00 UTC.
+//    5. Стоп — за екстремум сесії + буфер. ЖОРСТКА МЕЖА РИЗИКУ.
+//    6. Ціль — перший рівень карти з чистим RR >= minRR (витрати враховані).
+//
+//  ⚠ ЧЕСНИЙ РЕЗУЛЬТАТ БЕКТЕСТУ (Dukascopy M5 mid, вер.2025–лип.2026):
+//       n=115 · WR 32.2% · E[R] +0.133 · CI95 [-0.185; +0.455] · ΣR +15.3
+//       Нульова модель (випадковий напрямок, та сама геометрія): медіана +11.8R.
+//    ⇒ Тижневий напрямок статистично НЕ доведений (58-й перцентиль).
+//       Уся виміряна перевага — у ГЕОМЕТРІЇ: ризик <= 5 п + ціль >= 2RR + Shift.
+//       Без межі ризику та сама система дає ΣR -43.6.
+//    Довірчий інтервал перетинає нуль. Це дослідницький інструмент, не сигнал.
+//
+//  ⚠ ПЕРЕВІРКА НА TRADINGVIEW (OANDA:EURUSD M5, 27.07–18.09.2026, поза вибіркою Python):
+//       ліміт на рівні  n=23 · WR 21.7% · ΣR −5.20 · PF 0.77
+//       ринок на закритті n=26 · WR 30.8% · ΣR −9.15 · PF 0.71
+//    Обидва режими ВІД'ЄМНІ, щойно враховано 2 пункти витрат (slippage = 10 тіків).
+//    n мале (7.6 тижня), але знак протилежний Python-результату.
+//
+//  Деталі: MyVault/20-Trading/Backtest/v7-ablation-2026-09-17.md
+// ═══════════════════════════════════════════════════════════════════════════
+
+strategy("SMC Shift v7 · EURUSD M5", overlay = true, initial_capital = 10000,
+     default_qty_type = strategy.fixed, default_qty_value = 1, pyramiding = 0,
+     process_orders_on_close = true, close_entries_rule = "ANY",
+     margin_long = 0, margin_short = 0, slippage = 10,
+     max_lines_count = 500, max_labels_count = 500)
+
+// ─────────────────────────── ПАРАМЕТРИ ───────────────────────────
+gS = "1 · Сигнал"
+useShift  = input.bool (true , "Вимагати Shift після екстремуму сесії", group = gS)
+minBodyP  = input.float(2.0  , "Мін. тіло імпульсу Shift, п", step = 0.1, minval = 0, group = gS)
+usePrem   = input.bool (true , "Фільтр Premium / Discount", group = gS)
+useScen   = input.bool (false, "Сценарії A/B (перемикання на H1-закритті за PWH/PWL)", group = gS,
+     tooltip = "Вимкнено за результатом абляції: E[R] -0.133 → -0.179 при поверненні.")
+useBound  = input.bool (true , "Межа тижня (діапазон тижня відпрацьовано → напрямок від Asia)", group = gS)
+
+gR = "2 · Ризик і ціль"
+maxRiskP  = input.float(5.0  , "МАКСИМАЛЬНИЙ ризик, п (0 = без межі)", step = 0.5, minval = 0, group = gR,
+     tooltip = "Ключовий фільтр. ≤5п: ΣR +15.3 · ≤8п: -1.7 · без межі: -43.6")
+minRR     = input.float(2.0  , "Мінімальний ЧИСТИЙ RR", step = 0.1, minval = 0.5, group = gR)
+costP     = input.float(2.0  , "Витрати (спред + прослизання), п", step = 0.1, minval = 0, group = gR)
+bufP      = input.float(0.5  , "Буфер стопа за екстремум, п", step = 0.1, minval = 0, group = gR)
+offP      = input.float(0.2  , "Глибина зняття рівня для входу, п", step = 0.1, minval = 0, group = gR)
+riskCash  = input.float(100.0, "Ризик на угоду, валюта рахунку (1R)", step = 10, minval = 1, group = gR)
+
+gE = "3 · Виконання"
+entryMode = input.string("Ліміт на рівні", "Спосіб входу",
+     options = ["Ринок на закритті бару зняття", "Ліміт на рівні"], group = gE,
+     tooltip = "Бектест на Python припускав виконання точно на рівні (ліміт). " +
+               "Ринок на закритті — чесніша, але гірша оцінка.")
+
+gT = "4 · Час (UTC)"
+asiaEnd = input.int(6 , "Кінець азійської сесії / побудова карти", 0, 23, group = gT)
+fromH   = input.int(9 , "Початок вікна входів",  0, 23, group = gT)
+lastH   = input.int(17, "Останній час входу",    0, 23, group = gT)
+flatH   = input.int(19, "Примусове закриття",    0, 23, group = gT)
+
+gM = "5 · Карта рівнів і ліміти"
+pivDays = input.int(10, "Глибина H1-півотів, днів", 1, 60, group = gM)
+maxTr   = input.int(2 , "Максимум угод на день", 1, 10, group = gM)
+dedupM  = input.int(60, "Мін. пауза між входами, хв", 0, 600, group = gM)
+
+gV = "6 · Візуалізація"
+showLv    = input.bool(true , "Малювати карту рівнів", group = gV)
+showShift = input.bool(true , "Позначати Shift", group = gV)
+showPanel = input.bool(true , "Панель стану", group = gV)
+
+pipIn = input.float(0.0, "Розмір пункту (0 = авто)", step = 0.00001, group = gV)
+pip   = pipIn > 0 ? pipIn : syminfo.mintick * 10
+
+COST    = costP    * pip
+BUF     = bufP     * pip
+OFF     = offP     * pip
+MINBODY = minBodyP * pip
+MAXRISK = maxRiskP * pip
+
+// ─────────────────────────── ЧАС ───────────────────────────
+hU  = hour       (time, "UTC")
+mU  = minute     (time, "UTC")
+dU  = dayofmonth (time, "UTC")
+wkId = year(time, "UTC") * 100 + weekofyear(time, "UTC")
+
+newDay  = na(dU[1])   ? false : dU   != dU[1]
+newWeek = na(wkId[1]) ? false : wkId != wkId[1]
+minsNow = hU * 60 + mU
+
+// ─────────────────── HTF: PDH/PDL, PWH/PWL, тижневий біас ───────────────────
+pdh = request.security(syminfo.tickerid, "D", high [1], lookahead = barmerge.lookahead_off)
+pdl = request.security(syminfo.tickerid, "D", low  [1], lookahead = barmerge.lookahead_off)
+
+wH1 = request.security(syminfo.tickerid, "W", high [1], lookahead = barmerge.lookahead_off)
+wL1 = request.security(syminfo.tickerid, "W", low  [1], lookahead = barmerge.lookahead_off)
+wC1 = request.security(syminfo.tickerid, "W", close[1], lookahead = barmerge.lookahead_off)
+wH2 = request.security(syminfo.tickerid, "W", high [2], lookahead = barmerge.lookahead_off)
+wL2 = request.security(syminfo.tickerid, "W", low  [2], lookahead = barmerge.lookahead_off)
+wH3 = request.security(syminfo.tickerid, "W", high [3], lookahead = barmerge.lookahead_off)
+wL3 = request.security(syminfo.tickerid, "W", low  [3], lookahead = barmerge.lookahead_off)
+
+// Базова модель D1, застосована до ЗАВЕРШЕНОГО тижня w-1 проти w-2.
+// Жодного бару поточного тижня не використано.
+weeklyBias() =>
+    int res = 0
+    if not na(wH1) and not na(wH2)
+        tookH = wH1 > wH2
+        tookL = wL1 < wL2
+        if tookH and not tookL
+            res := wC1 > wH2 ?  1 : -1
+        else if tookL and not tookH
+            res := wC1 < wL2 ? -1 :  1
+        else if tookH and tookL
+            res := wC1 > (wH1 + wL1) / 2 ? 1 : -1
+        else if not na(wH3)
+            up = wH1 > wH2 and wH2 > wH3 and wL1 > wL2 and wL2 > wL3
+            dn = wH1 < wH2 and wH2 < wH3 and wL1 < wL2 and wL2 < wL3
+            res := up ? 1 : dn ? -1 : 0
+    res
+
+// ─────────────────── H1-півоти (будуються на M5, без security) ───────────────────
+var float curH = na
+var float curL = na
+var int   curT = na
+var float hA_h = na
+var float hA_l = na
+var float hB_h = na
+var float hB_l = na
+var int   hB_t = na
+var float hC_h = na
+var float hC_l = na
+var int   hC_t = na
+var array<float> pivP = array.new_float()
+var array<int>   pivT = array.new_int()
+
+newHour = na(hU[1]) ? false : hU != hU[1]
+
+if newHour and not na(curH)
+    hA_h := hB_h
+    hA_l := hB_l
+    hB_h := hC_h
+    hB_l := hC_l
+    hB_t := hC_t
+    hC_h := curH
+    hC_l := curL
+    hC_t := curT
+    if not na(hA_h) and not na(hB_h)
+        if hB_h >= hA_h and hB_h >= hC_h
+            array.push(pivP, hB_h)
+            array.push(pivT, hB_t)
+        if hB_l <= hA_l and hB_l <= hC_l
+            array.push(pivP, hB_l)
+            array.push(pivT, hB_t)
+    curH := high
+    curL := low
+    curT := time
+else
+    curH := na(curH) ? high : math.max(curH, high)
+    curL := na(curL) ? low  : math.min(curL, low)
+    curT := na(curT) ? time : curT
+
+// ─────────────────── денні / тижневі агрегати ───────────────────
+var float dyH = na                              // поточний день
+var float dyL = na
+var float wkH = na                              // ЗАВЕРШЕНІ дні поточного тижня
+var float wkL = na
+var float wfH = na                              // весь поточний тиждень
+var float wfL = na
+var array<float> wkRanges = array.new_float()
+var float asH = na                              // азійська сесія
+var float asL = na
+var float sH  = na                              // сесія від asiaEnd
+var float sL  = na
+var int   curDir = 0                            // напрямок тижня (може мінятись сценаріями)
+var int   dayDir = 0
+var bool  bndDone = false
+
+if newDay
+    if not na(dyH)
+        if newWeek
+            if not na(wfH)
+                array.push(wkRanges, wfH - wfL)
+                if array.size(wkRanges) > 8
+                    array.shift(wkRanges)
+            wkH := na
+            wkL := na
+            wfH := dyH
+            wfL := dyL
+        else
+            wkH := na(wkH) ? dyH : math.max(wkH, dyH)
+            wkL := na(wkL) ? dyL : math.min(wkL, dyL)
+            wfH := na(wfH) ? dyH : math.max(wfH, dyH)
+            wfL := na(wfL) ? dyL : math.min(wfL, dyL)
+    if newWeek
+        curDir := weeklyBias()
+    dyH := high
+    dyL := low
+    asH := na
+    asL := na
+    sH  := na
+    sL  := na
+else
+    dyH := na(dyH) ? high : math.max(dyH, high)
+    dyL := na(dyL) ? low  : math.min(dyL, low)
+
+if hU < asiaEnd
+    asH := na(asH) ? high : math.max(asH, high)
+    asL := na(asL) ? low  : math.min(asL, low)
+
+WKFULL = array.size(wkRanges) > 0 ? array.median(wkRanges) : 0.0110
+
+// ─────────────────── карта рівнів о asiaEnd ───────────────────
+var array<float> lvArr   = array.new_float()
+var array<line>  lvLines = array.new<line>()
+var int   trUsed   = 0
+var int   lastEnt  = -9999
+var bool  mapReady = false
+
+buildMap = newHour and hU == asiaEnd
+
+if buildMap
+    // обрізаємо півоти, старші за pivDays
+    cutoff = time - pivDays * 86400000
+    while array.size(pivT) > 0 and array.get(pivT, 0) < cutoff
+        array.shift(pivT)
+        array.shift(pivP)
+
+    array.clear(lvArr)
+    if array.size(pivP) > 0
+        for i = 0 to array.size(pivP) - 1
+            array.push(lvArr, array.get(pivP, i))
+    if not na(pdh)
+        array.push(lvArr, pdh)
+    if not na(pdl)
+        array.push(lvArr, pdl)
+    if not na(asH)
+        array.push(lvArr, asH)
+    if not na(asL)
+        array.push(lvArr, asL)
+    if not na(wH1)
+        array.push(lvArr, wH1)
+    if not na(wL1)
+        array.push(lvArr, wL1)
+    array.sort(lvArr, order.ascending)
+
+    // напрямок дня
+    bndDone := useBound and not na(wkH) and not na(wkL) and (wkH - wkL) >= WKFULL
+    dayDir  := curDir
+    if bndDone and not na(asL)
+        dayDir := (asL - wkL) < (wkH - asL) ? 1 : -1
+
+    trUsed   := 0
+    lastEnt  := -9999
+    mapReady := true
+
+    if showLv
+        if array.size(lvLines) > 0
+            for i = 0 to array.size(lvLines) - 1
+                line.delete(array.get(lvLines, i))
+            array.clear(lvLines)
+        if array.size(lvArr) > 0
+            for i = 0 to array.size(lvArr) - 1
+                p = array.get(lvArr, i)
+                array.push(lvLines, line.new(bar_index, p, bar_index + 170, p,
+                     color = color.new(color.gray, 55), width = 1))
+
+// ─────────────────── екстремум сесії + Shift ───────────────────
+var bool  shiftOK = false
+var int   barsExt = 0
+var float postLo = na
+var float postHi = na
+
+inSess = hU >= asiaEnd and hU <= flatH
+
+if inSess
+    bool isNewExt = false
+    if dayDir < 0
+        isNewExt := na(sH) or high > sH
+    else if dayDir > 0
+        isNewExt := na(sL) or low < sL
+
+    if isNewExt
+        barsExt := 0
+        shiftOK := false
+        postLo  := low
+        postHi  := high
+    else
+        barsExt += 1
+        // перевірка Shift за свінгом, утвореним ПІСЛЯ екстремуму
+        if useShift and not shiftOK and barsExt >= 2 and dayDir != 0
+            pbody = math.abs(close[1] - open[1])
+            if dayDir < 0
+                body = open - close
+                if not na(postLo) and close < postLo and body >= MINBODY and body > pbody
+                    shiftOK := true
+            else
+                body = close - open
+                if not na(postHi) and close > postHi and body >= MINBODY and body > pbody
+                    shiftOK := true
+        postLo := na(postLo) ? low  : math.min(postLo, low)
+        postHi := na(postHi) ? high : math.max(postHi, high)
+
+    sH := na(sH) ? high : math.max(sH, high)
+    sL := na(sL) ? low  : math.min(sL, low)
+
+// сценарії A/B — перемикання напрямку на H1-закритті за межу минулого тижня
+if useScen and inSess and mU == 55 and not bndDone
+    if not na(wL1) and close < wL1 and curDir != -1
+        curDir  := -1
+        dayDir  := -1
+        shiftOK := false
+        barsExt := 0
+        postLo  := na
+        postHi  := na
+    if not na(wH1) and close > wH1 and curDir != 1
+        curDir  :=  1
+        dayDir  :=  1
+        shiftOK := false
+        barsExt := 0
+        postLo  := na
+        postHi  := na
+
+plotshape(showShift and shiftOK and not shiftOK[1] and dayDir < 0, "Shift ↓",
+     shape.triangledown, location.abovebar, color.new(color.red, 0), size = size.tiny)
+plotshape(showShift and shiftOK and not shiftOK[1] and dayDir > 0, "Shift ↑",
+     shape.triangleup, location.belowbar, color.new(color.teal, 0), size = size.tiny)
+
+// ─────────────────── пошук входу ───────────────────
+var float slPx = na
+var float tpPx = na
+var float enPx = na
+
+flat = strategy.position_size == 0
+
+canScan = mapReady and flat and dayDir != 0 and array.size(lvArr) > 0 and
+          hU >= fromH and hU <= lastH and trUsed < maxTr and
+          (minsNow - lastEnt) >= dedupM and (not useShift or shiftOK)
+
+float sigE   = na
+float sigSL  = na
+float sigTP  = na
+int   sigDir = 0
+
+if canScan
+    float L = na
+    if dayDir < 0
+        // найнижчий рівень, знятий зверху цим баром
+        for i = 0 to array.size(lvArr) - 1
+            p = array.get(lvArr, i)
+            if na(L) and high >= p + OFF and p >= open
+                L := p
+    else
+        for i = array.size(lvArr) - 1 to 0
+            p = array.get(lvArr, i)
+            if na(L) and low <= p - OFF and p <= open
+                L := p
+
+    if not na(L)
+        E  = dayDir < 0 ? L + OFF : L - OFF
+        rH = math.max(nz(sH, high), high)
+        rL = math.min(nz(sL, low ), low)
+        if rH - rL > 0
+            pos = (E - rL) / (rH - rL)
+            okPD = not usePrem or (dayDir < 0 ? pos >= 0.5 : pos <= 0.5)
+            if okPD
+                SL   = dayDir < 0 ? rH + BUF : rL - BUF
+                okSL = dayDir < 0 ? SL > E : SL < E
+                if okSL
+                    risk = math.abs(SL - E)
+                    if risk > 0 and (MAXRISK == 0 or risk <= MAXRISK)
+                        float TP = na
+                        if dayDir < 0
+                            for i = array.size(lvArr) - 1 to 0
+                                p = array.get(lvArr, i)
+                                if na(TP) and p < E and (E - p - COST) / (risk + COST) >= minRR
+                                    TP := p
+                        else
+                            for i = 0 to array.size(lvArr) - 1
+                                p = array.get(lvArr, i)
+                                if na(TP) and p > E and (p - E - COST) / (risk + COST) >= minRR
+                                    TP := p
+                        if not na(TP)
+                            sigE   := E
+                            sigSL  := SL
+                            sigTP  := TP
+                            sigDir := dayDir
+
+// ─────────────────── ордери ───────────────────
+if sigDir != 0
+    qty = riskCash / math.abs(sigSL - sigE)
+    slPx := sigSL
+    tpPx := sigTP
+    enPx := sigE
+    trUsed  += 1
+    lastEnt := minsNow
+    if entryMode == "Ліміт на рівні"
+        if sigDir < 0
+            strategy.entry("S", strategy.short, qty = qty, limit = sigE, comment = "sweep")
+        else
+            strategy.entry("L", strategy.long , qty = qty, limit = sigE, comment = "sweep")
+    else
+        if sigDir < 0
+            strategy.entry("S", strategy.short, qty = qty, comment = "sweep")
+        else
+            strategy.entry("L", strategy.long , qty = qty, comment = "sweep")
+
+// Захисні ордери виставляються ЩОБАРУ, поки є актуальні рівні.
+// Якщо чекати на strategy.position_size != 0, стоп з'являється лише на барі ПІСЛЯ
+// заповнення — на M5 ціна встигає пройти крізь нього (виміряно: макс. збиток 8.88R
+// замість планових 1R; після виправлення — 1.67R).
+if not na(slPx) and not na(tpPx)
+    strategy.exit("xS", from_entry = "S", stop = slPx, limit = tpPx)
+    strategy.exit("xL", from_entry = "L", stop = slPx, limit = tpPx)
+
+// примусове закриття і скасування висячих лімітів
+if hU >= flatH
+    strategy.cancel_all()
+    strategy.close_all(comment = "flat")
+    slPx := na
+    tpPx := na
+    enPx := na
+
+if newDay
+    strategy.cancel_all()
+    mapReady := false
+    shiftOK  := false
+    barsExt  := 0
+    postLo   := na
+    postHi   := na
+
+// ─────────────────── панель ───────────────────
+// barstate.islast у стратегії без calc_on_every_tick не спрацьовує на живому барі —
+// потрібен ще й barstate.islastconfirmedhistory, інакше панель не рендериться взагалі.
+if showPanel and (barstate.islast or barstate.islastconfirmedhistory)
+    var table tb = table.new(position.bottom_right, 2, 7, border_width = 1)
+    dirTxt = dayDir > 0 ? "LONG" : dayDir < 0 ? "SHORT" : "—"
+    dirCol = dayDir > 0 ? color.new(color.teal, 70) : dayDir < 0 ? color.new(color.red, 70) : color.new(color.gray, 70)
+    table.cell(tb, 0, 0, "SMC Shift v7", bgcolor = color.new(color.blue, 60), text_size = size.small)
+    table.cell(tb, 1, 0, str.tostring(syminfo.ticker), bgcolor = color.new(color.blue, 60), text_size = size.small)
+    table.cell(tb, 0, 1, "Біас тижня", text_size = size.small)
+    table.cell(tb, 1, 1, curDir > 0 ? "LONG" : curDir < 0 ? "SHORT" : "—", text_size = size.small)
+    table.cell(tb, 0, 2, "Напрямок дня", text_size = size.small)
+    table.cell(tb, 1, 2, dirTxt, bgcolor = dirCol, text_size = size.small)
+    table.cell(tb, 0, 3, "Межа тижня", text_size = size.small)
+    table.cell(tb, 1, 3, bndDone ? "так" : "ні", text_size = size.small)
+    table.cell(tb, 0, 4, "Shift", text_size = size.small)
+    table.cell(tb, 1, 4, shiftOK ? "підтверджено" : "очікується", text_size = size.small)
+    table.cell(tb, 0, 5, "Рівнів на карті", text_size = size.small)
+    table.cell(tb, 1, 5, str.tostring(array.size(lvArr)), text_size = size.small)
+    table.cell(tb, 0, 6, "Угод сьогодні", text_size = size.small)
+    table.cell(tb, 1, 6, str.tostring(trUsed) + " / " + str.tostring(maxTr), text_size = size.small)
+
+// ─────────────────── алерти ───────────────────
+if sigDir != 0
+    alert((sigDir < 0 ? "SHORT " : "LONG ") + syminfo.ticker +
+          "  вхід " + str.tostring(sigE, format.mintick) +
+          "  SL "   + str.tostring(sigSL, format.mintick) +
+          "  TP "   + str.tostring(sigTP, format.mintick) +
+          "  ризик " + str.tostring(math.abs(sigSL - sigE) / pip, "#.0") + " п",
+          alert.freq_once_per_bar_close)

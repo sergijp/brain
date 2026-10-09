@@ -1,0 +1,1 @@
+- [[multilingual-content]] — переклади контенту через texts, fallback, валідація

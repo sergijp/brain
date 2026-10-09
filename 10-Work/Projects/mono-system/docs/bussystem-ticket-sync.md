@@ -7,7 +7,7 @@ project: mono-system
 status: active
 aliases: ["mono-system-bussystem-sync", "get_tickets", "infobus-sync"]
 pinecone_indexed: false
-last_verified: 2026-07-30
+last_verified: 2026-10-06
 ---
 
 # Синхронізація квитків Bussystem (get_tickets)
@@ -85,8 +85,8 @@ php artisan db:seed --class=BussystemCityAliasSeeder
 Сідер **не входить** у `DatabaseSeeder`, тож на свіжому оточенні таблиця
 порожня. А порожня таблиця означає, що `resolveRouteStation()` повертає `null`
 завжди → `CreateTicketJob` не знаходить жодної станції → **кожен** квиток синку
-падає в `error_tickets`. Фолбеку немає (на відміну від 3g, де лишився ще й
-legacy LIKE по `texts.title`).
+падає в `error_tickets` (неточний збіг з розділу «Резолв станцій» частину
+врятує, але не замінює таблицю).
 
 Заміряно на локальній копії 2026-07-31:
 
@@ -97,6 +97,43 @@ legacy LIKE по `texts.title`).
 
 Решта 3 — Utena і Gdynia: цих міст немає в наших `cities`/`texts` узагалі, тож
 для них помилка резолву коректна.
+
+## Резолв станцій (оновлено 2026-10-06)
+
+`BussystemDispatcherService::resolveRouteStation($routeApi, $token)` — у три кроки:
+
+1. **Точний збіг** через `bussystem_city_aliases` → місто → перша станція цього
+   міста на маршруті.
+2. **Неточний збіг у межах маршруту** (`fuzzyRouteStation()`), якщо крок 1 не дав
+   станції. Кандидати — лише міста зупинок цього маршруту (20–40). Порівнюються
+   тільки латинські назви (кириличні слова з назви вирізаються):
+   - без діакритики/регістру/розділових (Tarnów ≈ Tarnow);
+   - одна назва — початок іншої до межі слова (Suceava airport ≈ Suceava);
+   - Левенштейн ≤ 1 при довжині ≥ 6 і однаковій першій літері
+     (Polianytsia ≈ Polyanytsia).
+   Більше одного кандидата → `null`. Кожне спрацювання — `Log::info`.
+   Перевірено на 741 alias × 29 маршрутах API: 0 хибних збігів (з допуском 2 і
+   кирилицею було Краків ≈ Харків, Вижниця ≈ Вінниця, Yahotyn ≈ Khotyn).
+3. Не знайдено → `error_ticket` + **Telegram-алерт**
+   `BussystemFailureReporter::reportUnresolvedStation()` — раз на добу на пару
+   «назва + маршрут API», з причиною (назви немає в довіднику / місто є, але не
+   на маршруті).
+
+**Звідки беруться aliases:**
+- сідер (знімок назв міст + `MANUAL_ALIASES`) — запускається **окремо, руками**
+  (`php artisan db:seed --class=BussystemCityAliasSeeder`), не міграцією:
+  так вирішено 2026-10-06. Після зміни `MANUAL_ALIASES` — перезапустити;
+- `TextObserver` → `syncCityAliases($cityId)`: при збереженні/видаленні назви
+  міста перезбирає його `city_text_*` записи (раніше нове місто, як Kvasy,
+  падало в помилки до ручного перезапуску сідера);
+- менеджер на сторінці «Помилкові квитки» → «Запам'ятати»
+  (`ErrorTicketsController::rememberStation`, source = `manager`). Сідер ці
+  записи **не стирає**.
+
+Причина інциденту 2026-10: за 2 місяці 280 error_tickets «станцію не знайдено»,
+з них 250 — розбіжність написання (Bukovel (Polianytsia) дав 199), решта 30 —
+міста, яких немає на маршруті (Павлоград, Вільнюс, Варшава…) — це налаштування
+маршрутів, не код.
 
 ## Дедуп перед бронюванням (два бар'єри в CreateTicketJob)
 

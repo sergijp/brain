@@ -263,7 +263,7 @@ pinecone_indexed: false
 
 | Параметр | Значення |
 |----------|----------|
-| **Sample size** | 30 трейдів **Forex** + 15 трейдів **Indices/Commodities** перед go-live |
+| **Sample size** | **90 трейдів** перед go-live *(було: 30 Forex + 15 Indices)* — розрахунок [[mde-ts-program-2026-09-16]] |
 | **Період** | 6 міс історії (Manual Bar Replay у TradingView) |
 | **Watchlist Forex** | EURUSD, GBPUSD, XAUUSD |
 | **Watchlist Indices** | DXY, NAS100, SPX500 |
@@ -274,7 +274,13 @@ pinecone_indexed: false
 
 | Метрика | Поріг |
 |---------|-------|
-| WR | ≥ 40% (при min RR 1:3) |
+| **WR нуля** `1/(1+RR)` | **25%** — база для порівняння, не 50% |
+
+> ⚠️ **Застереження до `1/(1+RR)` (додано 2026-09-16).** Формула придатна лише коли **майже всі** угоди виходять по TP або SL. Якщо понад ~15% закриваються **за годинником** (EOD-flat, max-hold) або по BE — вона **завищує** нуль.
+> Вимірено на ТС-3.2: формула дала 62%, емпіричний нуль — **48.4%**, розбіжність 13.6 пп ([[ts32-lowrr-2026-09-16]]).
+> **У такому разі рахувати емпіричний нуль:** ті самі входи, та сама геометрія, напрямок монетою.
+
+| WR | **≥ 46%** *(було ≥40%)* — узгоджено з порогом expectancy при avg win 2.5R |
 | Expectancy | ≥ +0.6R після costs |
 | Max DD | ≤ 10% |
 | Adherence (checklist followed) | ≥ 92% |
@@ -282,7 +288,8 @@ pinecone_indexed: false
 
 ### Retirement criteria
 
-- WR < 35% на 30+ трейдах → пауза, ревізія 5-крокового checklist
+- **WR < 25% на 90+ трейдах** → гірше за випадковий вхід, ревізія 5-крокового checklist
+  *(було: «WR < 35% на 30+» — порівняння з неправильною базою і замала вибірка)*
 - Adherence < 85% → проблема з дисципліною, не стратегією
 
 ---
@@ -305,7 +312,7 @@ confluence_score: 0-6
 🟢 **Pine Validation (Етап 2)** — стартовано 2026-04-22.
 - Pine v6 `strategy()` код готовий: [[20-Trading/Backtest/pine-ns-2026-04-22]]
 - Параметри v1: EURUSD 15m, 2024-05 → 2026-04, commission 0.03%, 5-step funnel + 6-point scoring → size multiplier (1.0/0.5/0.0)
-- Sample target: ≥ 50 трейдів; PF > 1.3; cross-pair GBPUSD + XAUUSD для robustness (урок ТС-3)
+- Sample target: **≥ 90 трейдів**; PF > 1.3; cross-pair GBPUSD + XAUUSD для robustness (урок ТС-3)
 - Gate для переходу на Етап 1 Manual Bar Replay: всі success criteria з pine-ns файлу
 
 ---

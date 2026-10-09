@@ -1,0 +1,584 @@
+//@version=5
+// Owner Method — Map + Setups  (v0.3, 09.10.2026)
+// Карта ліквідності і зон + детектор сетапу «зняття пулу → імпульсний реклейм» + супровід угод + історія останніх угод.
+// Працювати на M5. Стан змінюється лише на закритих барах (без перемальовування).
+indicator("тестовий мій", shorttitle="тестовий мій", overlay=true, max_lines_count=500, max_boxes_count=500, max_labels_count=500)
+
+// ═════════════ 1 · БІАС І ТОРГОВИЙ ЧАС ═════════════
+g1 = "1 · Біас і торговий час"
+biasIn   = input.string("Авто (за азією)", "Напрям торгівлі (біас дня)", options=["Авто (за азією)", "Лише шорт", "Лише лонг", "Обидва боки"], group=g1, tooltip="Авто: екстремум азійської сесії (22:00–06:00 UTC) на рівні карти + достатній діапазон азії → день дистрибутивний, торгуємо геть від екстремуму.")
+sessFromH = input.int(5, "Початок торгів — година UTC", minval=0, maxval=23, group=g1, inline="a")
+sessFromM = input.int(50, "хвилина", minval=0, maxval=59, group=g1, inline="a")
+sessToH   = input.int(19, "Кінець торгів / примусове закриття — година UTC", minval=0, maxval=23, group=g1, inline="b")
+sessToM   = input.int(0, "хвилина", minval=0, maxval=59, group=g1, inline="b")
+dayLimit  = input.float(-3.0, "Денна межа збитку, R (після неї нових угод немає)", group=g1)
+
+// ═════════════ 2 · УМОВИ ВХОДУ ═════════════
+g2 = "2 · Умови входу (зняття пулу + реклейм)"
+maxAge   = input.int(3, "Скільки барів після зняття чекати реклейм", minval=0, group=g2)
+minBody  = input.float(0.3, "Мін. тіло реклейм-бару, ×ATR", step=0.05, group=g2)
+entryFx  = input.float(15.0, "Макс. відстань входу від екстремуму зняття, пунктів (форекс)", step=1.0, group=g2)
+entryAtr = input.float(2.7, "Макс. відстань входу від екстремуму зняття, ×ATR (індекси)", step=0.1, group=g2)
+atrLen   = input.int(24, "Довжина ATR (барів M5)", minval=2, group=g2)
+
+// ═════════════ 3 · СТОП, РИЗИК І ЦІЛЬ ═════════════
+g3 = "3 · Стоп, ризик і ціль"
+bufMult  = input.float(0.75, "Буфер стопа за екстремумом зняття, ×ATR", step=0.05, group=g3)
+minStopP = input.float(2.0, "Мін. відстань стопа, пунктів (форекс)", step=0.5, group=g3)
+riskMinA = input.float(0.8, "Мін. ризик угоди, ×ATR", step=0.1, group=g3)
+riskMaxA = input.float(2.5, "Макс. ризик угоди, ×ATR", step=0.1, group=g3)
+rrMin    = input.float(2.25, "Мін. співвідношення ризик/прибуток (RR)", step=0.05, group=g3)
+
+// ═════════════ 4 · ЩО МАЛЮВАТИ ═════════════
+g4 = "4 · Що малювати на графіку"
+showLvls = input.bool(true, "Рівні ліквідності (PDH/PDL, азія, свінги…)", group=g4)
+showFvg  = input.bool(true, "FVG — гепи справедливої вартості", group=g4)
+showOb   = input.bool(true, "OB — ордер-блоки", group=g4)
+showH1   = input.bool(true, "Таймфрейм H1", group=g4, inline="t")
+showH4   = input.bool(true, "H4", group=g4, inline="t")
+showD    = input.bool(true, "D (денний)", group=g4, inline="t")
+showSessLines = input.bool(true, "Лінії PDC, відкриття дня, відкриття Лондона", group=g4)
+maxLv    = input.int(70, "Макс. рівнів на графіку", minval=10, maxval=200, group=g4)
+maxZn    = input.int(90, "Макс. зон на графіку", minval=10, maxval=200, group=g4)
+zoneBand = input.float(4.0, "Малювати зони лише в межах ×ATR(D) від ціни", step=0.5, group=g4)
+dispMult = input.float(1.5, "OB: сила зсуву (тіло свічки ≥ ×середній діапазон)", step=0.1, group=g4)
+
+// ═════════════ 5 · ВИГЛЯД ═════════════
+g5 = "5 · Вигляд і кольори"
+colBsl   = input.color(color.new(#ef5350, 0), "Колір: ліквідність зверху (BSL)", group=g5, inline="c1")
+colSsl   = input.color(color.new(#26a69a, 0), "знизу (SSL)", group=g5, inline="c1")
+colD     = input.color(color.new(#ab47bc, 0), "Колір зон: D", group=g5, inline="c2")
+colH4    = input.color(color.new(#ff9800, 0), "H4", group=g5, inline="c2")
+colH1    = input.color(color.new(#42a5f5, 0), "H1", group=g5, inline="c2")
+colRisk  = input.color(color.new(#ef5350, 0), "Колір угоди: ризик", group=g5, inline="c3")
+colRew   = input.color(color.new(#26a69a, 0), "ціль", group=g5, inline="c3")
+zoneTr   = input.int(86, "Прозорість зон, % (більше = прозоріше)", minval=50, maxval=98, group=g5)
+boxTr    = input.int(80, "Прозорість боксів угоди, %", minval=50, maxval=98, group=g5)
+lblSizeIn = input.string("Малий", "Розмір підписів", options=["Дрібний", "Малий", "Звичайний"], group=g5)
+showTable = input.bool(true, "Таблиця стану (вгорі справа)", group=g5)
+
+// ═════════════ 6 · ІСТОРІЯ УГОД ═════════════
+g6 = "6 · Історія угод"
+histN    = input.int(5, "Скільки останніх угод показувати на графіку", minval=1, maxval=50, group=g6, tooltip="Старіші угоди видаляються з графіка. Активна угода завжди показується.")
+
+// ═════════════ 7 · АЛЕРТИ ═════════════
+g7 = "7 · Алерти"
+tgChat   = input.string("", "Telegram chat_id (порожньо = звичайний текст)", group=g7)
+
+// ───────────── Інструмент і масштаб
+isFx    = syminfo.type == "forex"
+isJpy   = str.contains(syminfo.ticker, "JPY")
+pip     = isFx ? (isJpy ? 0.01 : 0.0001) : 1.0
+unitTxt = isFx ? " п" : " пт"
+sweepMin = (isFx ? 0.3 : 1.0) * pip
+clusTol  = (isFx ? 1.0 : 3.0) * pip
+minStop  = isFx ? minStopP * pip : 0.0
+fvgScl   = isFx ? 1.0 : 3.0
+atrV     = ta.atr(atrLen)
+atrD     = request.security(syminfo.tickerid, "D", ta.atr(14)[1], lookahead = barmerge.lookahead_on)
+
+sessFrom = sessFromH * 60 + sessFromM
+sessTo   = sessToH * 60 + sessToM
+minOfDay = hour(time, "UTC") * 60 + minute(time, "UTC")
+newDay   = dayofweek(time, "UTC") != dayofweek(time[1], "UTC")
+inSess   = minOfDay >= sessFrom and minOfDay < sessTo
+lblSize  = lblSizeIn == "Дрібний" ? size.tiny : lblSizeIn == "Звичайний" ? size.normal : size.small
+
+// ───────────── Типи
+type Lvl
+    float  p
+    float  lo
+    float  hi
+    bool   isHigh
+    int    n
+    bool   swept
+    bool   done
+    int    born
+    int    sweepBar
+    float  ext
+    string tag
+    line   ln
+    label  lb
+
+type Zn
+    box    bx
+    bool   bull
+    bool   isFvg
+    bool   dead
+    float  top
+    float  bot
+    string tf
+
+type Trd
+    box    rb
+    box    wb
+    line   el
+    label  lb
+    label  xl
+    int    side
+    float  entry
+    float  sl
+    float  tp
+    float  r
+    bool   open
+    bool   sh
+    bool   late
+    int    xbar
+    label  tl
+
+var array<Lvl> lv = array.new<Lvl>()
+var array<Zn>  zn = array.new<Zn>()
+var array<Trd> trades = array.new<Trd>()
+
+// ───────────── Рівні
+lblText(Lvl l) =>
+    (l.isHigh ? "▲ " : "▼ ") + l.tag + (l.n > 1 ? " ×" + str.tostring(l.n) : "") + "  " + str.tostring(l.p, format.mintick)
+
+dropLvl(int i) =>
+    Lvl o = lv.get(i)
+    line.delete(o.ln)
+    label.delete(o.lb)
+    lv.remove(i)
+
+addLevel(float price, bool isHigh, string tag) =>
+    bool merged = false
+    int sz = lv.size()
+    if sz > 0
+        for i = 0 to sz - 1
+            Lvl l = lv.get(i)
+            if not l.swept and l.isHigh == isHigh and math.abs(l.p - price) <= clusTol
+                l.n += 1
+                l.lo := math.min(l.lo, price)
+                l.hi := math.max(l.hi, price)
+                l.p := (l.lo + l.hi) / 2
+                line.set_y1(l.ln, l.p)
+                line.set_y2(l.ln, l.p)
+                label.set_y(l.lb, l.p)
+                label.set_text(l.lb, lblText(l))
+                merged := true
+                break
+    if not merged
+        color c = isHigh ? colBsl : colSsl
+        bool sessTag = tag == "PDH" or tag == "PDL" or tag == "ASIA H" or tag == "ASIA L" or tag == "DAY"
+        line ln = line.new(bar_index, price, bar_index + 1, price, extend = extend.right, color = color.new(c, 25), style = sessTag ? line.style_dotted : line.style_dashed, width = tag == "D" ? 2 : 1)
+        Lvl nl = Lvl.new(price, price, price, isHigh, 1, false, false, bar_index, na, na, tag, ln, na)
+        nl.lb := label.new(bar_index, price, lblText(nl), style = label.style_none, textcolor = color.new(c, 10), size = lblSize)
+        lv.push(nl)
+        if lv.size() > maxLv
+            dropLvl(0)
+
+// ───────────── Стан дня / азії
+var float dayH = na
+var float dayL = na
+var float dayO = na
+var float pdh  = na
+var float pdl  = na
+var float pdc  = na
+var float ldnO = na
+var float asCurH = na
+var float asCurL = na
+var int   asCurHt = na
+var int   asCurLt = na
+var float asH = na
+var float asL = na
+var int   asHt = na
+var int   asLt = na
+var int   biasAuto = 0
+var float dayR = 0.0
+var float lastR = na
+
+inAsia  = hour(time, "UTC") >= 22 or hour(time, "UTC") < 6
+asStart = inAsia and not inAsia[1]
+asEnd   = (not inAsia) and inAsia[1]
+
+// ───────────── Дані старших ТФ (без перемальовування: закрита свічка HTF)
+htf(simple string tf) =>
+    request.security(syminfo.tickerid, tf, [time[1], time[3], time[4], time[5], open[1], high[1], low[1], close[1], open[2], high[2], low[2], close[2], open[3], high[3], low[3], close[3], open[4], high[4], low[4], close[4], open[5], high[5], low[5], close[5], ta.sma(high - low, 60)[1]], lookahead = barmerge.lookahead_on)
+
+[tH1, tH1a, tH1b, tH1c, oH1_1, hH1_1, lH1_1, cH1_1, oH1_2, hH1_2, lH1_2, cH1_2, oH1_3, hH1_3, lH1_3, cH1_3, oH1_4, hH1_4, lH1_4, cH1_4, oH1_5, hH1_5, lH1_5, cH1_5, avH1] = htf("60")
+[tH4, tH4a, tH4b, tH4c, oH4_1, hH4_1, lH4_1, cH4_1, oH4_2, hH4_2, lH4_2, cH4_2, oH4_3, hH4_3, lH4_3, cH4_3, oH4_4, hH4_4, lH4_4, cH4_4, oH4_5, hH4_5, lH4_5, cH4_5, avH4] = htf("240")
+[tD1, tD1a, tD1b, tD1c, oD_1, hD_1, lD_1, cD_1, oD_2, hD_2, lD_2, cD_2, oD_3, hD_3, lD_3, cD_3, oD_4, hD_4, lD_4, cD_4, oD_5, hD_5, lD_5, cD_5, avD] = htf("D")
+
+[phH1, plH1, ptH1] = request.security(syminfo.tickerid, "60", [ta.pivothigh(high, 2, 2)[1], ta.pivotlow(low, 2, 2)[1], time[3]], lookahead = barmerge.lookahead_on)
+[phD, plD, ptD]    = request.security(syminfo.tickerid, "D", [ta.pivothigh(high, 2, 2)[1], ta.pivotlow(low, 2, 2)[1], time[3]], lookahead = barmerge.lookahead_on)
+
+// ───────────── Зони (FVG + OB)
+newZone(string tf, bool bull, bool isFvg, int tLeft, float bot, float top) =>
+    color c = tf == "D" ? colD : tf == "H4" ? colH4 : colH1
+    color fillC = isFvg ? color.new(c, zoneTr) : color.new(bull ? colSsl : colBsl, zoneTr)
+    color brd = isFvg ? color.new(c, 55) : color.new(bull ? colSsl : colBsl, 55)
+    box bx = box.new(tLeft, top, time, bot, xloc = xloc.bar_time, extend = extend.right, border_color = brd, border_width = 1, bgcolor = fillC, text = tf + (isFvg ? " FVG " : " OB ") + (bull ? "▲" : "▼"), text_color = color.new(c, 15), text_size = lblSize, text_halign = text.align_right)
+    zn.push(Zn.new(bx, bull, isFvg, false, top, bot, tf))
+    if zn.size() > maxZn
+        Zn o = zn.get(0)
+        box.delete(o.bx)
+        zn.remove(0)
+
+procHtf(string tf, bool on, float minFvg, int t1, int t1prev, int t3, int t4, int t5, float o1, float h1, float l1, float c1, float o2, float h2, float l2, float c2, float o3, float h3, float l3, float c3, float o4, float h4, float l4, float c4, float o5, float h5, float l5, float c5, float av) =>
+    if on and not na(t1) and t1 != t1prev and not na(atrD)
+        bool inBand = math.abs(close - (h2 + l2) / 2) <= zoneBand * atrD
+        if showFvg and inBand
+            if l1 > h3 and (l1 - h3) >= minFvg
+                newZone(tf, true, true, t3, h3, l1)
+            if h1 < l3 and (l3 - h1) >= minFvg
+                newZone(tf, false, true, t3, h1, l3)
+        if showOb and inBand and av > 0
+            float body2 = math.abs(c2 - o2)
+            if body2 >= dispMult * av
+                if c2 > o2 and l1 > h3
+                    if o3 > c3
+                        newZone(tf, true, false, t3, l3, h3)
+                    else if o4 > c4
+                        newZone(tf, true, false, t4, l4, h4)
+                    else if o5 > c5
+                        newZone(tf, true, false, t5, l5, h5)
+                if c2 < o2 and h1 < l3
+                    if o3 < c3
+                        newZone(tf, false, false, t3, l3, h3)
+                    else if o4 < c4
+                        newZone(tf, false, false, t4, l4, h4)
+                    else if o5 < c5
+                        newZone(tf, false, false, t5, l5, h5)
+
+updateZones() =>
+    int sz = zn.size()
+    if sz > 0
+        for i = 0 to sz - 1
+            Zn z = zn.get(i)
+            if not z.dead
+                if z.bull
+                    if close < z.bot - sweepMin
+                        z.dead := true
+                    else if z.isFvg and low < z.top
+                        z.top := math.max(low, z.bot)
+                        box.set_top(z.bx, z.top)
+                else
+                    if close > z.top + sweepMin
+                        z.dead := true
+                    else if z.isFvg and high > z.bot
+                        z.bot := math.min(high, z.top)
+                        box.set_bottom(z.bx, z.bot)
+                if z.dead
+                    box.set_bgcolor(z.bx, color.new(color.gray, 93))
+                    box.set_border_color(z.bx, color.new(color.gray, 75))
+                    box.set_text(z.bx, (z.isFvg ? "INV " : "MIT ") + z.tf + (z.isFvg ? " FVG" : " OB"))
+                    box.set_text_color(z.bx, color.new(color.gray, 30))
+                    box.set_extend(z.bx, extend.none)
+                    box.set_right(z.bx, time)
+
+// ───────────── Стан поточної угоди
+var bool   tOn    = false
+var int    tSide  = 0
+var float  tEntry = na
+var float  tSl    = na
+var float  tTp    = na
+var int    tBar   = na
+var int    tNSig  = 0
+
+fmt(float v) => str.tostring(v, format.mintick)
+sgn(float v) => (v >= 0 ? "+" : "") + str.tostring(v, "0.00")
+
+sendAlert(string txt) =>
+    string m = tgChat == "" ? txt : '{"chat_id":"' + tgChat + '","parse_mode":"HTML","text":"' + txt + '"}'
+    alert(m, alert.freq_once_per_bar_close)
+
+trimTrades() =>
+    while trades.size() > histN
+        Trd o = trades.get(0)
+        box.delete(o.rb)
+        box.delete(o.wb)
+        line.delete(o.el)
+        label.delete(o.lb)
+        if not na(o.xl)
+            label.delete(o.xl)
+        if not na(o.tl)
+            label.delete(o.tl)
+        trades.remove(0)
+
+// ═════════════ ОСНОВНА ЛОГІКА (лише закриті бари) ═════════════
+if barstate.isconfirmed
+    // --- зміна дня
+    if newDay or na(dayH)
+        if not na(dayH)
+            pdh := dayH
+            pdl := dayL
+            pdc := close[1]
+            if showLvls
+                addLevel(pdh, true, "PDH")
+                addLevel(pdl, false, "PDL")
+        dayH := high
+        dayL := low
+        dayO := open
+        dayR := 0.0
+    // --- азійська сесія
+    if asStart
+        asCurH := high
+        asCurL := low
+        asCurHt := time
+        asCurLt := time
+    else if inAsia
+        if high > asCurH
+            asCurH := high
+            asCurHt := time
+        if low < asCurL
+            asCurL := low
+            asCurLt := time
+    if asEnd and not na(asCurH)
+        asH := asCurH
+        asL := asCurL
+        asHt := asCurHt
+        asLt := asCurLt
+        if showLvls
+            addLevel(asH, true, "ASIA H")
+            addLevel(asL, false, "ASIA L")
+        // авто-біас (#46, спрощено): екстремум азії на рівні карти + діапазон до екстремуму >= порогу
+        float minRng = isFx ? 15.0 * pip : 2.5 * atrV
+        float tolMap = isFx ? 20.0 * pip : 60.0
+        bool hiAtLvl = false
+        bool loAtLvl = false
+        int sz0 = lv.size()
+        if sz0 > 0
+            for i = 0 to sz0 - 1
+                Lvl l = lv.get(i)
+                if l.tag != "ASIA H" and l.tag != "ASIA L"
+                    if l.isHigh and math.abs(asH - l.p) <= tolMap
+                        hiAtLvl := true
+                    if not l.isHigh and math.abs(asL - l.p) <= tolMap
+                        loAtLvl := true
+        bool hiOk = hiAtLvl and asHt > asLt and (asH - asL) >= minRng
+        bool loOk = loAtLvl and asLt > asHt and (asH - asL) >= minRng
+        biasAuto := hiOk and not loOk ? -1 : loOk and not hiOk ? 1 : 0
+    // --- відкриття Лондона
+    if hour(time, "UTC") == 7 and minute(time, "UTC") == 0
+        ldnO := open
+
+    // --- свінги H1 / D
+    if showLvls
+        if showH1 and not na(phH1) and ptH1 != ptH1[1]
+            addLevel(phH1, true, "H1")
+        if showH1 and not na(plH1) and ptH1 != ptH1[1]
+            addLevel(plH1, false, "H1")
+        if showD and not na(phD) and ptD != ptD[1]
+            addLevel(phD, true, "D")
+        if showD and not na(plD) and ptD != ptD[1]
+            addLevel(plD, false, "D")
+
+    // --- зняття / реклейм / сетап
+    int bias = biasIn == "Лише шорт" ? -1 : biasIn == "Лише лонг" ? 1 : biasIn == "Обидва боки" ? 0 : biasAuto
+    bool biasKnown = biasIn == "Обидва боки" or bias != 0
+    bool canTrade = not tOn and inSess and dayR > dayLimit and biasKnown and not na(atrV)
+    bool entered = false
+    int szL = lv.size()
+    if szL > 0
+        for i = 0 to szL - 1
+            Lvl l = lv.get(i)
+            if not l.swept
+                if l.isHigh and high > l.hi + sweepMin
+                    l.swept := true
+                    l.sweepBar := bar_index
+                    l.ext := high
+                if (not l.isHigh) and low < l.lo - sweepMin
+                    l.swept := true
+                    l.sweepBar := bar_index
+                    l.ext := low
+                if l.swept
+                    line.set_extend(l.ln, extend.none)
+                    line.set_x2(l.ln, bar_index)
+                    line.set_color(l.ln, color.new(color.gray, 55))
+                    line.set_style(l.ln, line.style_dotted)
+                    label.set_x(l.lb, bar_index)
+                    label.set_text(l.lb, "✕ " + l.tag + "  знято")
+                    label.set_textcolor(l.lb, color.new(color.gray, 35))
+            if l.swept and not l.done
+                if l.isHigh
+                    l.ext := math.max(l.ext, high)
+                else
+                    l.ext := math.min(l.ext, low)
+                bool crossBack = l.isHigh ? (close < l.lo and (bar_index == l.sweepBar or close[1] >= l.lo)) : (close > l.hi and (bar_index == l.sweepBar or close[1] <= l.hi))
+                bool bodyOk = l.isHigh ? (close < open and (open - close) >= minBody * atrV) : (close > open and (close - open) >= minBody * atrV)
+                if crossBack
+                    l.done := true
+                    if bodyOk and canTrade and not entered and (bar_index - l.born) >= 3 and (bias == 0 or bias == (l.isHigh ? -1 : 1))
+                        int side = l.isHigh ? -1 : 1
+                        float entry = close
+                        float maxDist = isFx ? entryFx * pip : entryAtr * atrV
+                        if math.abs(entry - l.ext) <= maxDist
+                            float buf = math.max(bufMult * atrV, minStop)
+                            float sl = side == -1 ? l.ext + buf : l.ext - buf
+                            float bestD = 1e10
+                            float edge = na
+                            for j = 0 to szL - 1
+                                Lvl q = lv.get(j)
+                                if not q.swept and q.isHigh == (side == -1)
+                                    if side == -1 and q.lo > entry and (q.lo - entry) < bestD
+                                        bestD := q.lo - entry
+                                        edge := q.hi
+                                    if side == 1 and q.hi < entry and (entry - q.hi) < bestD
+                                        bestD := entry - q.hi
+                                        edge := q.lo
+                            if not na(edge)
+                                sl := side == -1 ? math.max(sl, edge + 0.5 * pip) : math.min(sl, edge - 0.5 * pip)
+                            float risk = math.abs(sl - entry)
+                            if risk >= riskMinA * atrV and risk <= riskMaxA * atrV and risk >= minStop
+                                float bestT = 1e10
+                                float tp = na
+                                for j = 0 to szL - 1
+                                    Lvl q = lv.get(j)
+                                    if not q.swept and q.isHigh == (side == 1)
+                                        float px = side == -1 ? q.hi : q.lo
+                                        float dist = side == -1 ? entry - px : px - entry
+                                        if dist > 0 and dist / risk >= rrMin and dist < bestT
+                                            bestT := dist
+                                            tp := px
+                                if not na(tp)
+                                    tOn := true
+                                    tSide := side
+                                    tEntry := entry
+                                    tSl := sl
+                                    tTp := tp
+                                    tBar := bar_index
+                                    tNSig += 1
+                                    float rr = math.abs(tp - entry) / risk
+                                    box rb = box.new(l.sweepBar, side == -1 ? sl : entry, bar_index + 1, side == -1 ? entry : sl, border_color = color.new(colRisk, 40), bgcolor = color.new(colRisk, boxTr))
+                                    box wb = box.new(l.sweepBar, side == -1 ? entry : tp, bar_index + 1, side == -1 ? tp : entry, border_color = color.new(colRew, 40), bgcolor = color.new(colRew, boxTr))
+                                    line el = line.new(l.sweepBar, entry, bar_index + 1, entry, color = color.new(color.white, 20), width = 2)
+                                    label lb = label.new(bar_index, entry, (side == -1 ? "▼ ШОРТ " : "▲ ЛОНГ ") + fmt(entry) + "   RR " + str.tostring(rr, "0.00") + "   ризик " + str.tostring(risk / pip, "0.0") + unitTxt, style = side == -1 ? label.style_label_down : label.style_label_up, color = color.new(#2962ff, 5), textcolor = color.white, size = lblSize)
+                                    trades.push(Trd.new(rb, wb, el, lb, na, side, entry, sl, tp, na, true, false, false, na, na))
+                                    trimTrades()
+                                    sendAlert("🟢 " + syminfo.ticker + (side == -1 ? " ШОРТ " : " ЛОНГ ") + fmt(entry) + " | SL " + fmt(sl) + " | TP " + fmt(tp) + " | RR " + str.tostring(rr, "0.00") + " | " + str.tostring(risk / pip, "0.0") + unitTxt)
+                                    entered := true
+                else if bar_index - l.sweepBar >= maxAge
+                    l.done := true
+
+    // --- супровід відкритої угоди
+    if tOn and bar_index > tBar
+        Trd cur = trades.last()
+        box.set_right(cur.rb, bar_index)
+        box.set_right(cur.wb, bar_index)
+        line.set_x2(cur.el, bar_index)
+        bool hitSl = tSide == -1 ? high >= tSl : low <= tSl
+        bool hitTp = tSide == -1 ? low <= tTp : high >= tTp
+        float exitPx = na
+        string why = ""
+        if hitSl
+            exitPx := tSl
+            why := "СТОП"
+        else if hitTp
+            exitPx := tTp
+            why := "ЦІЛЬ"
+        else if minOfDay >= sessTo - 5
+            exitPx := close
+            why := "ЗАКРИТО ПО ЧАСУ"
+        if not na(exitPx)
+            float riskX = math.abs(tEntry - tSl)
+            float rX = tSide * (exitPx - tEntry) / riskX
+            dayR += rX
+            lastR := rX
+            cur.r := rX
+            cur.open := false
+            cur.xbar := bar_index
+            if why == "СТОП"
+                cur.sh := true
+                box.set_border_style(cur.wb, line.style_dashed)
+            cur.xl := label.new(bar_index, exitPx, why + "  " + sgn(rX) + "R", style = tSide == -1 ? (rX > 0 ? label.style_label_up : label.style_label_down) : (rX > 0 ? label.style_label_down : label.style_label_up), color = rX > 0 ? color.new(colRew, 0) : rX < 0 ? color.new(colRisk, 0) : color.new(color.gray, 0), textcolor = color.white, size = lblSize)
+            sendAlert((rX > 0 ? "🎯 " : "🔴 ") + syminfo.ticker + " " + why + " " + fmt(exitPx) + " · " + sgn(rX) + "R · день " + sgn(dayR) + "R")
+            tOn := false
+
+    // --- після стопу: чи дійшла б ціль пізніше (бокс цілі тягнеться до неї або до кінця сесії)
+    int nSh = trades.size()
+    if nSh > 0
+        for i = 0 to nSh - 1
+            Trd sh = trades.get(i)
+            if sh.sh and bar_index > sh.xbar
+                bool reached = sh.side == -1 ? low <= sh.tp : high >= sh.tp
+                box.set_right(sh.wb, bar_index)
+                if reached
+                    sh.sh := false
+                    sh.late := true
+                    sh.tl := label.new(bar_index, sh.tp, "ціль досягнута ПІСЛЯ стопу", style = sh.side == -1 ? label.style_label_up : label.style_label_down, color = color.new(colRew, 35), textcolor = color.white, size = lblSize)
+                else if minOfDay >= sessTo - 5 or newDay
+                    sh.sh := false
+
+    // --- денні екстремуми (після логіки зняття, щоб зняття старого екстремуму було видно)
+    bool newHigh = high > dayH
+    bool newLow = low < dayL
+    if newHigh
+        dayH := high
+    if newLow
+        dayL := low
+    if showLvls
+        if newHigh
+            addLevel(dayH, true, "DAY")
+        if newLow
+            addLevel(dayL, false, "DAY")
+    int k = lv.size() - 1
+    while k >= 0
+        Lvl q2 = lv.get(k)
+        if q2.tag == "DAY" and q2.swept and q2.done
+            dropLvl(k)
+        k -= 1
+
+    // --- зони
+    if showFvg or showOb
+        procHtf("H1", showH1, 3.0 * pip * fvgScl, tH1, tH1[1], tH1a, tH1b, tH1c, oH1_1, hH1_1, lH1_1, cH1_1, oH1_2, hH1_2, lH1_2, cH1_2, oH1_3, hH1_3, lH1_3, cH1_3, oH1_4, hH1_4, lH1_4, cH1_4, oH1_5, hH1_5, lH1_5, cH1_5, avH1)
+        procHtf("H4", showH4, 5.0 * pip * fvgScl, tH4, tH4[1], tH4a, tH4b, tH4c, oH4_1, hH4_1, lH4_1, cH4_1, oH4_2, hH4_2, lH4_2, cH4_2, oH4_3, hH4_3, lH4_3, cH4_3, oH4_4, hH4_4, lH4_4, cH4_4, oH4_5, hH4_5, lH4_5, cH4_5, avH4)
+        procHtf("D", showD, 15.0 * pip * fvgScl, tD1, tD1[1], tD1a, tD1b, tD1c, oD_1, hD_1, lD_1, cD_1, oD_2, hD_2, lD_2, cD_2, oD_3, hD_3, lD_3, cD_3, oD_4, hD_4, lD_4, cD_4, oD_5, hD_5, lD_5, cD_5, avD)
+        updateZones()
+
+// ───────────── Підписи рівнів — до правого краю на останньому барі
+if barstate.islast
+    int n = lv.size()
+    if n > 0
+        for i = 0 to n - 1
+            Lvl l2 = lv.get(i)
+            if not l2.swept
+                label.set_x(l2.lb, bar_index + 3)
+
+// ───────────── Допоміжні лінії
+plot(showSessLines ? pdc : na, "PDC (закриття вчора)", color = color.new(color.blue, 35), style = plot.style_linebr)
+plot(showSessLines ? dayO : na, "Відкриття дня", color = color.new(color.blue, 60), style = plot.style_linebr)
+plot(showSessLines ? ldnO : na, "Відкриття Лондона 07:00", color = color.new(color.navy, 45), style = plot.style_linebr)
+
+// ───────────── Таблиця стану
+var table tb = table.new(position.top_right, 2, 10, bgcolor = color.new(#131722, 12), border_color = color.new(color.gray, 70), border_width = 1, frame_color = color.new(color.gray, 60), frame_width = 1)
+if barstate.islast and showTable
+    float sumR = 0.0
+    int wins = 0
+    int loss = 0
+    int lateN = 0
+    int stopN = 0
+    int tn = trades.size()
+    if tn > 0
+        for i = 0 to tn - 1
+            Trd t = trades.get(i)
+            if not t.open and not na(t.r)
+                sumR += t.r
+                if t.r > 0
+                    wins += 1
+                else if t.r < 0
+                    loss += 1
+                    stopN += 1
+                    if t.late
+                        lateN += 1
+    string bTxt = biasIn == "Авто (за азією)" ? (biasAuto == -1 ? "ВНИЗ (авто)" : biasAuto == 1 ? "ВГОРУ (авто)" : "не визначено") : biasIn
+    color bCol = bTxt == "ВНИЗ (авто)" or bTxt == "Лише шорт" ? colRisk : bTxt == "ВГОРУ (авто)" or bTxt == "Лише лонг" ? colRew : color.gray
+    table.merge_cells(tb, 0, 0, 1, 0)
+    table.cell(tb, 0, 0, "Owner Method · " + syminfo.ticker, text_color = color.white, text_size = size.small, bgcolor = color.new(#2962ff, 25))
+    table.cell(tb, 0, 1, "Біас дня", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 1, bTxt, text_color = bCol, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 2, "ATR(" + str.tostring(atrLen) + ")", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 2, str.tostring(atrV / pip, "0.0") + unitTxt, text_color = color.white, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 3, "Результат дня", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 3, sgn(dayR) + " R", text_color = dayR >= 0 ? colRew : colRisk, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 4, "Угода зараз", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 4, tOn ? (tSide == -1 ? "ШОРТ " : "ЛОНГ ") + fmt(tEntry) : "—", text_color = color.white, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 5, "Стоп / ціль", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 5, tOn ? fmt(tSl) + " / " + fmt(tTp) : "—", text_color = color.white, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 6, "Торгове вікно", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 6, inSess ? "відкрите" : "закрите", text_color = inSess ? colRew : color.gray, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 7, "Останні " + str.tostring(tn) + " угод", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 7, str.tostring(wins) + " + / " + str.tostring(loss) + " −", text_color = color.white, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 8, "Сума останніх", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 8, sgn(sumR) + " R", text_color = sumR >= 0 ? colRew : colRisk, text_size = size.small, text_halign = text.align_right)
+    table.cell(tb, 0, 9, "Стопи → ціль пізніше", text_color = color.new(color.white, 25), text_size = size.small, text_halign = text.align_left)
+    table.cell(tb, 1, 9, str.tostring(lateN) + " з " + str.tostring(stopN), text_color = color.white, text_size = size.small, text_halign = text.align_right)
