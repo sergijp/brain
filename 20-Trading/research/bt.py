@@ -8,7 +8,7 @@ INST = {
  'GER40':  dict(pip=1.0,  sw=1.0, clus=3.0, entry_max_pips=None, entry_max_atr=2.7, min_stop_pips=0.0, asia_min=None, asia_min_atr=2.5, tol_map=60.0, spread=1.5),
 }
 DEF = dict(buf=0.75, risk_min=0.8, risk_max=2.5, rr_min=2.25, body=0.3, bias='auto', sess=(350,1140), entry='market',
-           setup='reclaim', day_limit=-3.0, cost=True, pend_bars=6, htf_mode=None, htf_n=3, max_age=3, kz=None)
+           setup='reclaim', day_limit=-3.0, cost=True, pend_bars=6, htf_mode=None, htf_n=3, chain=False, chain_bars=8, pw_pools=False, fresh_age=0, week_limit=None, fri_cut=None, sw_pips=None, trend_days=False, dcandle=False, pd_filter=False, stop_pause=0, fvg_base=False, fvg_riskatr=4.8, smart_evict=False, maxlv=70, rseed=0, tp_rr=None, partial=0.0, partial_at=1.0, tp_cap=None, exit_h=None, buf_pips=None, pool_push=True, sl_swing=0, dow=None, scen=False, scen_only=True, scen_tags=None, scen_tfs=('H1','H4','D'), scen_first=False, scen_maxd=1.5, scen_pools=True, scen_riskatr=8.0, scen_maxper=2, zone_tfs=None, zone_first=False, zone_tol=3.0, prot=False, prot_minr=1.0, prot_lock=0.0, prot_sw=5, fvg=False, fvg_exp=96, fvg_min=2.0, fvg_buf=1.0, fvg_edge='near', fvg_kzfill=False, fvg_cluster=False, sr=False, sr_sw=3, sr_look=24, sr_exp=24, max_age=3, kz=None)
 
 def ts(t): return D.datetime.fromtimestamp(t, UTC)
 
@@ -17,7 +17,7 @@ class Lv: pass
 def run(bars, name, **kw):
     P = dict(DEF); P.update(kw); I = INST[name]; pip = I['pip']
     n = len(bars); T=[b[0] for b in bars];O=[b[1] for b in bars];H=[b[2] for b in bars];L=[b[3] for b in bars];C=[b[4] for b in bars]
-    SW=I['sw']*pip; CL=I['clus']*pip
+    SW=(P['sw_pips'] if P['sw_pips'] is not None else I['sw'])*pip; CL=I['clus']*pip
     tr=[0]*n; atr=[None]*n
     for i in range(n): tr[i]=H[i]-L[i] if i==0 else max(H[i]-L[i],abs(H[i]-C[i-1]),abs(L[i]-C[i-1]))
     for i in range(23,n): atr[i]=sum(tr[:24])/24 if i==23 else (atr[i-1]*23+tr[i])/24
@@ -26,6 +26,12 @@ def run(bars, name, **kw):
         k=T[i]//3600
         if k not in h1: h1[k]=[H[i],L[i]]
         else: h1[k][0]=max(h1[k][0],H[i]); h1[k][1]=min(h1[k][1],L[i])
+    m15={}
+    for i in range(n):
+        k=T[i]//900
+        if k not in m15: m15[k]=[O[i],H[i],L[i],C[i]]
+        else:
+            m15[k][1]=max(m15[k][1],H[i]); m15[k][2]=min(m15[k][2],L[i]); m15[k][3]=C[i]
     ks=sorted(h1); piv_hi={};piv_lo={}
     for j in range(2,len(ks)-2):
         if not all(ks[j+d+1]-ks[j+d]==1 for d in (-2,-1,0,1)): continue
@@ -45,7 +51,30 @@ def run(bars, name, **kw):
             if not l.swept and l.isH==isH and abs(l.p-price)<=CL:
                 l.n+=1;l.lo=min(l.lo,price);l.hi=max(l.hi,price);l.p=(l.lo+l.hi)/2;return
         l=Lv();l.p=l.lo=l.hi=price;l.isH=isH;l.n=1;l.swept=False;l.done=False;l.born=bi;l.sb=None;l.ext=None;l.tag=tag;l.acc=None;lv.append(l)
-        if len(lv)>70: lv.pop(0)
+        if len(lv)>P.get('maxlv',70):
+            if P.get('smart_evict'):
+                idx=next((k for k,q in enumerate(lv) if q.swept),None)
+                if idx is None: idx=next((k for k,q in enumerate(lv) if q.tag=='DAY'),0)
+                lv.pop(idx)
+            else: lv.pop(0)
+    wkH=wkL=None;wkR=0.0;chain_side=0;chain_until=-1;pdMid=None;lastStop=-10**9
+    sh1=sl1=sh2=sl2=None;strTrend=0;brkH=True;brkL=True;lastSwH=None;lastSwL=None
+    psh=psl=None;pbH=True;pbL=True;ptr=0
+    zones=[]
+    hb={};h4b={};dbk={}
+    for jj in range(n):
+        for dct,key in ((hb,T[jj]//3600),(h4b,(T[jj]-3600)//14400),(dbk,(T[jj]+10800)//86400)):
+            if key not in dct: dct[key]=[H[jj],L[jj]]
+            else: dct[key][0]=max(dct[key][0],H[jj]);dct[key][1]=min(dct[key][1],L[jj])
+    fvgscale=1.0 if pip<0.01 else 3.0
+    dkeys_sorted=sorted(dbk)
+    datr={}
+    for q,kk in enumerate(dkeys_sorted):
+        prev=dkeys_sorted[max(0,q-14):q]
+        datr[kk]=(sum(dbk[x][0]-dbk[x][1] for x in prev)/len(prev)) if len(prev)>=5 else None
+    scen_orders=[];scused=[];scused_day=None
+    if P['scen'] and not P['zone_tfs']: P['zone_tfs']=set(P['scen_tfs'])
+
     dayH=dayL=None;asC=None;asH=asL=asHt=asLt=None;biasAuto=0;dayR=0.0
     tOn=False;cur=None;pend=None;trades=[]
     inA=lambda i:(ts(T[i]).hour>=22 or ts(T[i]).hour<6)
@@ -55,9 +84,25 @@ def run(bars, name, **kw):
         newDay = i==0 or ts(T[i-1]).date()!=dt.date()
         inSess=P['sess'][0]<=mod<P['sess'][1]
         if P['kz'] is not None: inSess = inSess and any(a<=mod<b for a,b in P['kz'])
+        if P['dow'] is not None and dt.weekday() not in P['dow']: inSess=False
+        dk=(T[i]+10800)//86400
+        if i==0: dkH=H[i];dkL=L[i];dkcur=dk;dOpen=O[i];wOpen=O[i]
+        elif dk!=dkcur:
+            pdMid=(dkH+dkL)/2
+            if P['dcandle']: add(dkH,True,'PDH',i); add(dkL,False,'PDL',i)
+            dkH=H[i];dkL=L[i];dkcur=dk;dOpen=O[i]
+        else:
+            dkH=max(dkH,H[i]);dkL=min(dkL,L[i])
+        newWeek = i==0 or ts(T[i-1]).isocalendar()[1]!=dt.isocalendar()[1]
+        if newWeek:
+            if wkH is not None and P['pw_pools']:
+                add(wkH,True,'PWH',i); add(wkL,False,'PWL',i)
+            wkH,wkL=H[i],L[i]; wkR=0.0; wOpen=O[i]
+        else:
+            wkH=max(wkH,H[i]); wkL=min(wkL,L[i])
         if newDay or dayH is None:
             if dayH is not None:
-                add(dayH,True,'PDH',i); add(dayL,False,'PDL',i)
+                if not P['dcandle']: add(dayH,True,'PDH',i); add(dayL,False,'PDL',i)
             dayH,dayL=H[i],L[i]; dayR=0.0
             # HTF: тренд за 3 завершені дні
             d=dt.date(); idx=dkeys.index(d)
@@ -94,41 +139,145 @@ def run(bars, name, **kw):
         elif bm=='htf_against': bias=-htf; known=htf!=0
         elif bm=='auto_htf': bias=biasAuto; known=bias!=0 and bias==htf
         elif bm=='auto_vs_htf': bias=biasAuto; known=bias!=0 and bias==-htf
+        elif bm=='rand':
+            import random as _r
+            bias=_r.Random(P['rseed']*100003+dkcur).choice((-1,1)); known=True
+        elif bm=='dopen': bias=1 if C[i-1]>dOpen else -1 if C[i-1]<dOpen else 0; known=bias!=0
+        elif bm=='wopen': bias=1 if C[i-1]>wOpen else -1 if C[i-1]<wOpen else 0; known=bias!=0
+        elif bm=='htf_dopen': b1=1 if C[i-1]>dOpen else -1; bias=htf if (htf==b1 and htf!=0) else 0; known=bias!=0
+        elif bm=='htf_wopen': b1=1 if C[i-1]>wOpen else -1; bias=htf if (htf==b1 and htf!=0) else 0; known=bias!=0
+        elif bm=='htf_or_dopen': b1=1 if C[i-1]>dOpen else -1; bias=htf if htf!=0 else b1; known=True
         else: raise ValueError(bm)
-        canTrade=(not tOn) and pend is None and inSess and dayR>P['day_limit'] and known and a is not None
+        fri_ok = not (P['fri_cut'] is not None and dt.weekday()==4 and mod>=P['fri_cut'])
+        wk_ok = P['week_limit'] is None or wkR>P['week_limit']
+        chain_ok_now = P['chain'] and i<=chain_until
+        canTrade=(not tOn) and pend is None and inSess and dayR>P['day_limit'] and fri_ok and wk_ok and (i-lastStop)>P['stop_pause'] and (known or chain_ok_now) and a is not None
         # --- pending fill
         if pend is not None and not tOn:
             p=pend; s=p['side']
             tp_touched = (L[i]<=p['tp']) if s==-1 else (H[i]>=p['tp'])
             fill = (H[i]>=p['entry']) if s==-1 else (L[i]<=p['entry'])
+            if p.get('fvg') and not P['fvg_kzfill'] and not inSess: fill=False
             if i>p['i'] and fill and not tp_touched:
                 tOn=True;cur=dict(p);cur['i']=i-1;cur['t']=T[i];pend=None   # i-1: перевірка стопу/цілі вже на барі заповнення (стоп першим)
-            elif i>p['i'] and (tp_touched or i>=p['exp'] or not inSess):
+            elif i>p['i'] and (tp_touched or i>=p['exp'] or ((not inSess) and not p.get('fvg')) or (p.get('fvg') and (not (350<=mod<1140))) or (p.get('fvg') and ((C[i]>p['inval']) if s==-1 else (C[i]<p['inval'])))):
                 pend=None
         def make_setup(l,side,entry,ext,bar_i):
-            buf=max(P['buf']*a,I['min_stop_pips']*pip)
+            if P['pd_filter'] and pdMid is not None and ((side==-1 and entry<pdMid) or (side==1 and entry>pdMid)): return None
+            buf=max(P['buf']*a,I['min_stop_pips']*pip) if P['buf_pips'] is None else max(P['buf_pips']*pip,I['min_stop_pips']*pip)
+            if P['sl_swing']>0:
+                n_=P['sl_swing']; ext=max(ext,max(H[max(0,bar_i-n_):bar_i+1])) if side==-1 else min(ext,min(L[max(0,bar_i-n_):bar_i+1]))
             sl=ext+buf if side==-1 else ext-buf
             bd=1e9;edge=None
             for q in lv:
-                if not q.swept and q.isH==(side==-1):
+                if not q.swept and q.isH==(side==-1) and (i-q.born)>=P['fresh_age']:
                     if side==-1 and q.lo>entry and q.lo-entry<bd: bd=q.lo-entry;edge=q.hi
                     if side==1 and q.hi<entry and entry-q.hi<bd: bd=entry-q.hi;edge=q.lo
-            if edge is not None: sl=max(sl,edge+0.5*pip) if side==-1 else min(sl,edge-0.5*pip)
+            if edge is not None and P['pool_push']: sl=max(sl,edge+0.5*pip) if side==-1 else min(sl,edge-0.5*pip)
             risk=abs(sl-entry)
             if not (P['risk_min']*a<=risk<=P['risk_max']*a and risk>=I['min_stop_pips']*pip): return None
             bt=1e9;tp=None
             for q in lv:
-                if not q.swept and q.isH==(side==1):
+                if not q.swept and q.isH==(side==1) and (i-q.born)>=P['fresh_age']:
                     px=q.hi if side==-1 else q.lo
                     dist=entry-px if side==-1 else px-entry
                     if dist>0 and dist/risk>=P['rr_min'] and dist<bt: bt=dist;tp=px
+            if tp is None and P['tp_rr']: tp=entry-side*0 + (-1 if side==-1 else 1)*P['tp_rr']*risk if False else (entry-P['tp_rr']*risk if side==-1 else entry+P['tp_rr']*risk)
             if tp is None: return None
             return dict(side=side,entry=entry,sl=sl,tp=tp,i=bar_i,t=T[bar_i],risk=risk,rr=abs(tp-entry)/risk,tag=l.tag,hour=ts(T[bar_i]).hour,exp=bar_i+P['pend_bars'])
         entered=False
+        base_ok = (P['sess'][0]<=mod<P['sess'][1])
+        canTradeScen=canTrade
+        if P['scen'] and P['scen_only']: canTrade=False
+        canTradeB=(not tOn) and pend is None and base_ok and dayR>P['day_limit'] and fri_ok and wk_ok and (known or chain_ok_now) and a is not None
+        if P['fvg'] and (canTradeB if P['fvg_base'] else canTrade) and not entered and (T[i]+300)%900==0:
+            k=T[i]//900
+            c1=m15.get(k-2);c2=m15.get(k-1);c3=m15.get(k)
+            if c1 and c2 and c3:
+                for dirn in (-1,1):
+                    sr_=lastSwH if dirn==-1 else lastSwL
+                    sw_rec=None
+                    if sr_ and i-sr_[0]<=36:
+                        sw_rec=(sr_[0], max(H[sr_[0]:i+1]) if dirn==-1 else min(L[sr_[0]:i+1]))
+                    if P.get('dbg') is not None and dt.date()==D.date(2026,10,9) and dirn==-1: P['dbg'].append((dt.strftime('%H:%M'),'fvg-кандидат','sw=%s bias=%s canTrade=%s'%(sw_rec,bias,canTrade),''))
+                    if not sw_rec: continue
+                    if not (bias==0 or bias==dirn): continue
+                    if dirn==-1:
+                        gap_lo=c3[1]; gap_hi=c1[2]
+                        ok = gap_hi>gap_lo and (gap_hi-gap_lo)>=P['fvg_min']*pip and c2[3]<c2[0]
+                        entry = gap_lo if P['fvg_edge']=='near' else ((gap_lo+gap_hi)/2 if P['fvg_edge']=='mid' else gap_hi)
+                    else:
+                        gap_lo=c1[1]; gap_hi=c3[2]
+                        ok = gap_hi>gap_lo and (gap_hi-gap_lo)>=P['fvg_min']*pip and c2[3]>c2[0]
+                        entry = gap_hi if P['fvg_edge']=='near' else ((gap_lo+gap_hi)/2 if P['fvg_edge']=='mid' else gap_lo)
+                    if not ok: continue
+                    ext=sw_rec[1]
+                    buf=P['fvg_buf']*pip
+                    sl=ext+buf if dirn==-1 else ext-buf
+                    risk=abs(sl-entry)
+                    if not (P['risk_min']*a<=risk<=P['fvg_riskatr']*a and risk>=I['min_stop_pips']*pip): continue
+                    bt_=1e9;tp=None
+                    for q2 in lv:
+                        if not q2.swept and q2.isH==(dirn==1) and (not P['fvg_cluster'] or q2.n>=2):
+                            px=q2.hi if dirn==-1 else q2.lo
+                            dist=entry-px if dirn==-1 else px-entry
+                            if dist>0 and dist/risk>=P['rr_min'] and dist<bt_: bt_=dist;tp=px
+                    if tp is None: continue
+                    pend=dict(side=dirn,entry=entry,sl=sl,tp=tp,i=i,t=T[i],risk=risk,rr=abs(tp-entry)/risk,tag='FVG15',hour=dt.hour,exp=i+P['fvg_exp'],sweepbar=sw_rec[0],fvg=True,inval=ext)
+                    entered=True;break
+        if P['zone_tfs']:
+            for tfn,sec,off,dct,mins in (('H1',3600,0,hb,3.0),('H4',14400,3600,h4b,5.0),('D',86400,10800,dbk,15.0)):
+                if tfn in P['zone_tfs'] and (T[i]+300-off)%sec==0:
+                    k=(T[i]-off)//sec
+                    c1=dct.get(k-2);c3=dct.get(k)
+                    if c1 and c3:
+                        mn=mins*pip*fvgscale
+                        if c3[1]>c1[0] and c3[1]-c1[0]>=mn: zones.append(dict(tf=tfn,bull=True,lo=c1[0],hi=c3[1],i=i,ft=None,dead=False))
+                        if c3[0]<c1[1] and c1[1]-c3[0]>=mn: zones.append(dict(tf=tfn,bull=False,lo=c3[0],hi=c1[1],i=i,ft=None,dead=False))
+            if len(zones)>400: zones=[z for z in zones if not z['dead']][-250:]
+            for z in zones:
+                if z['dead']: continue
+                if z['bull'] and C[i]<z['lo']-0.3*pip: z['dead']=True;continue
+                if (not z['bull']) and C[i]>z['hi']+0.3*pip: z['dead']=True;continue
+                if z['ft'] is None and z['i']<i and L[i]<=z['hi'] and H[i]>=z['lo']: z['ft']=i
+        if P['sr']:
+            sw_=P['sr_sw']; j=i-sw_
+            if j-sw_>=0:
+                if H[j]>max(H[j-sw_:j]) and H[j]>=max(H[j+1:i+1]): sh2=sh1;sh1=H[j];brkH=False
+                if L[j]<min(L[j-sw_:j]) and L[j]<=min(L[j+1:i+1]): sl2=sl1;sl1=L[j];brkL=False
+            ev=None
+            if (not brkH) and sh1 is not None and C[i]>sh1:
+                brkH=True; ev=('up',sh1,strTrend==-1); strTrend=1
+            if (not brkL) and sl1 is not None and C[i]<sl1:
+                brkL=True; ev=('dn',sl1,strTrend==1); strTrend=-1
+            if ev and ev[2] and canTrade and not entered:   # Shift
+                dirn=-1 if ev[0]=='dn' else 1
+                sw_rec = lastSwH if dirn==-1 else lastSwL
+                if sw_rec and i-sw_rec[0]<=P['sr_look'] and (bias==0 or bias==dirn):
+                    lvl=ev[1]; ext=sw_rec[1]
+                    class Q: pass
+                    q=Q(); q.tag='SR'
+                    entry=lvl
+                    buf=max(P['buf']*a,I['min_stop_pips']*pip)
+                    sl=ext+buf if dirn==-1 else ext-buf
+                    risk=abs(sl-entry)
+                    if P['risk_min']*a<=risk<=P['risk_max']*a and risk>=I['min_stop_pips']*pip:
+                        bt_=1e9;tp=None
+                        for q2 in lv:
+                            if not q2.swept and q2.isH==(dirn==1):
+                                px=q2.hi if dirn==-1 else q2.lo
+                                dist=entry-px if dirn==-1 else px-entry
+                                if dist>0 and dist/risk>=P['rr_min'] and dist<bt_: bt_=dist;tp=px
+                        if tp is not None:
+                            pend=dict(side=dirn,entry=entry,sl=sl,tp=tp,i=i,t=T[i],risk=risk,rr=abs(tp-entry)/risk,tag='SR',hour=dt.hour,exp=i+P['sr_exp'],sweepbar=sw_rec[0])
+                            entered=True
         for l in list(lv):
             if not l.swept:
                 if l.isH and H[i]>l.hi+SW: l.swept=True;l.sb=i;l.ext=H[i]
                 if (not l.isH) and L[i]<l.lo-SW: l.swept=True;l.sb=i;l.ext=L[i]
+                if l.swept and (P['sr'] or P['fvg']):
+                    if l.isH: lastSwH=(i,H[i]) if (lastSwH is None or i-lastSwH[0]>P['sr_look'] or H[i]>lastSwH[1]) else lastSwH
+                    else: lastSwL=(i,L[i]) if (lastSwL is None or i-lastSwL[0]>P['sr_look'] or L[i]<lastSwL[1]) else lastSwL
             if l.swept and not l.done:
                 l.ext=max(l.ext,H[i]) if l.isH else min(l.ext,L[i])
                 if P['setup']=='reclaim':
@@ -137,16 +286,56 @@ def run(bars, name, **kw):
                     if cb:
                         l.done=True
                         side=-1 if l.isH else 1
-                        if body and canTrade and not entered and (i-l.born)>=3 and (bias==0 or bias==side):
+                        if P.get('dbg') is not None:
+                            why=None
+                            if not body: why='тіло реклейм-бару замале/не в бік угоди'
+                            elif tOn or pend is not None: why='вже є позиція/лімітка'
+                            elif not inSess: why='поза вікном входу (killzone/сесія)'
+                            elif dayR<=P['day_limit']: why='денна межа'
+                            elif not known: why='біас не визначено'
+                            elif not (bias==0 or bias==side): why='проти біасу (біас %s)'%('ВНИЗ' if bias==-1 else 'ВГОРУ')
+                            elif (i-l.born)<3: why='рівень надто свіжий'
+                            else:
+                                maxd = I['entry_max_pips']*pip if I['entry_max_pips'] else I['entry_max_atr']*a
+                                if abs(C[i]-l.ext)>maxd: why='вхід далеко від екстремуму зняття'
+                            P['dbg'].append((ts(T[i]).strftime('%m-%d %H:%M'),l.tag,'шорт' if side==-1 else 'лонг',why or 'пройшло до розрахунку стопа/RR'))
+                        zok=True
+                        if P['zone_tfs']:
+                            zok=False
+                            tol=P['zone_tol']*pip
+                            for z in zones:
+                                if z['dead'] or z['i']>=l.sb: continue
+                                if (side==-1 and z['bull']) or (side==1 and not z['bull']): continue
+                                if z['lo']-tol<=l.ext<=z['hi']+tol:
+                                    if P['zone_first'] and z['ft'] is not None and z['ft']<l.sb: continue
+                                    zok=True;break
+                        if body and zok and canTrade and not entered and (i-l.born)>=3 and (bias==0 or bias==side or (chain_ok_now and chain_side==side)):
                             maxd = I['entry_max_pips']*pip if I['entry_max_pips'] else I['entry_max_atr']*a
                             if abs(C[i]-l.ext)<=maxd:
-                                if P['entry']=='market': entry=C[i]
-                                elif P['entry']=='limit50': entry=(C[i]+ (H[i] if side==-1 else L[i]))/2 if False else (O[i]+C[i])/2
-                                elif P['entry']=='limitopen': entry=O[i]
+                                ent_mode=P['entry']
+                                if ent_mode=='auto':
+                                    # трендовий день: 3 послідовні нижчі H1-хаї (для шорту) / вищі H1-лоу (для лонгу) → ринок; інакше лімітка
+                                    kk=T[i]//3600; seq=[]
+                                    for q2 in range(1,5):
+                                        v=h1.get(kk-q2)
+                                        if v is None: break
+                                        seq.append(v)
+                                    tr_day=False
+                                    if len(seq)>=4:
+                                        hs=[v[0] for v in seq[::-1]]; ls=[v[1] for v in seq[::-1]]
+                                        tr_day = all(hs[j+1]<hs[j] for j in range(3)) if side==-1 else all(ls[j+1]>ls[j] for j in range(3))
+                                    ent_mode='market' if tr_day else 'limitopen'
+                                if ent_mode=='market': entry=C[i]
+                                elif ent_mode=='limit50': entry=(C[i]+ (H[i] if side==-1 else L[i]))/2 if False else (O[i]+C[i])/2
+                                elif ent_mode=='limitopen': entry=O[i]
+                                elif ent_mode=='limitob':
+                                    entry=O[i]
+                                    for k in range(i-1,max(i-6,0),-1):
+                                        if (C[k]>O[k] if side==-1 else C[k]<O[k]): entry=O[k];break
                                 su=make_setup(l,side,entry,l.ext,i)
                                 if su:
                                     su['sweepbar']=l.sb
-                                    if P['entry']=='market': tOn=True;cur=su
+                                    if ent_mode=='market': tOn=True;cur=su
                                     else: pend=su
                                     entered=True
                     elif i-l.sb>=P['max_age']: l.done=True
@@ -166,21 +355,102 @@ def run(bars, name, **kw):
                                 su=make_setup(l,side,C[i],ext,i)
                                 if su: su['sweepbar']=l.sb;tOn=True;cur=su;entered=True
                         elif i-l.acc>=6: l.done=True
+        shift_dn=shift_up=False
+        if P['scen'] and scen_orders:
+            if canTradeScen and not tOn:
+                for od in scen_orders:
+                    s_=od['side']
+                    fill=(H[i]>=od['entry']) if s_==-1 else (L[i]<=od['entry'])
+                    if not fill: continue
+                    slhit=(H[i]>=od['sl']) if s_==-1 else (L[i]<=od['sl'])
+                    tphit=(L[i]<=od['tp']) if s_==-1 else (H[i]>=od['tp'])
+                    if slhit or tphit: continue
+                    cur=dict(od);cur['i']=i-1;cur['t']=T[i];cur['tag']='SCEN';cur['hour']=dt.hour;tOn=True;scused.append(od['entry']);break
+            scen_orders=[]
+        if P['prot']:
+            sw_=P['prot_sw']; j=i-sw_
+            if j-sw_>=0:
+                if H[j]>max(H[j-sw_:j]) and H[j]>=max(H[j+1:i+1]): psh=H[j];pbH=False
+                if L[j]<min(L[j-sw_:j]) and L[j]<=min(L[j+1:i+1]): psl=L[j];pbL=False
+            if (not pbH) and psh is not None and C[i]>psh:
+                pbH=True; shift_up = (ptr==-1); ptr=1
+            if (not pbL) and psl is not None and C[i]<psl:
+                pbL=True; shift_dn = (ptr==1); ptr=-1
         if tOn and i>cur['i']:
             s=cur['side']
             hitSl = H[i]>=cur['sl'] if s==-1 else L[i]<=cur['sl']
             hitTp = L[i]<=cur['tp'] if s==-1 else H[i]>=cur['tp']
             ex=None;why=''
+            if P['tp_cap'] is not None and 'tpc' not in cur:
+                cur['tpc']=True
+                capd=P['tp_cap']*cur['risk']
+                if abs(cur['tp']-cur['entry'])>capd: cur['tp']=cur['entry']+s*capd;hitTp = L[i]<=cur['tp'] if s==-1 else H[i]>=cur['tp']
+            hitTp = L[i]<=cur['tp'] if s==-1 else H[i]>=cur['tp']
+            t_exit = (P['exit_h']*60) if P['exit_h'] else P['sess'][1]-5
             if hitSl: ex=cur['sl'];why='СТОП'
             elif hitTp: ex=cur['tp'];why='ЦІЛЬ'
-            elif mod>=P['sess'][1]-5: ex=C[i];why='ЧАС'
+            elif mod>=t_exit: ex=C[i];why='ЧАС'
+            elif P['partial']>0 and not cur.get('pdone'):
+                lvl=cur['entry']+s*P['partial_at']*cur['risk']
+                if (L[i]<=lvl) if s==-1 else (H[i]>=lvl):
+                    cur['pdone']=True;cur['pr']=P['partial']*P['partial_at']
             if ex is not None:
                 r=s*(ex-cur['entry'])/cur['risk']
+                if cur.get('pdone'): r=cur['pr']+(1-P['partial'])*r
                 if P['cost']: r-= I['spread']*pip/cur['risk']
-                dayR+=r;cur.update(ex=ex,r=r,why=why,xt=T[i]);trades.append(cur);tOn=False
+                dayR+=r;wkR+=r;cur.update(ex=ex,r=r,why=why,xt=T[i]);trades.append(cur);tOn=False
+            elif P['prot'] and not cur.get('moved'):
+                mfe=(cur['entry']-L[i])/cur['risk'] if s==-1 else (H[i]-cur['entry'])/cur['risk']
+                cur['mfe']=max(cur.get('mfe',0),mfe)
+                against = shift_up if s==-1 else shift_dn
+                if against and cur['mfe']>=P['prot_minr']:
+                    newsl=cur['entry']-s*P['prot_lock']*cur['risk'] if False else cur['entry']+s*P['prot_lock']*cur['risk']
+                    # для шорту s=-1: sl нижче входу при lock>0
+                    if (s==-1 and C[i]<newsl) or (s==1 and C[i]>newsl):
+                        cur['sl']=newsl;cur['moved']=True
+                if why=='ЦІЛЬ': chain_side=-s;chain_until=i+P['chain_bars']
+                if why=='СТОП': lastStop=i
         if H[i]>dayH: dayH=H[i]; add(dayH,True,'DAY',i)
         if L[i]<dayL: dayL=L[i]; add(dayL,False,'DAY',i)
         lv[:]=[l for l in lv if not (l.tag=='DAY' and l.swept and l.done)]
+        if P['scen']:
+            if scused_day!=dt.date(): scused=[];scused_day=dt.date()
+            scen_orders=[]
+            ad=datr.get((T[i]+10800)//86400)
+            if (not tOn) and canTradeScen and ad and a:
+                for dirn in (-1,1):
+                    if not (bias==0 or bias==dirn): continue
+                    best=None
+                    for z in zones:
+                        if z['dead']: continue
+                        if P['scen_first'] and z['ft'] is not None: continue
+                        if dirn==-1 and (not z['bull']) and z['lo']>C[i]: c=(z['lo']-C[i],z['lo'],z['hi'])
+                        elif dirn==1 and z['bull'] and z['hi']<C[i]: c=(C[i]-z['hi'],z['hi'],z['lo'])
+                        else: continue
+                        if best is None or c[0]<best[0]: best=c
+                    if P['scen_pools']:
+                        for q in lv:
+                            if q.swept or q.isH!=(dirn==-1): continue
+                            if P['scen_tags'] and q.tag not in P['scen_tags']: continue
+                            if dirn==-1 and q.lo>C[i]: c=(q.lo-C[i],q.lo,q.hi)
+                            elif dirn==1 and q.hi<C[i]: c=(C[i]-q.hi,q.hi,q.lo)
+                            else: continue
+                            if best is None or c[0]<best[0]: best=c
+                    if best is None or best[0]>P['scen_maxd']*ad: continue
+                    eP=best[1];fE=best[2]
+                    if any(abs(eP-u)<=1.0*pip for u in scused): continue
+                    buf=max(P['buf']*a,I['min_stop_pips']*pip)
+                    sl=(max(fE,eP)+buf) if dirn==-1 else (min(fE,eP)-buf)
+                    risk=abs(sl-eP)
+                    if not (P['risk_min']*a<=risk<=P['scen_riskatr']*a and risk>=I['min_stop_pips']*pip): continue
+                    bt_=1e9;tp=None
+                    for q in lv:
+                        if q.swept or q.isH!=(dirn==1): continue
+                        px=q.hi if dirn==-1 else q.lo
+                        dist=eP-px if dirn==-1 else px-eP
+                        if dist>0 and dist/risk>=P['rr_min'] and dist<bt_: bt_=dist;tp=px
+                    if tp is None: continue
+                    scen_orders.append(dict(side=dirn,entry=eP,sl=sl,tp=tp,risk=risk,rr=abs(tp-eP)/risk))
     return trades
 
 def stats(tr):
